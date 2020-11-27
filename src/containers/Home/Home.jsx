@@ -13,11 +13,6 @@ const StyledHomeWrapper = styled.div`
   background-color: #eee;
 `;
 
-const Routes = {
-  home: '/',
-  contact: '/',
-};
-
 function Home(props) {
   const showSettings = e => {
     e.preventDefault();
@@ -43,12 +38,14 @@ function Home(props) {
         title="OUR HAPPPY CUSTOMERS"
         description="Providing hard wood on the floor"
         buttonText="Explore"
+        buttonCallback={() => props.history.push('/testimonials')}
         image={flooring1}
       ></ImageSection>
       <ImageSection
         title="WHO WE ARE"
         description=""
         buttonText="FIND OUT MORE"
+        buttonCallback={() => props.history.push('/aboutus')}
         image={flooring1}
       ></ImageSection>
     </StyledHomeWrapper>

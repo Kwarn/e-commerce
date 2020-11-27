@@ -1,5 +1,6 @@
 import Toolbar from '../components/navigation/Toolbar/Toolbar';
 import React from 'react';
+import ScrollToTop from './ScrollToTop';
 import styled from 'styled-components';
 
 const StyledSiteDimensionsWrapper = styled.div`
@@ -15,7 +16,8 @@ const StyledMainContentContainer = styled.div`
 export default function Layout({ children }) {
   return (
     <StyledSiteDimensionsWrapper>
-      <Toolbar></Toolbar>
+      <ScrollToTop />
+      <Toolbar />
       <StyledMainContentContainer>{children}</StyledMainContentContainer>
     </StyledSiteDimensionsWrapper>
   );
