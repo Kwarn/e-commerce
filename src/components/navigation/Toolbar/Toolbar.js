@@ -3,13 +3,13 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 import styled from 'styled-components';
 
 const StyledToolbar = styled.header`
-  display: flex;
+  min-width: 100%;
   height: 15vh;
-  width: 100%;
+  margin: auto;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #ee;
+  background-color: white;
   z-index: 100;
   transition: top 0.6s;
   top: ${props => (!props.hide ? '0' : '-15vh')};
@@ -36,9 +36,7 @@ const Toolbar = () => {
 
   return (
     <StyledToolbar hide={!scrollPos.visible}>
-      <nav>
-        <NavigationItems />
-      </nav>
+      <NavigationItems />
     </StyledToolbar>
   );
 };

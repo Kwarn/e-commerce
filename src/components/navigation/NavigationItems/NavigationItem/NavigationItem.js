@@ -4,17 +4,15 @@ import styled from 'styled-components';
 
 const StyledNavItem = styled.li`
   display: flex;
-  height: 80%;
+  border-bottom: 4px solid transparent;
   .navLink {
     color: #474747;
+    margin: auto;
     text-decoration: none;
-    height: 100%;
-    padding: 16px 10px 16px 10px;
-    border-bottom: ${props =>
-      props.active ? '4px solid #f59f93' : '4px solid transparent'};
+    padding: 7vh 0 7.5vh 0;
   }
   &:hover {
-    border-bottom: 4px solid #f59f93;
+    border-bottom: 4px solid #474747;
   }
 `;
 

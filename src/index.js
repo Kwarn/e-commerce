@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 // import salesDataReducer from './store/ducks/salesData';
-import './index.css';
 import App from './App';
 
 const rootReducer = combineReducers({
