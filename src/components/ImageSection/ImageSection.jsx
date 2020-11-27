@@ -9,7 +9,7 @@ const StyledImageContainer = styled.div`
   justify-content: center;
   min-height: 200px;
   .image {
-    width: 100%;
+    width: ${props => (props.shouldFillWidth ? '100%' : '95%')};
     margin: auto;
     object-fit: cover;
   }
@@ -46,6 +46,7 @@ export default function ImageSection({
   description,
   buttonText = null,
   buttonCallback,
+  shouldFillWidth = false,
   image,
 }) {
   let btn = null;
@@ -58,7 +59,7 @@ export default function ImageSection({
   }
 
   return (
-    <StyledImageContainer>
+    <StyledImageContainer shouldFillWidth={shouldFillWidth}>
       <img className="image" src={image} alt="Welcome" />
       <StyledTitle>{title}</StyledTitle>
       <StyledDescription>{description}</StyledDescription>

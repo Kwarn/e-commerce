@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ImageSection from '../../components/ImageSection/ImageSection';
 import welcomeImage from '../../assets/welcomeImage.jpg';
 import flooring1 from '../../assets/flooring1.jpg';
+import happyCustomer from '../../assets/happyCustomer.jpg';
 import TextSection from '../../components/textSection/TextSection';
 import { withRouter } from 'react-router-dom';
 
@@ -27,6 +28,7 @@ function Home(props) {
         description="Discover our extensive range"
         buttonText="Explore"
         buttonCallback={() => props.history.push('/products')}
+        shouldFillWidth={true}
         image={welcomeImage}
       ></ImageSection>
       <TextSection
@@ -36,14 +38,14 @@ function Home(props) {
       />
       <ImageSection
         title="OUR HAPPPY CUSTOMERS"
-        description="Providing hard wood on the floor"
-        buttonText="Explore"
+        description="What they have to say"
+        buttonText="Testimonials"
         buttonCallback={() => props.history.push('/testimonials')}
-        image={flooring1}
+        image={happyCustomer}
       ></ImageSection>
       <ImageSection
-        title="WHO WE ARE"
-        description=""
+        title="ABOUT US"
+        description="Meet our specialists"
         buttonText="FIND OUT MORE"
         buttonCallback={() => props.history.push('/aboutus')}
         image={flooring1}
