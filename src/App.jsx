@@ -21,15 +21,16 @@ const AboutUs = React.lazy(() => import('./components/aboutUs/AboutUs'));
 
 const App = props => {
   let routes = (
-    <Router>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/aboutus" component={AboutUs} />
-          <Redirect to="/" />
-        </Switch>
-      </Suspense>
-    </Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Switch>
+        <Route path="/testimonials" component={Testimonials} />
+        <Route path="/products" component={Products} />
+        <Route path="/aboutus" component={AboutUs} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/home" component={Home} />
+        <Route exact path="/" render={() => <Redirect to="/home" />} />
+      </Switch>
+    </Suspense>
   );
   return (
     <ThemeProvider theme={theme}>
