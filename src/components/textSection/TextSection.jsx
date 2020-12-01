@@ -2,20 +2,34 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledTextSection = styled.div`
+  position: relative;
   display: flex;
+  justify-content: center;
   height: 30vh;
-  text-align: center;
-  margin: auto;
-  padding: 0 5% 0 5%;
-  font-size: 1.5em;
-  white-space: pre-line;
-  text-decoration: none;
+  width: 100%;
+  .centered {
+    justify-self: center;
+    text-align: center;
+    margin: auto 5% auto 5%;
+    display: block;
+    bottom: 0px;
+    top: 0px;
+  }
+  h1 {
+    font-size: 1.4em;
+  }
+  p {
+    margin: auto;
+  }
 `;
 
-export default function TextSection({ text }) {
+export default function TextSection({ h1, p }) {
   return (
     <StyledTextSection>
-      <p>{text}</p>
+      <div className="centered">
+        <h1>{h1}</h1>
+        <p>{p}</p>
+      </div>
     </StyledTextSection>
   );
 }
