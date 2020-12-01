@@ -8,7 +8,7 @@ const StyledSiteDimensionsWrapper = styled.div`
 `;
 
 const StyledMainContentContainer = styled.div`
-  margin-top: 15vh;
+  margin-top: 16vh;
   min-height: 150vh;
   max-width: 100%;
 `;
