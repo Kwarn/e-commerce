@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 const StyledToolbar = styled.header`
   min-width: 100%;
