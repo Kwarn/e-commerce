@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import NavigationItem from './NavigationItem/NavigationItem';
 import styled from 'styled-components';
 import logo from '../../../assets/logo.png';
+import { withRouter } from 'react-router-dom';
 
 const StyledNavItems = styled.ul`
   padding: 0;
@@ -11,50 +12,25 @@ const StyledNavItems = styled.ul`
   flex-direction: row;
   justify-content: space-between;
   height: 15vh;
-  .navItem {
-    border-bottom: ${props => (props.active ? '4px solid #474747' : '')};
-  }
 `;
 const StyledLogo = styled.img`
+  cursor: pointer;
   margin: auto;
   height: 80%;
 `;
 
-const NavigationItems = () => {
-  const [activeClass, setActiveClass] = useState({
-    home: false,
-    contact: false,
-  });
-
-  const setActiveClassHandler = id => {
-    if (id === 'home') {
-      setActiveClass({ home: true, contact: false });
-    } else {
-      setActiveClass({ home: false, contact: true });
-    }
-  };
-
+const NavigationItems = ({ history }) => {
   return (
     <StyledNavItems>
-      <NavigationItem
-        className="navItem"
-        onClick={() => setActiveClass('home')}
-        active={activeClass.home}
-        link="/"
-      >
-        Home
-      </NavigationItem>
-      <StyledLogo src={logo} alt="Twelve Oak" />
-      <NavigationItem
-        className="navItem"
-        onClick={() => setActiveClass('contact')}
-        active={activeClass.contact}
-        link="/contact"
-      >
-        Contact
-      </NavigationItem>
+      <NavigationItem link="/home">Home</NavigationItem>
+      <StyledLogo
+        src={logo}
+        alt="Twelve Oak"
+        onClick={() => history.push('/home')}
+      />
+      <NavigationItem link="/contact">Contact</NavigationItem>
     </StyledNavItems>
   );
 };
 
-export default NavigationItems;
+export default withRouter(NavigationItems);
