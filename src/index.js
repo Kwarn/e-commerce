@@ -4,28 +4,26 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-// import salesDataReducer from './store/ducks/salesData';
+import productsReducer from './store/ducks/products';
 import App from './App';
 
 const rootReducer = combineReducers({
-  salesData: () => ({}),
+  products: productsReducer,
 });
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   rootReducer,
-  compose(
-    applyMiddleware(sagaMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  composeEnhancers(applyMiddleware(sagaMiddleware))
 );
-
-// sagaMiddleware.run(watchSalesData)
-// sagaMiddleware.run(watchSalesTallyData)
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );
