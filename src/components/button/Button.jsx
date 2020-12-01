@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
+  cursor: pointer;
   display: inline-block;
   width: fit-content;
   font-size: 1.2em;
