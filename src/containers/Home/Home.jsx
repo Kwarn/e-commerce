@@ -32,7 +32,7 @@ function Home(props) {
         image={welcomeImage}
       ></ImageSection>
       <TextSection
-        text={`We make beautiful real wood flooring from responsibly sourced timber
+        p={`We make beautiful real wood flooring from responsibly sourced timber
 
         Find Your Perfect Wood Floor`}
       />
