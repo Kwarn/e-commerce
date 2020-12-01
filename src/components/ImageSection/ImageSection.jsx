@@ -24,7 +24,7 @@ const StyledButtonContainer = styled.div`
 `;
 
 const StyledTitle = styled.h1`
-  background: rgba(0, 0, 0, 0.2);
+  width: fit-content;
   font-size: 1.5em;
   width: 80%;
   color: white;

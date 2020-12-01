@@ -32,9 +32,8 @@ function Home(props) {
         image={welcomeImage}
       ></ImageSection>
       <TextSection
-        p={`We make beautiful real wood flooring from responsibly sourced timber
-
-        Find Your Perfect Wood Floor`}
+        h1="Find Your Perfect Wood Floor"
+        p="We make beautiful real wood flooring from responsibly sourced timber"
       />
       <ImageSection
         title="OUR HAPPPY CUSTOMERS"

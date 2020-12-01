@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import NavigationItem from './NavigationItem/NavigationItem';
 import styled from 'styled-components';
 import logo from '../../../assets/logo.png';
+import DrawToggle from '../Toolbar/Sidebar/DrawToggle/DrawToggle';
 import { withRouter } from 'react-router-dom';
 
 const StyledNavItems = styled.ul`
@@ -19,10 +20,10 @@ const StyledLogo = styled.img`
   height: 80%;
 `;
 
-const NavigationItems = ({ history }) => {
+const NavigationItems = ({ sideDrawToggleFn, history }) => {
   return (
     <StyledNavItems>
-      <NavigationItem link="/home">Home</NavigationItem>
+      <DrawToggle toggleFn={sideDrawToggleFn} />
       <StyledLogo
         src={logo}
         alt="Twelve Oak"

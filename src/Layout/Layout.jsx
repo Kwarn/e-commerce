@@ -1,7 +1,8 @@
+import React, { useState } from 'react';
 import Toolbar from '../components/navigation/Toolbar/Toolbar';
-import React from 'react';
 import ScrollToTop from './ScrollToTop';
 import styled from 'styled-components';
+import SideDraw from '../components/navigation/Toolbar/Sidebar/Sidebar';
 
 const StyledSiteDimensionsWrapper = styled.div`
   max-width: 100%;
@@ -14,10 +15,21 @@ const StyledMainContentContainer = styled.div`
 `;
 
 export default function Layout({ children }) {
+  const [showSideDraw, setShowSideDraw] = useState(false);
+
+  const sideDrawerClosedHandler = () => {
+    setShowSideDraw(false);
+  };
+
+  const sideDrawToggleHandler = () => {
+    setShowSideDraw(!showSideDraw);
+  };
+
   return (
     <StyledSiteDimensionsWrapper>
       <ScrollToTop />
-      <Toolbar />
+      <Toolbar toggleSideDrawFn={sideDrawToggleHandler} />
+      <SideDraw isOpen={showSideDraw} closeFn={sideDrawerClosedHandler} />
       <StyledMainContentContainer>{children}</StyledMainContentContainer>
     </StyledSiteDimensionsWrapper>
   );

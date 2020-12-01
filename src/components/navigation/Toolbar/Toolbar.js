@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import DrawToggle from './Sidebar/DrawToggle/DrawToggle';
+import SideDraw from './Sidebar/Sidebar';
 
 const StyledToolbar = styled.header`
   min-width: 100%;
@@ -16,7 +17,7 @@ const StyledToolbar = styled.header`
   top: ${props => (!props.hide ? '0' : '-15vh')};
 `;
 
-const Toolbar = () => {
+const Toolbar = ({ toggleSideDrawFn }) => {
   const [scrollPos, setScrollPos] = useState({
     posY: window.pageYOffset,
     visible: true,
@@ -37,7 +38,7 @@ const Toolbar = () => {
 
   return (
     <StyledToolbar hide={!scrollPos.visible}>
-      <NavigationItems />
+      <NavigationItems sideDrawToggleFn={toggleSideDrawFn} />
     </StyledToolbar>
   );
 };
