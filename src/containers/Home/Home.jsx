@@ -46,7 +46,7 @@ function Home(props) {
         title="ABOUT US"
         description="Meet our specialists"
         buttonText="FIND OUT MORE"
-        buttonCallback={() => props.history.push('/aboutus')}
+        buttonCallback={() => props.history.push('/about')}
         image={flooring1}
       ></ImageSection>
     </StyledHomeWrapper>
