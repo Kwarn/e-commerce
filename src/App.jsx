@@ -17,7 +17,7 @@ const Products = React.lazy(() => import('./containers/products/Products'));
 const Testimonials = React.lazy(() =>
   import('./components/testimonials/Testimonials')
 );
-const AboutUs = React.lazy(() => import('./components/aboutUs/AboutUs'));
+const About = React.lazy(() => import('./containers/about/About'));
 
 const App = props => {
   let routes = (
@@ -25,7 +25,7 @@ const App = props => {
       <Switch>
         <Route path="/testimonials" component={Testimonials} />
         <Route path="/products" component={Products} />
-        <Route path="/aboutus" component={AboutUs} />
+        <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/home" component={Home} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />
