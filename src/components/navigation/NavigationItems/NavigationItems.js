@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import NavigationItem from './NavigationItem/NavigationItem';
+import React from 'react';
 import styled from 'styled-components';
 import logo from '../../../assets/logo.png';
 import DrawToggle from '../Toolbar/Sidebar/DrawToggle/DrawToggle';
 import { withRouter } from 'react-router-dom';
+import contactIcon from '../../../assets/contactIcon.png';
 
 const StyledNavItems = styled.ul`
   padding: 0;
@@ -20,6 +20,13 @@ const StyledLogo = styled.img`
   height: 80%;
 `;
 
+const StyledContactIcon = styled.img`
+  cursor: pointer;
+  margin-top: 6vh;
+  height: 5vh;
+  width: auto;
+`;
+
 const NavigationItems = ({ sideDrawToggleFn, history }) => {
   return (
     <StyledNavItems>
@@ -29,7 +36,11 @@ const NavigationItems = ({ sideDrawToggleFn, history }) => {
         alt="Twelve Oak"
         onClick={() => history.push('/home')}
       />
-      <NavigationItem link="/contact">Contact</NavigationItem>
+      <StyledContactIcon
+        onClick={() => history.push('/contact')}
+        src={contactIcon}
+        alt="contact"
+      />
     </StyledNavItems>
   );
 };

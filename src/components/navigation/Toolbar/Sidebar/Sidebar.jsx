@@ -53,6 +53,7 @@ const StyledMenuContainer = styled.div`
   margin-top: 20%;
 `;
 
+// font-weight: lighter needs to be included in media-query(?) otherwise it displays too thin on some browsers;
 const StyledMenuItem = styled.div`
   margin: auto;
   width: 80%;
@@ -61,7 +62,6 @@ const StyledMenuItem = styled.div`
     color: white;
     text-align: center;
     font-size: 1.3em;
-    font-weight: lighter;
   }
   border-bottom: 4px solid ${props => (props.isCurrentPage ? '#eee' : 'none')};
 `;
