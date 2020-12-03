@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import logo from '../../../assets/logo.png';
-import DrawToggle from '../Toolbar/Sidebar/DrawToggle/DrawToggle';
+import DrawToggle from '../Sidebar/DrawToggle/DrawToggle';
 import { withRouter } from 'react-router-dom';
 import contactIcon from '../../../assets/contactIcon.png';
 

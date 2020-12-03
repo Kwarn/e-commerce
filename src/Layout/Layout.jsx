@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Toolbar from '../components/navigation/Toolbar/Toolbar';
 import ScrollToTop from './ScrollToTop';
 import styled from 'styled-components';
-import SideDraw from '../components/navigation/Toolbar/Sidebar/Sidebar';
+import SideDraw from '../components/navigation/Sidebar/Sidebar';
 import Footer from '../components/footer/Footer';
 
 const StyledSiteDimensionsWrapper = styled.div`

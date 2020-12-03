@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import NavigationItems from '../../NavigationItems/NavigationItems';
-import Backdrop from '../../../UI/backdrop/Backdrop';
-import Logo from '../../../../assets/logo.png';
+import NavigationItems from '../NavigationItems/NavigationItems';
+import Backdrop from '../../UI/backdrop/Backdrop';
+import Logo from '../../../assets/logo.png';
 import styled, { css } from 'styled-components';
 import { useLocation, withRouter } from 'react-router-dom';
-import background from '../../../../assets/sidebarBackground.jpg';
-import closeButton from '../../../../assets/closeButton.png';
+import background from '../../../assets/sidebarBackground.jpg';
+import closeButton from '../../../assets/closeButton.png';
 
 const StyledSideDraw = styled.div`
   position: relative;
@@ -55,15 +55,20 @@ const StyledMenuContainer = styled.div`
 
 // font-weight: lighter needs to be included in media-query(?) otherwise it displays too thin on some browsers;
 const StyledMenuItem = styled.div`
+  cursor: pointer;
   margin: auto;
   width: 80%;
   height: 30px;
+  border-bottom: 4px solid
+    ${props => (props.isCurrentPage ? '#eee' : 'transparent')};
+  &:hover {
+    border-bottom-color: #eee;
+  }
   h1 {
     color: white;
     text-align: center;
     font-size: 1.3em;
   }
-  border-bottom: 4px solid ${props => (props.isCurrentPage ? '#eee' : 'none')};
 `;
 
 const SideDraw = ({ isOpen, closeFn, history }) => {
