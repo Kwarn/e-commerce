@@ -13,6 +13,7 @@ const StyledMainContentContainer = styled.div`
   margin-top: 16vh;
   min-height: 150vh;
   max-width: 100%;
+  background-color: #eee;
 `;
 
 export default function Layout({ children }) {
