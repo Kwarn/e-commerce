@@ -3,6 +3,7 @@ import Toolbar from '../components/navigation/Toolbar/Toolbar';
 import ScrollToTop from './ScrollToTop';
 import styled from 'styled-components';
 import SideDraw from '../components/navigation/Toolbar/Sidebar/Sidebar';
+import Footer from '../components/footer/Footer';
 
 const StyledSiteDimensionsWrapper = styled.div`
   max-width: 100%;
@@ -31,6 +32,7 @@ export default function Layout({ children }) {
       <Toolbar toggleSideDrawFn={sideDrawToggleHandler} />
       <SideDraw isOpen={showSideDraw} closeFn={sideDrawerClosedHandler} />
       <StyledMainContentContainer>{children}</StyledMainContentContainer>
+      <Footer />
     </StyledSiteDimensionsWrapper>
   );
 }

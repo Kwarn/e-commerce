@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import styled from 'styled-components';
-import DrawToggle from './Sidebar/DrawToggle/DrawToggle';
-import SideDraw from './Sidebar/Sidebar';
 
 const StyledToolbar = styled.header`
   min-width: 100%;
