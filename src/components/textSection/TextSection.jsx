@@ -2,34 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledTextSection = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  height: 30vh;
+  overflow: auto;
   width: 100%;
-  .centered {
-    justify-self: center;
-    text-align: center;
-    margin: auto 5% auto 5%;
-    display: block;
-    bottom: 0px;
-    top: 0px;
-  }
-  h1 {
-    font-size: 1.4em;
-  }
+  h1,
+  h2,
+  h3,
+  h4,
   p {
-    margin: auto;
+    text-align: center;
   }
 `;
 
-export default function TextSection({ h1, p }) {
-  return (
-    <StyledTextSection>
-      <div className="centered">
-        <h1>{h1}</h1>
-        <p>{p}</p>
-      </div>
-    </StyledTextSection>
-  );
+export default function TextSection({ children }) {
+  return <StyledTextSection>{children}</StyledTextSection>;
 }
