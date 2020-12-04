@@ -1,14 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import ContactForm from './ContactForm/ContactForm';
 import TextSection from '../../components/textSection/TextSection';
+import background from '../../assets/contactBackground.jpg';
 
 const StyledContactWrapper = styled.div`
+  background-image: url(${background});
+  background-size: cover;
   margin-top: 10px;
   display: inline-block;
   width: 100%;
   height: 100%;
-  background-color: #839b97;
+  background-color: #ccc;
   color: white;
 `;
 
@@ -56,9 +59,10 @@ const Contact = props => {
           </ul>
         </TextSection>
       </StyledSection>
+      <ContactForm />
       <StyledSection>
         <TextSection>
-          <h3>Call the Team</h3>
+          <h3>Talk to the Team</h3>
           <p>{`Phone: ${phone}`}</p>
           <p>{`Email: ${email}`}</p>
         </TextSection>
@@ -67,7 +71,7 @@ const Contact = props => {
       <StyledSection>
         <TextSection>
           <h3>Our Address</h3>
-          <p>{addressElements}</p>
+          {addressElements}
         </TextSection>
       </StyledSection>
     </StyledContactWrapper>
