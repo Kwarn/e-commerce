@@ -1,5 +1,5 @@
 import React from 'react';
-import ImageSection from '../../components/ImageSection/ImageSection';
+import ImageSection from '../ImageSections/ImageSection/ImageSection';
 import products from '../../assets/products.jpg';
 import hardwood from '../../assets/hardwood.jpg';
 import laminate from '../../assets/laminate.jpg';
