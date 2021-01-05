@@ -1,11 +1,10 @@
 import React from 'react';
-// import welcomeImage from '../../assets/welcomeImage.jpeg';
 import goldFloor from '../../assets/goldFloor.jpeg';
 import ImageSection from './ImageSection/ImageSection';
 import flooring1 from '../../assets/flooring1.jpg';
 import happyCustomer from '../../assets/happyCustomer.jpg';
 import welcomeImage from '../../assets/withChair.jpg';
-import { withRouter, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const ImageSections = () => {
   const history = useHistory();
@@ -15,7 +14,7 @@ const ImageSections = () => {
       description: 'Discover our extensive range',
       buttonText: 'Explore',
       buttonCallback: () => history.push('/products'),
-      shouldFillWidth: true,
+      isWelcomeElement: true,
       image: welcomeImage,
     },
     testimonials: {
