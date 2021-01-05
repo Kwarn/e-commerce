@@ -8,11 +8,12 @@ const StyledImageContainer = styled.div`
   display: flex;
   justify-content: center;
   width: ${props => (props.isWelcomeElement ? '100%' : '95%')};
-  height: ${props => (props.isWelcomeElement ? '85vh' : '95%')};
+  height: ${props => (props.isWelcomeElement ? '85vh' : '100%')};
   max-width ${props => (props.isWelcomeElement ? '100%' : '350px')};;
   max-height: ${props => (props.isWelcomeElement ? '100%' : '350px')};
   .image {
-    min-width: 100%;
+    min-height: ${props => (props.isWelcomeElement ? '25em' : '20em')};
+    width: ${props => (props.isWelcomeElement ? '100%' : '95%')};
     object-fit: cover;
   }
   color: ${props => (props.textColor === 'black' ? 'black' : 'white')};
