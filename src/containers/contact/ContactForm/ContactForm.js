@@ -4,6 +4,10 @@ import Spinner from '../../../components/UI/spinner/Spinner';
 import { updateObject, validateInput } from '../../../utility/utility';
 import styled from 'styled-components';
 
+// KNOWN ISSUES: Field highlighting on invalid input is shared for name & email and shouldn't be.
+// Error messages for invalid form inputs should be removed as user inputs valid entry.
+// Field for 'Your Contact Number (Optional)' needed.
+
 const StyledContactForm = styled.form`
   color: #474747;
   background-color: rgba(255, 255, 255, 0.8);
@@ -100,6 +104,12 @@ const Contact = () => {
     wasTouched: false,
     isValid: false,
     invalidFormErrorMessage: 'Please enter a valid email address.',
+    value: '',
+  });
+  const [phoneElement, setPhoneElement] = useState({
+    validation: {
+      required: false,
+    },
     value: '',
   });
   const [subjectElement, setSubjectElement] = useState({
@@ -225,18 +235,25 @@ const Contact = () => {
       ) : (
         <>
           <StyledInput
-            placeholder="Name"
+            placeholder="Your Name"
             invalid={!nameElement.isValid && nameElement.wasTouched}
             name="name"
             onChange={event => inputChangedHandler(event.target.value, 'name')}
             value={nameElement.value}
           />
           <StyledInput
-            placeholder="Email"
+            placeholder="Your Email Address"
             invalid={!nameElement.isValid && nameElement.wasTouched}
             name="email"
             onChange={event => inputChangedHandler(event.target.value, 'email')}
             value={emailElement.value}
+          />
+          <StyledInput
+            placeholder="Your Phone Number"
+            invalid={!nameElement.isValid && nameElement.wasTouched}
+            name="phone"
+            onChange={event => inputChangedHandler(event.target.value, 'phone')}
+            value={phoneElement.value}
           />
           <h2 style={{ textAlign: 'center' }}>How can we help?</h2>
           <StyledSelect
@@ -255,7 +272,7 @@ const Contact = () => {
             </StyledSpinnerWrapper>
           ) : (
             <StyledTextArea
-              placeholder="Your message"
+              placeholder="Your Message"
               invalid={!textBoxElement.isValid && textBoxElement.wasTouched}
               name="message"
               onChange={event =>
