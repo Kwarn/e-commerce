@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 const StyledFooterWrapper = styled.div`
   display: flex;
   min-width: 100%;
-  height: 40vh;
+  height: 30vh;
   background-color: #474747;
   color: white;
 `;
