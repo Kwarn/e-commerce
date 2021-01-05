@@ -10,6 +10,7 @@ const StyledImageContainer = styled.div`
   justify-content: center;
   max-width: ${props => (props.shouldFillWidth ? '100%' : '350px')};
   .image {
+    min-height: ${props => (props.shouldFillWidth ? '25em' : '20em')};
     width: ${props => (props.shouldFillWidth ? '100%' : '95%')};
     margin: auto;
     object-fit: cover;
@@ -21,7 +22,7 @@ const StyledButtonContainer = styled.div`
   position: absolute;
   width: fit-content;
   height: 40px;
-  bottom: 25%;
+  bottom: 20%;
   left: 10%;
 `;
 
@@ -30,21 +31,21 @@ const StyledTitle = styled.h1`
   font-size: 1.5em;
   width: 80%;
   position: absolute;
-  top: 20%;
-  font-weight: 100;
+  top: 40%;
+  font-weight: 900;
 `;
 
 const StyledDescription = styled.p`
   font-size: 1.1em;
   width: 80%;
   position: absolute;
-  bottom: 35%;
+  bottom: 30%;
 `;
 
 export default function ImageSection({
   title,
   description,
-  textColor = 'black',
+  textColor = 'white',
   buttonText = null,
   buttonCallback,
   shouldFillWidth = false,
