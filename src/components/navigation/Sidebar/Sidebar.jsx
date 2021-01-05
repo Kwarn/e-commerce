@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-import NavigationItems from '../NavigationItems/NavigationItems';
+import React from 'react';
 import Backdrop from '../../UI/backdrop/Backdrop';
-import Logo from '../../../assets/logo.png';
 import styled, { css } from 'styled-components';
 import { useLocation, withRouter } from 'react-router-dom';
 import background from '../../../assets/sidebarBackground.jpg';

@@ -4,12 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './global';
 import { theme } from './theme';
 import Layout from './Layout/Layout';
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 const Home = React.lazy(() => import('./containers/Home/Home'));
 const Contact = React.lazy(() => import('./containers/contact/Contact'));

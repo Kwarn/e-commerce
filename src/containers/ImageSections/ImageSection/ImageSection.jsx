@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../../../components/button/Button';
-import { mediaQueries } from '../../../mediaQueries/mediaQueries';
 
 const StyledImageContainer = styled.div`
   margin: 5px 5px 5px 5px;

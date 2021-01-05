@@ -1,7 +1,6 @@
 import React from 'react';
 import goldFloor from '../../assets/goldFloor.jpeg';
 import ImageSection from './ImageSection/ImageSection';
-import flooring1 from '../../assets/flooring1.jpg';
 import happyCustomer from '../../assets/happyCustomer.jpg';
 import welcomeImage from '../../assets/withChair.jpg';
 import { useHistory } from 'react-router-dom';
