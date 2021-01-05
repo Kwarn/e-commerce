@@ -4,15 +4,16 @@ import Button from '../../../components/button/Button';
 import { mediaQueries } from '../../../mediaQueries/mediaQueries';
 
 const StyledImageContainer = styled.div`
-  margin: 10px 0 10px 0;
+  margin: 5px 5px 5px 5px;
   position: relative;
   display: flex;
   justify-content: center;
-  max-width: ${props => (props.shouldFillWidth ? '100%' : '350px')};
+  width: ${props => (props.isWelcomeElement ? '100%' : '95%')};
+  height: ${props => (props.isWelcomeElement ? '85vh' : '95%')};
+  max-width ${props => (props.isWelcomeElement ? '100%' : '350px')};;
+  max-height: ${props => (props.isWelcomeElement ? '100%' : '350px')};
   .image {
-    min-height: ${props => (props.shouldFillWidth ? '25em' : '20em')};
-    width: ${props => (props.shouldFillWidth ? '100%' : '95%')};
-    margin: auto;
+    min-width: 100%;
     object-fit: cover;
   }
   color: ${props => (props.textColor === 'black' ? 'black' : 'white')};
@@ -48,7 +49,7 @@ export default function ImageSection({
   textColor = 'white',
   buttonText = null,
   buttonCallback,
-  shouldFillWidth = false,
+  isWelcomeElement = false,
   image,
 }) {
   let btn = null;
@@ -63,7 +64,7 @@ export default function ImageSection({
   return (
     <StyledImageContainer
       textColor={textColor}
-      shouldFillWidth={shouldFillWidth}
+      isWelcomeElement={isWelcomeElement}
     >
       <img className="image" src={image} alt="Welcome" />
       <StyledTitle>{title}</StyledTitle>
