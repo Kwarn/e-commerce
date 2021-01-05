@@ -1,30 +1,44 @@
 import React from 'react';
 import ImageSection from '../ImageSections/ImageSection/ImageSection';
 import products from '../../assets/products.jpg';
-import hardwood from '../../assets/hardwood.jpg';
-import laminate from '../../assets/laminate.jpg';
+import tongueAndGroove from '../../assets/tongueAndGroove.jpg';
+import clickFlooring from '../../assets/clickFlooring.jpeg';
+import underlay from '../../assets/underlay.jpeg';
+import adhesives from '../../assets/adhesives.jpeg';
 import TextSection from '../../components/textSection/TextSection';
+import WelcomeSection from '../PageHeaders/PageHeader/PageHeader';
+import styled from 'styled-components';
+import PageHeaders from '../PageHeaders/PageHeaders';
+
+const StyledProductsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  align-items: center;
+`;
 
 export default function Products() {
-  const productMenuItems = { Hardwood: hardwood, Laminate: laminate };
+  const { productsHeader } = PageHeaders();
+
+  const productMenuItems = {
+    'TONGUE & GROOVE': tongueAndGroove,
+    'CLICK FLOORING': clickFlooring,
+    UNDERLAY: underlay,
+    ADHESIVES: adhesives,
+  };
 
   const menuItems = Object.keys(productMenuItems).map(key => (
     <ImageSection
       key={key}
-      title={`${key} flooring`}
+      title={key}
       buttonText="BROWSE"
       image={productMenuItems[key]}
     />
   ));
 
   return (
-    <>
-      <ImageSection image={products} shouldFillWidth={true} />
-      <TextSection
-        h1="OUR PRODUCTS"
-        p="Make a house a home with our diverse range of products"
-      />
-      {menuItems}
-    </>
+    <StyledProductsWrapper>
+      {productsHeader} {menuItems}
+    </StyledProductsWrapper>
   );
 }
