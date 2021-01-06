@@ -171,25 +171,17 @@ const Contact = () => {
   };
 
   const inputChangedHandler = (value, elementIdentifier) => {
-    let targetElement;
-    let setTargetElement;
+    const targetElements = {
+      name: [nameElement, setNameElement],
+      email: [emailElement, setEmailElement],
+      phone: [phoneElement, setPhoneElement],
+      subject: [subjectElement, setSubjectElement],
+      textBox: [textBoxElement, setTextBoxElement],
+    };
 
-    if (elementIdentifier === 'name') {
-      targetElement = nameElement;
-      setTargetElement = setNameElement;
-    }
-    if (elementIdentifier === 'email') {
-      targetElement = emailElement;
-      setTargetElement = setEmailElement;
-    }
-    if (elementIdentifier === 'subject') {
-      targetElement = subjectElement;
-      setTargetElement = setSubjectElement;
-    }
-    if (elementIdentifier === 'textBox') {
-      targetElement = textBoxElement;
-      setTargetElement = setTextBoxElement;
-    }
+    const targetElement = targetElements[elementIdentifier][0];
+    const setTargetElement = targetElements[elementIdentifier][1];
+
     setTargetElement(
       updateObject(targetElement, {
         isValid: validateInput(value, targetElement.validation),
@@ -235,22 +227,21 @@ const Contact = () => {
       ) : (
         <>
           <StyledInput
-            placeholder="Your Name"
+            placeholder="Name"
             invalid={!nameElement.isValid && nameElement.wasTouched}
             name="name"
             onChange={event => inputChangedHandler(event.target.value, 'name')}
             value={nameElement.value}
           />
           <StyledInput
-            placeholder="Your Email Address"
-            invalid={!nameElement.isValid && nameElement.wasTouched}
+            placeholder="Email Address"
+            invalid={!emailElement.isValid && emailElement.wasTouched}
             name="email"
             onChange={event => inputChangedHandler(event.target.value, 'email')}
             value={emailElement.value}
           />
           <StyledInput
-            placeholder="Your Phone Number"
-            invalid={!nameElement.isValid && nameElement.wasTouched}
+            placeholder="Phone Number (Optional)"
             name="phone"
             onChange={event => inputChangedHandler(event.target.value, 'phone')}
             value={phoneElement.value}
