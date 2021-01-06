@@ -42,7 +42,6 @@ const Contact = props => {
       <StyledSection>
         <TextSection>
           <h1>CONTACT US</h1>
-          <p>We love to hear from our customers!</p>
         </TextSection>
       </StyledSection>
       <StyledDivider />
