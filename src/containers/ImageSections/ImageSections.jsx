@@ -19,7 +19,7 @@ const ImageSections = () => {
     testimonials: {
       title: 'OUR CUSTOMERS',
       description: 'Hear what they have to say',
-      buttonText: 'Testimonials',
+      buttonText: 'More',
       buttonCallback: () => history.push('/testimonials'),
       image: happyCustomer,
     },

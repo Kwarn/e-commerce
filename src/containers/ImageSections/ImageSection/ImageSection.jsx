@@ -3,19 +3,19 @@ import styled from 'styled-components';
 import Button from '../../../components/button/Button';
 
 const StyledImageContainer = styled.div`
-  margin: 5px 5px 5px 5px;
+  margin: 5px;
   position: relative;
   display: flex;
   justify-content: center;
+  .image {
+    min-height: 350px;
+    width: 100%;
+    object-fit: cover;
+  }
   width: ${props => (props.isWelcomeElement ? '100%' : '95%')};
   height: ${props => (props.isWelcomeElement ? '85vh' : '100%')};
   max-width ${props => (props.isWelcomeElement ? '100%' : '350px')};;
   max-height: ${props => (props.isWelcomeElement ? '100%' : '350px')};
-  .image {
-    min-height: ${props => (props.isWelcomeElement ? '25em' : '20em')};
-    width: ${props => (props.isWelcomeElement ? '100%' : '95%')};
-    object-fit: cover;
-  }
   color: ${props => (props.textColor === 'black' ? 'black' : 'white')};
 `;
 
@@ -32,15 +32,15 @@ const StyledTitle = styled.h1`
   font-size: 1.5em;
   width: 80%;
   position: absolute;
-  top: 40%;
   font-weight: 900;
+  top: ${props => (props.isWelcomeElement ? '40%' : '30%')};
 `;
 
 const StyledDescription = styled.p`
   font-size: 1.1em;
   width: 80%;
   position: absolute;
-  bottom: 30%;
+  bottom: ${props => (props.isWelcomeElement ? '25%' : '30%')};
 `;
 
 export default function ImageSection({
@@ -67,8 +67,10 @@ export default function ImageSection({
       isWelcomeElement={isWelcomeElement}
     >
       <img className="image" src={image} alt="Welcome" />
-      <StyledTitle>{title}</StyledTitle>
-      <StyledDescription>{description}</StyledDescription>
+      <StyledTitle isWelcomeElement={isWelcomeElement}>{title}</StyledTitle>
+      <StyledDescription isWelcomeElement={isWelcomeElement}>
+        {description}
+      </StyledDescription>
       {btn}
     </StyledImageContainer>
   );
