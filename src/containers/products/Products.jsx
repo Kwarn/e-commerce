@@ -14,6 +14,16 @@ const StyledProductsWrapper = styled.div`
   align-items: center;
 `;
 
+const StyledMenuCards = styled.div`
+  display: flex;
+  flex-direction: row;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+  max-width: 100%;
+  align-items: center;
+`;
+
 export default function Products() {
   const { productsHeader } = PageHeaders();
 
@@ -35,7 +45,8 @@ export default function Products() {
 
   return (
     <StyledProductsWrapper>
-      {productsHeader} {menuItems}
+      {productsHeader}
+      <StyledMenuCards>{menuItems}</StyledMenuCards>
     </StyledProductsWrapper>
   );
 }
