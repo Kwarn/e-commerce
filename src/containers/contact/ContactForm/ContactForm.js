@@ -4,9 +4,8 @@ import Spinner from '../../../components/UI/spinner/Spinner';
 import { updateObject, validateInput } from '../../../utility/utility';
 import styled from 'styled-components';
 
-// KNOWN ISSUES: Field highlighting on invalid input is shared for name & email and shouldn't be.
+// KNOWN ISSUES:
 // Error messages for invalid form inputs should be removed as user inputs valid entry.
-// Field for 'Your Contact Number (Optional)' needed.
 
 const StyledContactForm = styled.form`
   color: #474747;
