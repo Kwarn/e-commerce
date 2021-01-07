@@ -5,14 +5,14 @@ import TextSection from '../../components/textSection/TextSection';
 import background from '../../assets/contactBackground.jpg';
 
 const StyledContactWrapper = styled.div`
-  background-image: url(${background});
+  // background-image: url(${background});
   background-size: cover;
   margin-top: 10px;
   display: inline-block;
   width: 100%;
   height: 100%;
-  background-color: #ccc;
-  color: white;
+  background-color: #eee;
+  color: #474747;
 `;
 
 const StyledSection = styled.section`
@@ -61,7 +61,7 @@ const Contact = props => {
       <ContactForm />
       <StyledSection>
         <TextSection>
-          <h3>Talk to the Team</h3>
+          <h3>Speak with the team</h3>
           <p>{`Phone: ${phone}`}</p>
           <p>{`Email: ${email}`}</p>
         </TextSection>
