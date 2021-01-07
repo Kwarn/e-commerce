@@ -1,40 +1,43 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledWrapper = styled.div`
-  position: relative;
-  height: 85vh;
-  text-align: center;
+const StyledHeaderWrapper = styled.div`
   background-color: white;
+  color: #474747;
+  text-align: center;
+  min-width: 100%;
 `;
 
 const StyledImage = styled.img`
-  height: 60%;
+  height: 55vh;
   width: 100%;
   object-fit: cover;
 `;
 
-const StyledTextContainer = styled.div`
-  padding: 0px 15px 0px 15px;
-  height: 40%;
-  .h1 {
-    margin: auto;
-    color: white;
+const StyledTextWrapper = styled.div`
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+`;
+
+const Text = styled.div`
+  width: 90%;
+  margin: auto;
+  .h2 {
     font-weight: 900;
-  }
-  .p {
-    margin: auto;
   }
 `;
 
 export default function PageHeader({ title, desc, image }) {
   return (
-    <StyledWrapper>
+    <StyledHeaderWrapper>
       <StyledImage src={image} />
-      <StyledTextContainer>
-        <h1>{title}</h1>
-        <p>{desc}</p>
-      </StyledTextContainer>
-    </StyledWrapper>
+      <StyledTextWrapper>
+        <Text>
+          <h2>{title}</h2>
+          <p>{desc}</p>
+        </Text>
+      </StyledTextWrapper>
+    </StyledHeaderWrapper>
   );
 }
