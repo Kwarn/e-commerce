@@ -3,6 +3,10 @@ import goldFloor from '../../assets/goldFloor.jpeg';
 import ImageSection from './ImageSection/ImageSection';
 import happyCustomer from '../../assets/happyCustomer.jpg';
 import welcomeImage from '../../assets/withChair.jpg';
+import tongueAndGrooveImage from '../../assets/tongueAndGroove.jpg';
+import clickFlooringImage from '../../assets/clickFlooring.jpeg';
+import underlayImage from '../../assets/underlay.jpeg';
+import adhesivesImage from '../../assets/adhesives.jpeg';
 import { useHistory } from 'react-router-dom';
 
 const ImageSections = () => {
@@ -29,6 +33,30 @@ const ImageSections = () => {
       buttonText: 'Find out more',
       buttonCallback: () => history.push('/about'),
       image: goldFloor,
+    },
+    tongueAndGroove: {
+      title: 'TONGUE & GROOVE',
+      buttonText: 'BROWSE',
+      buttonCallback: () => history.push('/tng'),
+      image: tongueAndGrooveImage,
+    },
+    clickFlooring: {
+      title: 'CLICK FLOORING',
+      buttonText: 'BROWSE',
+      buttonCallback: () => history.push('/clickflooring'),
+      image: clickFlooringImage,
+    },
+    underlay: {
+      title: 'UNDERLAY',
+      buttonText: 'BROWSE',
+      buttonCallback: () => history.push('/underlay'),
+      image: underlayImage,
+    },
+    adhesives: {
+      title: 'ADHESIVES',
+      buttonText: 'BROWSE',
+      buttonCallback: () => history.push('/adhesives'),
+      image: adhesivesImage,
     },
   };
 
