@@ -1,6 +1,6 @@
 import React from 'react';
 import goldFloor from '../../assets/goldFloor.jpeg';
-import MenuCards from './MenuCard/MenuCard';
+import MenuCard from './MenuCard/MenuCard';
 import happyCustomer from '../../assets/happyCustomer.jpg';
 import welcomeImage from '../../assets/withChair.jpg';
 import tongueAndGrooveImage from '../../assets/tongueAndGroove.jpg';
