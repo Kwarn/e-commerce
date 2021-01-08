@@ -1,6 +1,6 @@
 import React from 'react';
 import PageHeaders from '../PageHeaders/PageHeaders';
-import ImageSections from '../ImageSections/ImageSections';
+import ImageSections from '../MenuCards/MenuCards';
 import styled from 'styled-components';
 
 const StyledProductsWrapper = styled.div`

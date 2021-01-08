@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ImageSections from '../ImageSections/ImageSections';
+import ImageSections from '../MenuCards/MenuCards';
 import { withRouter } from 'react-router-dom';
 
 const StyledHomeWrapper = styled.div`
