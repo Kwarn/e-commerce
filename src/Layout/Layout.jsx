@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Toolbar from '../components/Navigation/Toolbar/Toolbar';
 import ScrollToTop from './ScrollToTop';
 import styled from 'styled-components';
@@ -17,6 +17,22 @@ const StyledMainContentContainer = styled.div`
 
 export default function Layout({ children }) {
   const [showSideDraw, setShowSideDraw] = useState(false);
+  const [layoutMode, setLayoutMode] = useState('');
+
+  useEffect(() => {
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  });
+
+  const onResize = () => {
+    setLayoutMode(
+      window.innerWidth > 769
+        ? 'desktop'
+        : window.innerWidth > 500 && window.innerWidth < 769
+        ? 'tablet'
+        : 'mobile'
+    );
+  };
 
   const sideDrawerClosedHandler = () => {
     setShowSideDraw(false);
@@ -29,7 +45,10 @@ export default function Layout({ children }) {
   return (
     <StyledSiteDimensionsWrapper>
       <ScrollToTop />
-      <Toolbar toggleSideDrawFn={sideDrawToggleHandler} />
+      <Toolbar
+        layoutMode={layoutMode}
+        toggleSideDrawFn={sideDrawToggleHandler}
+      />
       <SideDraw isOpen={showSideDraw} closeFn={sideDrawerClosedHandler} />
       <StyledMainContentContainer>{children}</StyledMainContentContainer>
       <Footer />
