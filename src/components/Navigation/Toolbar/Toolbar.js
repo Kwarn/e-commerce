@@ -15,17 +15,16 @@ const StyledToolbar = styled.header`
   top: ${props => (!props.hide ? '0' : '-15vh')};
 `;
 
-const Toolbar = ({ toggleSideDrawFn }) => {
+const Toolbar = ({ toggleSideDrawFn, layoutMode }) => {
   const [scrollPos, setScrollPos] = useState({
     posY: window.pageYOffset,
     visible: true,
   });
 
   useEffect(() => {
+    console.log(layoutMode);
     window.addEventListener('scroll', scrollHandler);
-    return () => {
-      window.removeEventListener('scroll', scrollHandler);
-    };
+    return () => window.removeEventListener('scroll', scrollHandler);
   });
 
   const scrollHandler = () => {
