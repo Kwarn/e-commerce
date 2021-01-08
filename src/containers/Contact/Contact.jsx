@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ContactForm from './ContactForm/ContactForm';
-import TextSection from '../../components/textSection/TextSection';
+import TextSection from '../../components/TextSection/TextSection';
 import background from '../../assets/contactBackground.jpg';
 
 const StyledContactWrapper = styled.div`

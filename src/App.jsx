@@ -7,25 +7,25 @@ import Layout from './Layout/Layout';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 const Home = React.lazy(() => import('./containers/Home/Home'));
-const Contact = React.lazy(() => import('./containers/contact/Contact'));
-const Products = React.lazy(() => import('./containers/products/Products'));
+const Contact = React.lazy(() => import('./containers/Contact/Contact'));
+const Products = React.lazy(() => import('./containers/Products/Products'));
 const Testimonials = React.lazy(() =>
-  import('./components/testimonials/Testimonials')
+  import('./components/Testimonials/Testimonials')
 );
-const About = React.lazy(() => import('./containers/about/About'));
+const About = React.lazy(() => import('./containers/About/About'));
 const TongueAndGroove = React.lazy(() =>
-  import('./containers/products/TongueAndGroove/TongueAndGroove')
+  import('./containers/Products/TongueAndGroove/TongueAndGroove')
 );
 const ClickFlooring = React.lazy(() =>
-  import('.//containers/products/ClickFlooring/ClickFlooring')
+  import('./containers/Products/ClickFlooring/ClickFlooring')
 );
 
 const Adhesives = React.lazy(() =>
-  import('./containers/products/Adhesives/Adhesives')
+  import('./containers/Products/Adhesives/Adhesives')
 );
 
 const Underlay = React.lazy(() =>
-  import('./containers/products/Underlay/Underlay')
+  import('./containers/Products/Underlay/Underlay')
 );
 
 const App = props => {
