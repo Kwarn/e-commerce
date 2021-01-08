@@ -13,11 +13,29 @@ const Testimonials = React.lazy(() =>
   import('./components/testimonials/Testimonials')
 );
 const About = React.lazy(() => import('./containers/about/About'));
+const TongueAndGroove = React.lazy(() =>
+  import('./containers/products/TongueAndGroove/TongueAndGroove')
+);
+const ClickFlooring = React.lazy(() =>
+  import('.//containers/products/ClickFlooring/ClickFlooring')
+);
+
+const Adhesives = React.lazy(() =>
+  import('./containers/products/Adhesives/Adhesives')
+);
+
+const Underlay = React.lazy(() =>
+  import('./containers/products/Underlay/Underlay')
+);
 
 const App = props => {
   let routes = (
     <Suspense fallback={<div>Loading...</div>}>
       <Switch>
+        <Route path="/underlay" component={Underlay} />
+        <Route path="/adhesives" component={Adhesives} />
+        <Route path="/tng" component={TongueAndGroove} />
+        <Route path="/clickflooring" component={ClickFlooring} />
         <Route path="/testimonials" component={Testimonials} />
         <Route path="/products" component={Products} />
         <Route path="/about" component={About} />
