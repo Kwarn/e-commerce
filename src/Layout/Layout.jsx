@@ -26,9 +26,9 @@ export default function Layout({ children }) {
 
   const onResize = () => {
     setLayoutMode(
-      window.innerWidth > 769
+      window.innerWidth > 1024
         ? 'desktop'
-        : window.innerWidth > 500 && window.innerWidth < 769
+        : window.innerWidth > 450 && window.innerWidth < 1025
         ? 'tablet'
         : 'mobile'
     );
