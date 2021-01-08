@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ImageSections from '../MenuCards/MenuCards';
+import MenuCards from '../MenuCards/MenuCards';
 import { withRouter } from 'react-router-dom';
 
 const StyledHomeWrapper = styled.div`
@@ -21,7 +21,7 @@ const StyledMenuCards = styled.div`
 `;
 
 function Home(props) {
-  const { welcomeElement, testimonials, aboutUs } = ImageSections();
+  const { welcomeElement, testimonials, aboutUs } = MenuCards();
   return (
     <>
       <StyledHomeWrapper>

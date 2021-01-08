@@ -43,7 +43,7 @@ const StyledDescription = styled.p`
   bottom: ${props => (props.isWelcomeElement ? '25%' : '30%')};
 `;
 
-export default function ImageSection({
+export default function MenuCard({
   title,
   description,
   textColor = 'white',

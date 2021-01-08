@@ -1,6 +1,6 @@
 import React from 'react';
 import goldFloor from '../../assets/goldFloor.jpeg';
-import ImageSection from './MenuCard/MenuCard';
+import MenuCards from './MenuCard/MenuCard';
 import happyCustomer from '../../assets/happyCustomer.jpg';
 import welcomeImage from '../../assets/withChair.jpg';
 import tongueAndGrooveImage from '../../assets/tongueAndGroove.jpg';
@@ -9,7 +9,7 @@ import underlayImage from '../../assets/underlay.jpeg';
 import adhesivesImage from '../../assets/adhesives.jpeg';
 import { useHistory } from 'react-router-dom';
 
-const ImageSections = () => {
+const MenuCards = () => {
   const history = useHistory();
   const imageSectionContent = {
     welcomeElement: {
@@ -64,11 +64,11 @@ const ImageSections = () => {
   for (let key in imageSectionContent) {
     imageSectionsObject = {
       ...imageSectionsObject,
-      ...{ [key]: <ImageSection key={key} {...imageSectionContent[key]} /> },
+      ...{ [key]: <MenuCard key={key} {...imageSectionContent[key]} /> },
     };
   }
 
   return imageSectionsObject;
 };
 
-export default ImageSections;
+export default MenuCards;

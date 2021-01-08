@@ -1,6 +1,6 @@
 import React from 'react';
 import PageHeaders from '../PageHeaders/PageHeaders';
-import ImageSections from '../MenuCards/MenuCards';
+import MenuCards from '../MenuCards/MenuCards';
 import styled from 'styled-components';
 
 const StyledProductsWrapper = styled.div`
@@ -13,12 +13,7 @@ const StyledProductsWrapper = styled.div`
 export default function Products() {
   const { productsHeader } = PageHeaders();
 
-  const {
-    tongueAndGroove,
-    clickFlooring,
-    underlay,
-    adhesives,
-  } = ImageSections();
+  const { tongueAndGroove, clickFlooring, underlay, adhesives } = MenuCards();
 
   return (
     <StyledProductsWrapper>
