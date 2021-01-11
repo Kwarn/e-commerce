@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledDrawToggle = styled.div`
-  margin: 6vh 0 0 0;
+  margin-top: ${props => (props.mobile ? '5vh' : props.tablet ? '4vh' : null)};
   width: 40px;
   height: 5vh;
   display: flex;
@@ -18,8 +18,12 @@ const StyledDrawToggle = styled.div`
   }
 `;
 
-const DrawToggle = ({ toggleFn }) => (
-  <StyledDrawToggle onClick={toggleFn}>
+const DrawToggle = ({ layoutMode, toggleFn }) => (
+  <StyledDrawToggle
+    mobile={layoutMode === 'mobile'}
+    tablet={layoutMode === 'tablet'}
+    onClick={toggleFn}
+  >
     <div></div>
     <div></div>
     <div></div>

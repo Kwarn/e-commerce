@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import styled from 'styled-components';
 
-const StyledToolbar = styled.header`
+const StyledVariableToolbar = styled.header`
   min-width: 100%;
-  height: 15vh;
+  height: ${props => (props.mobile ? '14vh' : props.tablet ? '12vh' : '10vh')};
   margin: auto;
   position: fixed;
   top: 0;
@@ -22,7 +22,6 @@ const Toolbar = ({ toggleSideDrawFn, layoutMode }) => {
   });
 
   useEffect(() => {
-    console.log(layoutMode);
     window.addEventListener('scroll', scrollHandler);
     return () => window.removeEventListener('scroll', scrollHandler);
   });
@@ -34,9 +33,21 @@ const Toolbar = ({ toggleSideDrawFn, layoutMode }) => {
   };
 
   return (
-    <StyledToolbar hide={!scrollPos.visible}>
-      <NavigationItems sideDrawToggleFn={toggleSideDrawFn} />
-    </StyledToolbar>
+    <StyledVariableToolbar
+      mobile={layoutMode === 'mobile'}
+      tablet={layoutMode === 'tablet'}
+      desktop={layoutMode === 'desktop'}
+      hide={!scrollPos.visible}
+    >
+      <NavigationItems
+        layoutMode={layoutMode}
+        sideDrawToggleFn={
+          layoutMode === 'mobile' || layoutMode === 'tablet'
+            ? toggleSideDrawFn
+            : null
+        }
+      />
+    </StyledVariableToolbar>
   );
 };
 

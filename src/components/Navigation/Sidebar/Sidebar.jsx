@@ -10,7 +10,7 @@ const StyledSideDraw = styled.div`
   background-image: url(${background});
   background-size: cover;
   position: fixed;
-  width: 280px;
+  width: ${props => (props.mobile ? '280px' : props.tablet ? '400px' : null)};
   max-width: 80%;
   height: 100%;
   left: 0;
@@ -69,7 +69,7 @@ const StyledMenuItem = styled.div`
   }
 `;
 
-const SideDraw = ({ isOpen, closeFn, history }) => {
+const SideDraw = ({ layoutMode, isOpen, closeFn, history }) => {
   const userPageLocation = useLocation();
 
   const changeRouteHandler = pageId => {
@@ -79,7 +79,12 @@ const SideDraw = ({ isOpen, closeFn, history }) => {
   return (
     <>
       <Backdrop show={isOpen} closeFn={closeFn} />
-      <StyledSideDraw onClick={closeFn} show={isOpen}>
+      <StyledSideDraw
+        mobile={layoutMode === 'mobile'}
+        tablet={layoutMode === 'tablet'}
+        onClick={closeFn}
+        show={isOpen}
+      >
         <StyledCloseButton src={closeButton} alt="close"></StyledCloseButton>
         <StyledMenuContainer>
           <StyledMenuItem
@@ -107,12 +112,3 @@ const SideDraw = ({ isOpen, closeFn, history }) => {
 };
 
 export default withRouter(SideDraw);
-
-// <div>
-//   <img
-//     className="logo"
-//     src={Logo}
-//     alt="Twelve Oak"
-//     onClick={() => history.push('/home')}
-//   />
-// </div>;
