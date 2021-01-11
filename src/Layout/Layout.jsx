@@ -10,14 +10,21 @@ const StyledSiteDimensionsWrapper = styled.div`
 `;
 
 const StyledMainContentContainer = styled.div`
-  margin-top: 16vh;
+  margin-top: ${props =>
+    props.mobile
+      ? '14vh'
+      : props.tablet
+      ? '12vh'
+      : props.desktop
+      ? '10vh'
+      : null};
   max-width: 100%;
   background-color: #eee;
 `;
 
 export default function Layout({ children }) {
   const [showSideDraw, setShowSideDraw] = useState(false);
-  const [layoutMode, setLayoutMode] = useState('');
+  const [layoutMode, setLayoutMode] = useState('mobile');
 
   useEffect(() => {
     window.addEventListener('resize', onResize);
@@ -43,13 +50,21 @@ export default function Layout({ children }) {
   };
 
   return (
-    <StyledSiteDimensionsWrapper>
+    <StyledSiteDimensionsWrapper
+      mobile={layoutMode === 'mobile'}
+      tablet={layoutMode === 'tablet'}
+      desktop={layoutMode === 'desktop'}
+    >
       <ScrollToTop />
       <Toolbar
         layoutMode={layoutMode}
         toggleSideDrawFn={sideDrawToggleHandler}
       />
-      <SideDraw isOpen={showSideDraw} closeFn={sideDrawerClosedHandler} />
+      <SideDraw
+        layoutMode={layoutMode}
+        isOpen={showSideDraw}
+        closeFn={sideDrawerClosedHandler}
+      />
       <StyledMainContentContainer>{children}</StyledMainContentContainer>
       <Footer />
     </StyledSiteDimensionsWrapper>
