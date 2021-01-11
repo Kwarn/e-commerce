@@ -11,7 +11,7 @@ import { useHistory } from 'react-router-dom';
 
 const MenuCards = () => {
   const history = useHistory();
-  const imageSectionContent = {
+  const menuCardContent = {
     welcomeElement: {
       title: 'NATURAL WOOD FLOORING',
       description: 'Discover our extensive range',
@@ -60,15 +60,15 @@ const MenuCards = () => {
     },
   };
 
-  let imageSectionsObject = {};
-  for (let key in imageSectionContent) {
-    imageSectionsObject = {
-      ...imageSectionsObject,
-      ...{ [key]: <MenuCard key={key} {...imageSectionContent[key]} /> },
+  let menuCardsObj = {};
+  for (let key in menuCardContent) {
+    menuCardsObj = {
+      ...menuCardsObj,
+      ...{ [key]: <MenuCard key={key} {...menuCardContent[key]} /> },
     };
   }
 
-  return imageSectionsObject;
+  return menuCardsObj;
 };
 
 export default MenuCards;
