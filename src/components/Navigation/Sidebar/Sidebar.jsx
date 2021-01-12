@@ -70,6 +70,11 @@ const StyledMenuItem = styled.div`
 `;
 
 const SideDraw = ({ layoutMode, isOpen, closeFn, history }) => {
+  const layoutModeProps = {
+    mobile: layoutMode === 'mobile',
+    tablet: layoutMode === 'tablet',
+    desktop: layoutMode === 'desktop',
+  };
   const userPageLocation = useLocation();
 
   const changeRouteHandler = pageId => {
@@ -79,12 +84,7 @@ const SideDraw = ({ layoutMode, isOpen, closeFn, history }) => {
   return (
     <>
       <Backdrop show={isOpen} closeFn={closeFn} />
-      <StyledSideDraw
-        mobile={layoutMode === 'mobile'}
-        tablet={layoutMode === 'tablet'}
-        onClick={closeFn}
-        show={isOpen}
-      >
+      <StyledSideDraw {...layoutModeProps} onClick={closeFn} show={isOpen}>
         <StyledCloseButton src={closeButton} alt="close"></StyledCloseButton>
         <StyledMenuContainer>
           <StyledMenuItem
