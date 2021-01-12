@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import LayoutsContext from '../../../../Layout/LayoutsContext';
 
 const StyledDrawToggle = styled.div`
-  margin-top: ${props => (props.mobile ? '5vh' : props.tablet ? '4vh' : null)};
+  margin-top: ${props =>
+    props.isMobile ? '5vh' : props.isTablet ? '4vh' : null};
+  margin-left: 5vw;
   width: 40px;
   height: 5vh;
-  display: flex;
+  display: ${props => (props.isDesktop ? 'none' : 'flex')};
   flex-flow: column;
   justify-content: space-around;
-  align-items: center;
   box-sizing: border-box;
   cursor: pointer;
   div {
@@ -18,15 +20,14 @@ const StyledDrawToggle = styled.div`
   }
 `;
 
-const DrawToggle = ({ layoutMode, toggleFn }) => (
-  <StyledDrawToggle
-    mobile={layoutMode === 'mobile'}
-    tablet={layoutMode === 'tablet'}
-    onClick={toggleFn}
-  >
-    <div></div>
-    <div></div>
-    <div></div>
-  </StyledDrawToggle>
-);
+const DrawToggle = ({ toggleFn }) => {
+  const layouts = useContext(LayoutsContext);
+  return (
+    <StyledDrawToggle {...layouts} onClick={toggleFn}>
+      <div></div>
+      <div></div>
+      <div></div>
+    </StyledDrawToggle>
+  );
+};
 export default DrawToggle;
