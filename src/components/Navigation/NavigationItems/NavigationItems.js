@@ -1,64 +1,79 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import logo from '../../../assets/logo.png';
 import DrawToggle from '../Sidebar/DrawToggle/DrawToggle';
 import { withRouter } from 'react-router-dom';
 import contactIcon from '../../../assets/contactIcon.png';
+import LayoutsContext from '../../../Layout/LayoutsContext';
 
 const StyledNavItems = styled.div`
+  position: relative;
   padding: 0;
-  margin: ${props => (props.desktop ? '0 2vw 0 2vw' : '0 5vw 0 5vw')};
+  width: ${props => (props.isDesktop ? '100%' : 'auto')};
   max-width: 100%;
-  display: flex;
-  flex-direction: row;
-  -webkit-justify-content: 'space-between';
+  display: ${props => (props.isDesktop ? 'inline-flex' : 'flex')};
+  justify-content: space-between;
   height: ${props =>
-    props.mobile
+    props.isMobile
       ? '14vh'
-      : props.tablet
+      : props.isTablet
       ? '12vh'
-      : props.desktop
+      : props.isDesktop
       ? '10vh'
       : null};
 `;
 const StyledLogo = styled.img`
   cursor: pointer;
   margin: auto;
-  height: ${props => (props.desktop ? '100%' : '80%')};
+  max-height: ${props => (props.isDesktop ? '100%' : '80%')};
+  ${({ isDesktop }) =>
+    isDesktop &&
+    `position: absolute;
+    left: 20px
+  `}
 `;
 
 const StyledContactIcon = styled.img`
   cursor: pointer;
-  margin-top: ${props => (props.mobile ? '5vh' : props.tablet ? '3vh' : '2vh')};
-  text-align: right;
-  height: ${props => (props.desktop ? '65%' : '5vh')};
-  width: auto;
+  margin-top: ${props =>
+    props.isMobile ? '5vh' : props.isTablet ? '4vh' : '2vh'};
+  margin-right: ${props => (props.isDesktop ? 'auto' : '5vw')};
+  height: ${props => (props.isDesktop ? '60%' : '5vh')};
+  ${({ isDesktop }) =>
+    isDesktop &&
+    `position: absolute;
+    right: 20px
+  `}
+  }
 `;
 
-const NavigationItems = ({ layoutMode, sideDrawToggleFn, history }) => {
+const NavigationItems = ({ sideDrawToggleFn, history }) => {
+  const layouts = useContext(LayoutsContext);
+  const { isMobile, isDesktop, isTablet } = layouts;
+
+  const drawToggleComponent = <DrawToggle toggleFn={sideDrawToggleFn} />;
+  const logoComponent = (
+    <StyledLogo
+      isDesktop={isDesktop}
+      src={logo}
+      alt="Twelve Oak"
+      onClick={() => history.push('/home')}
+    />
+  );
+  const contactIconComponent = (
+    <StyledContactIcon
+      {...layouts}
+      onClick={() => history.push('/contact')}
+      src={contactIcon}
+      alt="contact"
+    />
+  );
+  console.log(isDesktop);
   return (
-    <StyledNavItems
-      mobile={layoutMode === 'mobile'}
-      tablet={layoutMode === 'tablet'}
-      desktop={layoutMode === 'desktop'}
-    >
-      {layoutMode === 'mobile' || layoutMode === 'tablet' ? (
-        <DrawToggle layoutMode={layoutMode} toggleFn={sideDrawToggleFn} />
-      ) : null}
-      <StyledLogo
-        desktop={layoutMode === 'desktop'}
-        src={logo}
-        alt="Twelve Oak"
-        onClick={() => history.push('/home')}
-      />
-      <StyledContactIcon
-        mobile={layoutMode === 'mobile'}
-        tablet={layoutMode === 'tablet'}
-        desktop={layoutMode === 'desktop'}
-        onClick={() => history.push('/contact')}
-        src={contactIcon}
-        alt="contact"
-      />
+    <StyledNavItems {...layouts} className={isDesktop ? 'isDesktop' : ''}>
+      {isDesktop ? logoComponent : drawToggleComponent}
+      {isDesktop ? null : logoComponent}
+      {contactIconComponent}
     </StyledNavItems>
   );
 };
