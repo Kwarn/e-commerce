@@ -1,21 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import styled from 'styled-components';
+import LayoutsContext from '../../../Layout/LayoutsContext';
 
 const StyledVariableToolbar = styled.header`
-  min-width: 100%;
-  height: ${props => (props.mobile ? '14vh' : props.tablet ? '12vh' : '10vh')};
-  margin: auto;
+  width: 100%;
   position: fixed;
-  top: 0;
   left: 0;
+  top: 0;
   background-color: white;
   z-index: 100;
   transition: top 0.6s;
+  height: ${props =>
+    props.isMobile ? '14vh' : props.isTablet ? '12vh' : '10vh'};
   top: ${props => (!props.hide ? '0' : '-15vh')};
 `;
 
-const Toolbar = ({ toggleSideDrawFn, layoutMode }) => {
+const Toolbar = ({ toggleSideDrawFn }) => {
+  const layouts = useContext(LayoutsContext);
+  const { isDesktop } = layouts;
   const [scrollPos, setScrollPos] = useState({
     posY: window.pageYOffset,
     visible: true,
@@ -33,19 +36,9 @@ const Toolbar = ({ toggleSideDrawFn, layoutMode }) => {
   };
 
   return (
-    <StyledVariableToolbar
-      mobile={layoutMode === 'mobile'}
-      tablet={layoutMode === 'tablet'}
-      desktop={layoutMode === 'desktop'}
-      hide={!scrollPos.visible}
-    >
+    <StyledVariableToolbar {...layouts} hide={!scrollPos.visible}>
       <NavigationItems
-        layoutMode={layoutMode}
-        sideDrawToggleFn={
-          layoutMode === 'mobile' || layoutMode === 'tablet'
-            ? toggleSideDrawFn
-            : null
-        }
+        sideDrawToggleFn={!isDesktop ? toggleSideDrawFn : null}
       />
     </StyledVariableToolbar>
   );
