@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Button from '../../../components/Button/Button';
+import LayoutsContext from '../../../Layout/LayoutsContext';
 
 const StyledImageContainer = styled.div`
   margin: 5px;
@@ -12,10 +13,10 @@ const StyledImageContainer = styled.div`
     width: 100%;
     object-fit: cover;
   }
-  width: ${props => (props.isWelcomeElement ? '100%' : '95%')};
-  height: ${props => (props.isWelcomeElement ? '85vh' : '100%')};
-  max-width ${props => (props.isWelcomeElement ? '100%' : '350px')};;
-  max-height: ${props => (props.isWelcomeElement ? '100%' : '350px')};
+  width: 95%;
+  height: 100%;
+  max-width: 350px;
+  max-height: 350px;
   color: ${props => (props.textColor === 'black' ? 'black' : 'white')};
 `;
 
@@ -33,14 +34,14 @@ const StyledTitle = styled.h1`
   width: 80%;
   position: absolute;
   font-weight: 900;
-  top: ${props => (props.isWelcomeElement ? '40%' : '30%')};
+  top: 30%;
 `;
 
 const StyledDescription = styled.p`
   font-size: 1.1em;
   width: 80%;
   position: absolute;
-  bottom: ${props => (props.isWelcomeElement ? '25%' : '30%')};
+  bottom: 30%;
 `;
 
 export default function MenuCard({
@@ -49,9 +50,10 @@ export default function MenuCard({
   textColor = 'white',
   buttonText = null,
   buttonCallback,
-  isWelcomeElement = false,
   image,
 }) {
+  const layouts = useContext(LayoutsContext);
+
   let btn = null;
   if (buttonText) {
     btn = (
@@ -62,15 +64,10 @@ export default function MenuCard({
   }
 
   return (
-    <StyledImageContainer
-      textColor={textColor}
-      isWelcomeElement={isWelcomeElement}
-    >
+    <StyledImageContainer {...layouts} textColor={textColor}>
       <img className="image" src={image} alt="Welcome" />
-      <StyledTitle isWelcomeElement={isWelcomeElement}>{title}</StyledTitle>
-      <StyledDescription isWelcomeElement={isWelcomeElement}>
-        {description}
-      </StyledDescription>
+      <StyledTitle>{title}</StyledTitle>
+      <StyledDescription>{description}</StyledDescription>
       {btn}
     </StyledImageContainer>
   );
