@@ -12,13 +12,7 @@ const StyledSiteDimensionsWrapper = styled.div`
 
 const StyledMainContentContainer = styled.div`
   margin-top: ${props =>
-    props.mobile
-      ? '14vh'
-      : props.tablet
-      ? '12vh'
-      : props.desktop
-      ? '10vh'
-      : null};
+    props.isMobile ? '14vh' : props.isTablet ? '12vh' : '10vh'};
   max-width: 100%;
   background-color: #eee;
 `;
@@ -57,7 +51,9 @@ export default function Layout({ children }) {
         <ScrollToTop />
         <Toolbar toggleSideDrawFn={sideDrawToggleHandler} />
         <SideDraw isOpen={showSideDraw} closeFn={sideDrawerClosedHandler} />
-        <StyledMainContentContainer>{children}</StyledMainContentContainer>
+        <StyledMainContentContainer {...layoutModeProps}>
+          {children}
+        </StyledMainContentContainer>
         <Footer />
       </LayoutsContext.Provider>
     </StyledSiteDimensionsWrapper>
