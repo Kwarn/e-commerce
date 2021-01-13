@@ -2,7 +2,7 @@ import React from 'react';
 import goldFloor from '../../assets/goldFloor.jpeg';
 import MenuCard from './MenuCard/MenuCard';
 import happyCustomer from '../../assets/happyCustomer.jpg';
-import welcomeImage from '../../assets/withChair.jpg';
+import welcomeImage from '../../assets/slideImage1.jpg';
 import tongueAndGrooveImage from '../../assets/tongueAndGroove.jpg';
 import clickFlooringImage from '../../assets/clickFlooring.jpeg';
 import underlayImage from '../../assets/underlay.jpeg';
@@ -12,14 +12,6 @@ import { useHistory } from 'react-router-dom';
 const MenuCards = () => {
   const history = useHistory();
   const menuCardContent = {
-    welcomeElement: {
-      title: 'NATURAL WOOD FLOORING',
-      description: 'Discover our extensive range',
-      buttonText: 'Explore',
-      buttonCallback: () => history.push('/products'),
-      isWelcomeElement: true,
-      image: welcomeImage,
-    },
     testimonials: {
       title: 'OUR CUSTOMERS',
       description: 'Hear what they have to say',
