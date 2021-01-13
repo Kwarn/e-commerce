@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Backdrop from '../../UI/backdrop/Backdrop';
 import styled, { css } from 'styled-components';
 import { useLocation, withRouter } from 'react-router-dom';
 import background from '../../../assets/sidebarBackground.jpg';
 import closeButton from '../../../assets/closeButton.png';
+import LayoutsContext from '../../../Layout/LayoutsContext';
 
 const StyledSideDraw = styled.div`
   position: relative;
   background-image: url(${background});
   background-size: cover;
   position: fixed;
-  width: ${props => (props.mobile ? '280px' : props.tablet ? '400px' : null)};
+  width: ${props =>
+    props.isMobile ? '280px' : props.isTablet ? '400px' : null};
   max-width: 80%;
   height: 100%;
   left: 0;
@@ -69,12 +71,8 @@ const StyledMenuItem = styled.div`
   }
 `;
 
-const SideDraw = ({ layoutMode, isOpen, closeFn, history }) => {
-  const layoutModeProps = {
-    mobile: layoutMode === 'mobile',
-    tablet: layoutMode === 'tablet',
-    desktop: layoutMode === 'desktop',
-  };
+const SideDraw = ({ isOpen, closeFn, history }) => {
+  const layouts = useContext(LayoutsContext);
   const userPageLocation = useLocation();
 
   const changeRouteHandler = pageId => {
@@ -84,7 +82,7 @@ const SideDraw = ({ layoutMode, isOpen, closeFn, history }) => {
   return (
     <>
       <Backdrop show={isOpen} closeFn={closeFn} />
-      <StyledSideDraw {...layoutModeProps} onClick={closeFn} show={isOpen}>
+      <StyledSideDraw {...layouts} onClick={closeFn} show={isOpen}>
         <StyledCloseButton src={closeButton} alt="close"></StyledCloseButton>
         <StyledMenuContainer>
           <StyledMenuItem
