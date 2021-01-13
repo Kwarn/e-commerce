@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MenuCards from '../MenuCards/MenuCards';
 import { withRouter } from 'react-router-dom';
+import Carousel from '../Carousel/Carousel';
 
 const StyledHomeWrapper = styled.div`
   display: flex;
@@ -25,6 +26,7 @@ function Home(props) {
   return (
     <>
       <StyledHomeWrapper>
+        <Carousel />
         {welcomeElement}
         <StyledMenuCards>
           {testimonials}
