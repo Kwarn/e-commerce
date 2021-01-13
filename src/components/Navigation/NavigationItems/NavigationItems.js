@@ -49,7 +49,7 @@ const StyledContactIcon = styled.img`
 
 const NavigationItems = ({ sideDrawToggleFn, history }) => {
   const layouts = useContext(LayoutsContext);
-  const { isMobile, isDesktop, isTablet } = layouts;
+  const { isDesktop } = layouts;
 
   const drawToggleComponent = <DrawToggle toggleFn={sideDrawToggleFn} />;
   const logoComponent = (
@@ -68,7 +68,6 @@ const NavigationItems = ({ sideDrawToggleFn, history }) => {
       alt="contact"
     />
   );
-  console.log(isDesktop);
   return (
     <StyledNavItems {...layouts} className={isDesktop ? 'isDesktop' : ''}>
       {isDesktop ? logoComponent : drawToggleComponent}
