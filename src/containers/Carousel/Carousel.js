@@ -17,7 +17,6 @@ const StyledSlideContainer = styled.ul`
   padding: 0;
   position: absolute;
   justify-content: center;
-  width: 300%;
   height: 100%;
   transition: 0.5s;
 `;

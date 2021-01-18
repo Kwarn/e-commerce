@@ -5,7 +5,10 @@ import LayoutsContext from '../../../Layout/LayoutsContext';
 const StyledSlide = styled.li`
   position: relative;
   display: flex;
-  width: 100%;
+  width: ${props =>
+    props.yScrollBarWidth
+      ? `calc(100vw - ${props.yScrollBarWidth - 1}px)`
+      : '100vw'};
   min-height: 100%;
   background-image: url(${({ background }) => background});
   background-repeat: no-repeat;
@@ -47,6 +50,7 @@ const StyledText = styled.div`
 
 const Slide = ({ slide }) => {
   const layouts = useContext(LayoutsContext);
+  console.log(layouts);
   return (
     <StyledSlide {...layouts} background={slide.image}>
       <StyledContentWrapper {...layouts} isImageDark={slide.isImageDark}>
