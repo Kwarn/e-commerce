@@ -2,16 +2,16 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import LayoutsContext from '../../../Layout/LayoutsContext';
 
-const StyledSlide = styled.div`
+const StyledSlide = styled.li`
   position: relative;
-  margin: auto;
   display: flex;
-  min-width: 100%;
+  width: 100%;
   min-height: 100%;
   background-image: url(${({ background }) => background});
   background-repeat: no-repeat;
   background-size: cover;
   padding: 0;
+  margin: auto;
 `;
 
 const StyledContentWrapper = styled.div`
@@ -21,7 +21,7 @@ const StyledContentWrapper = styled.div`
   margin-top: -60px;
   min-height: 120px;
   left: 50%;
-  color: ${props => (props.isImageDark ? 'black' : 'white')};
+  color: white;
   margin-left: ${props =>
     props.isMobile ? '-120px' : props.isTablet ? '-150px' : '-250px'};
   width: ${props =>
@@ -37,8 +37,7 @@ const StyledCallToAction = styled.div`
   height: 60px;
   width: ${props =>
     props.isMobile ? '180px' : props.isTablet ? '200px' : '420px'};
-  border: ${props =>
-    props.isImageDark ? '2px solid black' : '2px solid white'};
+  border: 2px solid white;
 `;
 
 const StyledText = styled.div`

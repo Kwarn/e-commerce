@@ -11,21 +11,23 @@ import slideImage2 from '../../assets/slideImage2.jpg';
 import slideImage3 from '../../assets/slideImage3.jpg';
 import slideImage4 from '../../assets/slideImage4.jpg';
 
-const StyledSlideContainer = styled.div`
-  overflow: hidden;
+const StyledSlideContainer = styled.ul`
   display: flex;
+  margin: 0;
+  padding: 0;
+  position: absolute;
   justify-content: center;
-  min-width: 100%;
+  width: 300%;
   height: 100%;
-  transition: 2s;
+  transition: 0.5s;
 `;
 
 const StyledCarouselControl = styled.div`
-  cursor: pointer;
-  text-align: center;
   position: absolute;
   display: flex;
   justify-content: center;
+  text-align: center;
+  cursor: pointer;
   top: 50%;
   width: 10%;
   height: 100%;
@@ -45,18 +47,19 @@ const StyledCarouselChevron = styled.img`
 const StyledCarousel = styled.div`
   position: relative;
   display: flex;
-  min-width: 100%;
+  width: 100%;
   height: ${props =>
     props.isMobile ? '86vh' : props.isTablet ? '88vh' : '90vh'};
-  overflow: hidden;
   padding: 0;
+  margin: 0;
+  overflow: hidden;
 `;
 
 const Carousel = () => {
   const layouts = useContext(LayoutsContext);
   const history = useHistory();
 
-  const [x, setX] = useState(0);
+  const [x, setX] = useState(-100);
 
   const handlers = useSwipeable({
     onSwipedLeft: () => goRight(),
@@ -79,30 +82,25 @@ const Carousel = () => {
       isImageDark: false,
     },
     { title: 'CREATE A BEAUTIFUL SPACE', image: slideImage3 },
-    { title: 'NEED FLOORING ADVICE? BOOK A CONSULTATION', image: slideImage4 },
+    // { title: 'NEED FLOORING ADVICE? BOOK A CONSULTATION', image: slideImage4 },
   ];
 
   const slides = slidesArr.map(slide => {
-    return (
-      <StyledSlideContainer
-        key={slide.title}
-        style={{ transform: `translateX(${x}%)` }}
-      >
-        <Slide slide={slide} />
-      </StyledSlideContainer>
-    );
+    return <Slide key={slide.title} slide={slide} />;
   });
 
   const goLeft = () => {
-    x === 0 ? setX(-100 * (slides.length - 1)) : setX(x + 100);
+    setX(x + 100);
   };
   const goRight = () => {
-    x === -100 * (slides.length - 1) ? setX(0) : setX(x - 100);
+    setX(x - 100);
   };
 
   return (
     <StyledCarousel {...layouts} {...handlers}>
-      {slides}
+      <StyledSlideContainer style={{ left: `${x}%` }}>
+        {slides}
+      </StyledSlideContainer>
       <StyledCarouselControl onClick={goLeft} style={{ left: 0 }}>
         <StyledCarouselChevron src={leftChevronImage} alt="go left" />
       </StyledCarouselControl>
