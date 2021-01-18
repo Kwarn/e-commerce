@@ -19,7 +19,29 @@ const StyledMainContentContainer = styled.div`
 
 export default function Layout({ children }) {
   const [showSideDraw, setShowSideDraw] = useState(false);
-  const [layoutModeProps, setLayoutModeProps] = useState({});
+  const yScrollBarWidth = window.innerWidth - document.body.clientWidth;
+  const [layoutModeProps, setLayoutModeProps] = useState(
+    window.innerWidth > 1024
+      ? {
+          isMobile: false,
+          isTablet: false,
+          isDesktop: true,
+          yScrollBarWidth,
+        }
+      : window.innerWidth > 450 && window.innerWidth < 1025
+      ? {
+          isMobile: false,
+          isTablet: true,
+          isDesktop: false,
+          yScrollBarWidth,
+        }
+      : {
+          isMobile: true,
+          isTablet: false,
+          isDesktop: false,
+          yScrollBarWidth,
+        }
+  );
 
   useEffect(() => {
     onResize();
@@ -30,10 +52,25 @@ export default function Layout({ children }) {
   const onResize = () => {
     setLayoutModeProps(
       window.innerWidth > 1024
-        ? { isMobile: false, isTablet: false, isDesktop: true }
+        ? {
+            isMobile: false,
+            isTablet: false,
+            isDesktop: true,
+            yScrollBarWidth,
+          }
         : window.innerWidth > 450 && window.innerWidth < 1025
-        ? { isMobile: false, isTablet: true, isDesktop: false }
-        : { isMobile: true, isTablet: false, isDesktop: false }
+        ? {
+            isMobile: false,
+            isTablet: true,
+            isDesktop: false,
+            yScrollBarWidth,
+          }
+        : {
+            isMobile: true,
+            isTablet: false,
+            isDesktop: false,
+            yScrollBarWidth,
+          }
     );
   };
 
