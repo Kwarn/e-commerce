@@ -50,7 +50,6 @@ const StyledText = styled.div`
 
 const Slide = ({ slide }) => {
   const layouts = useContext(LayoutsContext);
-  console.log(layouts);
   return (
     <StyledSlide {...layouts} background={slide.image}>
       <StyledContentWrapper {...layouts} isImageDark={slide.isImageDark}>

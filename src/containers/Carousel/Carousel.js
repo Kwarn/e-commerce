@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import { useHistory } from 'react-router-dom';
 import Slide from './Slide/Slide';
@@ -57,8 +57,23 @@ const StyledCarousel = styled.div`
 const Carousel = () => {
   const layouts = useContext(LayoutsContext);
   const history = useHistory();
-
+  const slideContainer = useRef(null);
   const [x, setX] = useState(-100);
+  const transitionEndListener = e => {
+    console.log(x);
+    if (x === 0) {
+      setX(-400);
+    }
+  };
+
+  useEffect(() => {
+    const sc = slideContainer.current;
+
+    sc.addEventListener('webkitTransitionEnd', transitionEndListener);
+    return () => {
+      sc.removeEventListener('webkitTransitionEnd', transitionEndListener);
+    };
+  });
 
   const handlers = useSwipeable({
     onSwipedLeft: () => goRight(),
@@ -81,12 +96,15 @@ const Carousel = () => {
       isImageDark: false,
     },
     { title: 'CREATE A BEAUTIFUL SPACE', image: slideImage3 },
-    // { title: 'NEED FLOORING ADVICE? BOOK A CONSULTATION', image: slideImage4 },
+    { title: 'NEED FLOORING ADVICE? BOOK A CONSULTATION', image: slideImage4 },
   ];
 
   const slides = slidesArr.map(slide => {
     return <Slide key={slide.title} slide={slide} />;
   });
+
+  const firstSlideClone = slides[0];
+  const lastSlideClone = slides[slides.length - 1];
 
   const goLeft = () => {
     setX(x + 100);
@@ -97,10 +115,16 @@ const Carousel = () => {
 
   return (
     <StyledCarousel {...layouts} {...handlers}>
-      <StyledSlideContainer style={{ left: `${x}%` }}>
+      <StyledSlideContainer ref={slideContainer} style={{ left: `${x}%` }}>
+        {lastSlideClone}
         {slides}
+        {firstSlideClone}
       </StyledSlideContainer>
-      <StyledCarouselControl onClick={goLeft} style={{ left: 0 }}>
+      <StyledCarouselControl
+        onClick={goLeft}
+        onAnimationEnd={() => console.log('test')}
+        style={{ left: 0 }}
+      >
         <StyledCarouselChevron src={leftChevronImage} alt="go left" />
       </StyledCarouselControl>
       <StyledCarouselControl onClick={goRight} style={{ right: 0 }}>
