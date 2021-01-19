@@ -20,6 +20,9 @@ const StyledMainContentContainer = styled.div`
 export default function Layout({ children }) {
   const [showSideDraw, setShowSideDraw] = useState(false);
   const yScrollBarWidth = window.innerWidth - document.body.clientWidth;
+
+  //Stange bug detecting scrollbar on inital load when trying to refactor this code
+
   const [layoutModeProps, setLayoutModeProps] = useState(
     window.innerWidth > 1024
       ? {
