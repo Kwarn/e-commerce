@@ -103,6 +103,12 @@ const SideDraw = ({ isOpen, closeFn, history }) => {
           >
             <h1>CONTACT</h1>
           </StyledMenuItem>
+          <StyledMenuItem
+            onClick={() => changeRouteHandler('calculator')}
+            isCurrentPage={userPageLocation.pathname === '/calculator'}
+          >
+            <h1>FLOORING CALCULATOR</h1>
+          </StyledMenuItem>
         </StyledMenuContainer>
       </StyledSideDraw>
     </>
