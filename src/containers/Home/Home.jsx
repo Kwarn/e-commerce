@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MenuCards from '../MenuCards/MenuCards';
 import { withRouter } from 'react-router-dom';
 // import Carousel from '../Carousel/Carousel';
-import CarouselInfinite from '../CarouselInfinite/CarouselInfinite';
+import CarouselInfinite from '../Carousel/Carousel';
 
 const StyledHomeWrapper = styled.div`
   display: flex;
@@ -21,18 +21,13 @@ const StyledMenuCards = styled.div`
   max-width: 100%;
   align-items: center;
 `;
-const StyledCarouselContainer = styled.div`
-  width: 100%;
-  height: 100vh;
-`;
-function Home(props) {
+
+function Home() {
   const { welcomeElement, testimonials, aboutUs } = MenuCards();
   return (
     <>
       <StyledHomeWrapper>
-        <StyledCarouselContainer>
-          <CarouselInfinite />
-        </StyledCarouselContainer>
+        <CarouselInfinite />
         {welcomeElement}
         <StyledMenuCards>
           {testimonials}
