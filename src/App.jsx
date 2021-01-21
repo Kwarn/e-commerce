@@ -28,10 +28,15 @@ const Underlay = React.lazy(() =>
   import('./containers/Products/Underlay/Underlay')
 );
 
+const SqFtCalculator = React.lazy(() =>
+  import('./containers/SqFtCalculator/SqFtCalulator')
+);
+
 const App = props => {
   let routes = (
     <Suspense fallback={<div>Loading...</div>}>
       <Switch>
+        <Route path="/calculator" component={SqFtCalculator} />
         <Route path="/underlay" component={Underlay} />
         <Route path="/adhesives" component={Adhesives} />
         <Route path="/tng" component={TongueAndGroove} />
