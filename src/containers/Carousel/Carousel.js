@@ -19,6 +19,7 @@ const StyledSlideContainer = styled.ul`
   justify-content: center;
   height: 100%;
   transition: 0.5s;
+  width: fit-content;
 `;
 
 const StyledCarouselControl = styled.div`
@@ -55,34 +56,7 @@ const StyledCarousel = styled.div`
 `;
 
 const Carousel = () => {
-  const layouts = useContext(LayoutsContext);
-  const history = useHistory();
-  const slideContainer = useRef(null);
-  const [x, setX] = useState(-100);
-  const transitionEndListener = e => {
-    console.log(x);
-    if (x === 0) {
-      setX(-400);
-    }
-  };
-
-  useEffect(() => {
-    const sc = slideContainer.current;
-
-    sc.addEventListener('webkitTransitionEnd', transitionEndListener);
-    return () => {
-      sc.removeEventListener('webkitTransitionEnd', transitionEndListener);
-    };
-  });
-
-  const handlers = useSwipeable({
-    onSwipedLeft: () => goRight(),
-    onSwipedRight: () => goLeft(),
-    preventDefaultTouchmoveEvent: true,
-    trackMouse: true,
-  });
-
-  const slidesArr = [
+  const slidesContentArray = [
     {
       title: 'BEAUTIFUL HARDWOOD FLOORING',
       image: slideImage1,
@@ -98,36 +72,74 @@ const Carousel = () => {
     { title: 'CREATE A BEAUTIFUL SPACE', image: slideImage3 },
     { title: 'NEED FLOORING ADVICE? BOOK A CONSULTATION', image: slideImage4 },
   ];
+  const [slides, setSlides] = useState(
+    slidesContentArray.map(slide => <Slide key={slide.title} slide={slide} />)
+  );
+  const layouts = useContext(LayoutsContext);
+  const history = useHistory();
+  const slideContainerRef = useRef(null);
+  const [x, setX] = useState(-100);
+  const [direction, setDirection] = useState('');
 
-  const slides = slidesArr.map(slide => {
-    return <Slide key={slide.title} slide={slide} />;
+  const transitionEndListener = e => {
+    if (direction === 'left') {
+      slides.unshift(slides[slides.length - 1]);
+
+      // setSlides(prevSlides => {
+      //   const first = prevSlides[0];
+      //   const middle = prevSlides.slice(1, prevSlides.length - 1);
+      //   const last = prevSlides[prevSlides.length - 1];
+      //   // console.log('Beginning: ', first, 'Middle: ', middle, 'last: ', last);
+      //   if (direction === 'left')
+      //     return [].concat.apply([], [last, middle, first]);
+      //   else if (direction === 'right')
+      //     return [].concat.apply([], [first, middle, last]);
+      // });
+    }
+
+    // console.log('slides AFTER:', slides);
+  };
+
+  useEffect(() => {
+    const sc = slideContainerRef.current;
+    sc.addEventListener('webkitTransitionEnd', transitionEndListener);
+    return () => {
+      sc.removeEventListener('webkitTransitionEnd', transitionEndListener);
+    };
   });
 
-  const firstSlideClone = slides[0];
-  const lastSlideClone = slides[slides.length - 1];
+  const handlers = useSwipeable({
+    onSwipedLeft: () => cycleSliderhandler('right'),
+    onSwipedRight: () => cycleSliderhandler('left'),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
 
-  const goLeft = () => {
-    setX(x + 100);
-  };
-  const goRight = () => {
-    setX(x - 100);
+  const cycleSliderhandler = direction => {
+    if (direction === 'left') {
+      setDirection('left');
+      setX(x + 100);
+    } else {
+      setDirection('right');
+      setX(x - 100);
+    }
   };
 
   return (
     <StyledCarousel {...layouts} {...handlers}>
-      <StyledSlideContainer ref={slideContainer} style={{ left: `${x}%` }}>
-        {lastSlideClone}
+      <StyledSlideContainer ref={slideContainerRef} style={{ left: `${x}%` }}>
         {slides}
-        {firstSlideClone}
       </StyledSlideContainer>
       <StyledCarouselControl
-        onClick={goLeft}
-        onAnimationEnd={() => console.log('test')}
+        onClick={() => cycleSliderhandler('left')}
         style={{ left: 0 }}
       >
         <StyledCarouselChevron src={leftChevronImage} alt="go left" />
       </StyledCarouselControl>
-      <StyledCarouselControl onClick={goRight} style={{ right: 0 }}>
+      <StyledCarouselControl
+        onClick={() => cycleSliderhandler('right')}
+        style={{ right: 0 }}
+      >
         <StyledCarouselChevron src={rightChevronImage} alt="go right" />
       </StyledCarouselControl>
     </StyledCarousel>
