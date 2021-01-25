@@ -1,10 +1,13 @@
 import './App.css';
-import React, { Suspense } from 'react';
+import React, { Suspense, useContext } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './global';
 import { theme } from './theme';
 import Layout from './Layout/Layout';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import Spinner from './components/UI/spinner/Spinner';
+import styled from 'styled-components';
+import LayoutsContext from './Layout/LayoutsContext';
 
 const Home = React.lazy(() => import('./containers/Home/Home'));
 const Contact = React.lazy(() => import('./containers/Contact/Contact'));
@@ -30,9 +33,26 @@ const Underlay = React.lazy(() =>
 
 const Help = React.lazy(() => import('./containers/Help/Help'));
 
-const App = props => {
+const StyledSpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  height: ${props =>
+    props.isMobile ? '86vh' : props.isTablet ? '88vh' : '90vh'};
+`;
+
+const App = () => {
+  const layouts = useContext(LayoutsContext);
+
   let routes = (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense
+      fallback={
+        <StyledSpinnerWrapper {...layouts}>
+          <div style={{ margin: 'auto' }}>
+            <Spinner />
+          </div>
+        </StyledSpinnerWrapper>
+      }
+    >
       <Switch>
         <Route path="/help" component={Help} />
         <Route path="/underlay" component={Underlay} />
