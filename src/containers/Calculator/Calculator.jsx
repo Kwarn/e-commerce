@@ -89,11 +89,11 @@ export default function Calculator() {
 
   function submitAreaHandler(e) {
     e.preventDefault();
-    setTotalMeasurement(floorLength * floorWidth);
+    setTotalMeasurement((floorLength * floorWidth).toFixed(2));
   }
   function submitPriceHandler(e) {
     e.preventDefault();
-    setTotalPrice(pricePerSq * totalMeasurement);
+    setTotalPrice((pricePerSq * totalMeasurement).toFixed(2));
   }
 
   return (
