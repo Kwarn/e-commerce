@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Calculator from '../Calculator/Calculator';
 import styled from 'styled-components';
 
@@ -21,7 +21,9 @@ const StyledSection = styled.div`
   padding: 5px;
   border: 1px solid black;
   display: flex;
-  flex-direction: row;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledSubSection = styled.div``;
@@ -47,7 +49,7 @@ const StyledDescription = styled.p`
 `;
 
 const StyledCalculatorWrapper = styled.div`
-  margin: auto auto auto 30px;
+  margin: auto auto auto auto;
   max-width: 400px;
 `;
 
@@ -65,15 +67,15 @@ export default function Help() {
             </StyledSubSectionTitle>
             <StyledDescription>
               Just break out your measuring tape to get the floors length and
-              width. You can use our handy calculator to find the area! Say a
-              room is 20 feet wide by 13 feet long, then 20 x 13 = 260 square
-              feet.
+              width. You can use our handy calculator below to find the area!
+              Say a room is 20 feet wide by 13 feet long, then 20 x 13 = 260
+              square feet.
             </StyledDescription>
             <StyledSubSectionTitle>
               How much will it cost?
             </StyledSubSectionTitle>
             <StyledDescription>
-              Simply use the calculator above or enter the total area and the
+              Simply use the calculator below or enter the total area and the
               price per square feet/meters into the calculator. The price per sq
               foot/meter can be found on all of our products.
             </StyledDescription>
