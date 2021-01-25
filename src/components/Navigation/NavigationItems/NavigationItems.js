@@ -44,6 +44,24 @@ const StyledContactIcon = styled.img`
     `position: absolute;
     right: 20px
   `}
+`;
+
+const StyledDesktopNavItemsContainer = styled.div`
+  background-color: 'green';
+  position: absolute;
+  left: 200px;
+  height: 100%;
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledDesktopNavItem = styled.h3`
+  cursor: pointer;
+  margin: auto;
+  border-bottom: 2px solid transparent;
+  &:hover {
+    border-bottom: 2px solid #474747;
   }
 `;
 
@@ -68,11 +86,32 @@ const NavigationItems = ({ sideDrawToggleFn, history }) => {
       alt="contact"
     />
   );
+
+  const desktopNavItemsContent = [
+    { title: 'PRODUCTS', link: 'products' },
+    { title: 'HELP', link: 'help' },
+    { title: 'CONTACT', link: 'contact' },
+  ];
+
+  const DesktopNavItems = desktopNavItemsContent.map(content => (
+    <StyledDesktopNavItem
+      key={content.title}
+      onClick={() => history.push(`/${content.link}`)}
+    >
+      {content.title}
+    </StyledDesktopNavItem>
+  ));
+
   return (
     <StyledNavItems {...layouts} className={isDesktop ? 'isDesktop' : ''}>
       {isDesktop ? logoComponent : drawToggleComponent}
+      {isDesktop ? (
+        <StyledDesktopNavItemsContainer>
+          {DesktopNavItems}
+        </StyledDesktopNavItemsContainer>
+      ) : null}
       {isDesktop ? null : logoComponent}
-      {contactIconComponent}
+      {isDesktop ? null : contactIconComponent}
     </StyledNavItems>
   );
 };
