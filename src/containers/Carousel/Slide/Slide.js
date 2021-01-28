@@ -23,9 +23,9 @@ const StyledContentWrapper = styled.div`
   left: 50%;
   color: white;
   margin-left: ${props =>
-    props.isMobile ? '-120px' : props.isTablet ? '-150px' : '-250px'};
+    props.isMobile ? '-120px' : props.isTablet ? '-150px' : '-200px'};
   width: ${props =>
-    props.isMobile ? '240px' : props.isTablet ? '300px' : '500px'};
+    props.isMobile ? '240px' : props.isTablet ? '300px' : '400px'};
   background-color: ${props =>
     props.isImageDark ? 'rgba(225, 225, 225, 0.5)' : 'rgba(0, 0, 0, 0.5)'};
 `;
@@ -36,7 +36,7 @@ const StyledCallToAction = styled.div`
   margin: auto;
   height: 60px;
   width: ${props =>
-    props.isMobile ? '180px' : props.isTablet ? '200px' : '420px'};
+    props.isMobile ? '180px' : props.isTablet ? '200px' : '300px'};
   border: 2px solid white;
 `;
 

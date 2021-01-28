@@ -20,19 +20,27 @@ export default function Carousel() {
   const history = useHistory();
   const slidesContentArray = [
     {
-      title: 'BEAUTIFUL HARDWOOD FLOORING',
+      title: 'VIEW OUR BEAUTIFUL COLLECTION OF WOOD FLOORING',
       image: slideImage1,
-      callbackFn: () => history.push('/products'),
       isImageDark: false,
+      callbackFn: () => history.push('/products'),
     },
     {
-      title: 'OUR HAPPY CUSTOMERS',
-      image: slideImage2,
-      callbackFn: () => history.push('/testimonials'),
-      isImageDark: false,
+      title: 'NEED FLOORING ADVICE? BOOK A CONSULTATION',
+      image: slideImage4,
+      callbackFn: () => history.push('/products'),
     },
-    { title: 'CREATE A BEAUTIFUL SPACE', image: slideImage3 },
-    { title: 'NEED FLOORING ADVICE? BOOK A CONSULTATION', image: slideImage4 },
+    {
+      title: 'CREATE A BEAUTIFUL SPACE',
+      image: slideImage3,
+      callbackFn: () => history.push('/products'),
+    },
+    {
+      title: 'HEAR FROM OUR CUSTOMERS',
+      image: slideImage2,
+      isImageDark: false,
+      callbackFn: () => history.push('/testimonials'),
+    },
   ];
   const slides = slidesContentArray.map(slide => (
     <Slide key={slide.title} slide={slide} />
