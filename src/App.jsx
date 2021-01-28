@@ -48,7 +48,7 @@ const App = () => {
       fallback={
         <StyledSpinnerWrapper {...layouts}>
           <div style={{ margin: 'auto' }}>
-            <Spinner />
+            <Spinner isPageLoad={true} />
           </div>
         </StyledSpinnerWrapper>
       }
