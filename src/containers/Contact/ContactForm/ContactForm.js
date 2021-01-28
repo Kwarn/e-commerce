@@ -8,9 +8,12 @@ import styled from 'styled-components';
 // Error messages for invalid form inputs should be removed as user inputs valid entry.
 
 const StyledContactForm = styled.form`
+  max-width: 400px;
+  width: auto;
+  border-radius: 5px;
   color: #474747;
-  background-color: rgba(255, 255, 255, 0.8);
-  margin: 30px 10px 0 10px;
+  background-color: rgba(255, 255, 255, 0.4);
+  margin: auto 0;
   padding: 20px 10px 10px 10px;
   display: flex;
   flex-direction: column;
@@ -38,7 +41,7 @@ const StyledTextArea = styled.textarea`
   padding: 5px;
   font-size: larger;
   text-align: left;
-  min-height: 150px;
+  min-height: 100px;
   margin: 0 0 10px 0;
   background-color: ${props => (props.invalid ? '#ecd7cd' : 'none')};
 `;
@@ -73,7 +76,7 @@ const StyledDisclaimer = styled.p`
 
 const StyledSelect = styled.select`
   font-size: large;
-  padding: 10px 5px 10px 2px;
+  padding: 10px 5px 10px 0;
   margin-bottom: 5px;
 `;
 
