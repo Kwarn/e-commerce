@@ -1,22 +1,49 @@
 import React from 'react';
-import TextSection from '../../components/textSection/TextSection';
+import styled from 'styled-components';
+
+const StyledTextSection = styled.div`
+  margin: 35px auto 35px auto;
+  max-width: 700px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  h2 {
+    padding: 0;
+    margin: 15px auto 15px auto;
+    font-weight: 600;
+  }
+`;
 
 export default function TextSections() {
   const textSectionContent = {
-    welcomeText: [
-      <h1>Find Your Perfect Wood Floor</h1>,
-      <p>
-        We supply beautiful real wood flooring from responsibly sourced timber
-      </p>,
-    ],
-    customers: [
-      <h2>Our Customers Love Us!</h2>,
-      <p>We pride ourselves on our support team</p>,
-    ],
+    welcomeText: {
+      title:
+        'We Make Beautiful Real Wood Flooring From Responsibly Sourced Timber',
+      secondTitle: 'Find Your Perfect Wood Floor',
+    },
+    // customers: [
+    //   <h2>Our Customers Love Us!</h2>,
+    //   <p>We pride ourselves on our support team</p>,
+    // ],
   };
 
-  const textSections = Object.keys(textSectionContent).map(key => (
-    <TextSection key={key}>{textSectionContent[key]}</TextSection>
-  ));
-  return { textSections };
+  let textSectionsObj = {};
+  for (let key in textSectionContent) {
+    textSectionsObj = {
+      ...textSectionsObj,
+      ...{
+        [key]: (
+          <StyledTextSection key={key}>
+            <h2>{textSectionContent[key].title}</h2>
+            <h2>{textSectionContent[key].secondTitle}</h2>
+            <p>{textSectionContent[key].description}</p>
+          </StyledTextSection>
+        ),
+      },
+    };
+  }
+
+  return textSectionsObj;
 }
