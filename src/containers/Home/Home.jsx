@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import MenuCards from '../MenuCards/MenuCards';
+import TextSections from '../TextSections/TextSections';
 import { withRouter } from 'react-router-dom';
-// import Carousel from '../Carousel/Carousel';
 import CarouselInfinite from '../Carousel/Carousel';
 
 const StyledHomeWrapper = styled.div`
@@ -24,11 +24,12 @@ const StyledMenuCards = styled.div`
 
 function Home() {
   const { welcomeElement, testimonials, aboutUs } = MenuCards();
+  const { welcomeText } = TextSections();
   return (
     <>
       <StyledHomeWrapper>
         <CarouselInfinite />
-        {welcomeElement}
+        {welcomeText}
         <StyledMenuCards>
           {testimonials}
           {aboutUs}
