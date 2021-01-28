@@ -1,29 +1,59 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import ContactForm from './ContactForm/ContactForm';
-import TextSection from '../../components/TextSection/TextSection';
-import background from '../../assets/contactBackground.jpg';
+import background from '../../assets/sidebarBackground.jpg';
+import LayoutContext from '../../Layout/LayoutsContext';
 
 const StyledContactWrapper = styled.div`
-  // background-image: url(${background});
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-image: url(${background});
   background-size: cover;
-  margin-top: 10px;
-  display: inline-block;
   width: 100%;
   height: 100%;
-  background-color: #eee;
-  color: #474747;
+  color: #eee;
+  min-height: ${props =>
+    props.isMobile ? '86vh' : props.isTablet ? '88vh' : '90vh'};
 `;
 
-const StyledSection = styled.section`
-  margin: 30px 0 0 0;
+const StyledGroup = styled.section`
+  margin: 0 auto 0 auto;
+  display: flex;
+  flex-direction: row;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledDivider = styled.hr`
-  width: 80%;
+  width: ${props => (props.isDesktop ? '65%' : props.isTablet ? '80%' : '90%')};
+  margin: 30px auto 30px auto;
 `;
 
-const Contact = props => {
+const StyledTextSection = styled.div`
+  margin: 0 30px 0 30px;
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  ul {
+    text-align: right;
+    padding: 0;
+    margin: 0 60px 0 0;
+    list-style-type: none;
+    align-self: center;
+  }
+
+  p {
+    margin: 5px 0 5px 0;
+    padding: 0;
+  }
+`;
+
+const Contact = () => {
+  const layouts = useContext(LayoutContext);
   const addressLines = [
     'Q & Y Internation Ltd',
     'Unit 2 Wessex Park Industrial Estate',
@@ -35,44 +65,35 @@ const Contact = props => {
   const addressElements = addressLines.map((line, idx) => (
     <p key={idx}>{line}</p>
   ));
-  const phone = '03333 110 888';
-  const email = 'Qandyinternational@gmail.com';
+
   return (
-    <StyledContactWrapper>
-      <StyledSection>
-        <TextSection>
-          <h1>CONTACT US</h1>
-        </TextSection>
-      </StyledSection>
-      <StyledDivider />
-      <StyledSection>
-        <TextSection>
+    <StyledContactWrapper {...layouts}>
+      <StyledDivider {...layouts} />
+      <StyledGroup>
+        <StyledTextSection>
           <h3>Customer Service Open Hours</h3>
           <ul>
-            <li>Monday: 9:00 - 17:30</li>
-            <li>Tuesday: 9:00 - 17:30</li>
-            <li>Wednesday: 9:00 - 17:30</li>
-            <li>Thursday: 9:00 - 17:30</li>
-            <li>Friday: 9:00 - 16:30</li>
-            <li>Weekends/Bank Holidays: 12:00 - 14:00</li>
+            <li>
+              Monday - Thursday: <b>9:00 - 17:30</b>
+            </li>
+            <li>
+              Friday: <b>9:00 - 17:00</b>
+            </li>
+            <li>
+              Weekends: <b> 12:00 - 14:00</b>
+            </li>
           </ul>
-        </TextSection>
-      </StyledSection>
-      <ContactForm />
-      <StyledSection>
-        <TextSection>
+          <StyledDivider {...layouts} />
           <h3>Speak with the team</h3>
-          <p>{`Phone: ${phone}`}</p>
-          <p>{`Email: ${email}`}</p>
-        </TextSection>
-      </StyledSection>
-      <StyledDivider />
-      <StyledSection>
-        <TextSection>
+          <p>Phone: 03333 110 888</p>
+          <p>Email: Qandyinternational@gmail.com</p>
+          <StyledDivider {...layouts} />
           <h3>Our Address</h3>
           {addressElements}
-        </TextSection>
-      </StyledSection>
+        </StyledTextSection>
+        <ContactForm />
+      </StyledGroup>
+      <StyledDivider {...layouts} />
     </StyledContactWrapper>
   );
 };
