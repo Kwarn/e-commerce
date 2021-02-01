@@ -3,6 +3,7 @@ import Calculator from '../Calculator/Calculator';
 import styled from 'styled-components';
 
 const StyledHelpWrapper = styled.div`
+  margin: auto;
   display: flex;
   width: 100;
 `;
