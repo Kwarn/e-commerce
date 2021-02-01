@@ -41,7 +41,7 @@ const StyledTextArea = styled.textarea`
   padding: 5px;
   font-size: larger;
   text-align: left;
-  min-height: 100px;
+  min-height: 120px;
   margin: 0 0 10px 0;
   background-color: ${props => (props.invalid ? '#ecd7cd' : 'none')};
 `;

@@ -47,7 +47,7 @@ const StyledTextSection = styled.div`
   }
 
   p {
-    margin: 5px 0 5px 0;
+    margin: 0px 0 5px 0;
     padding: 0;
   }
 `;
