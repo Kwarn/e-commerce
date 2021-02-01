@@ -8,7 +8,7 @@ import CarouselInfinite from '../Carousel/Carousel';
 const StyledHomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 100%;
+  width: 100%;
   align-items: center;
 `;
 
