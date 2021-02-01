@@ -6,14 +6,14 @@ import SideDraw from '../components/Navigation/Sidebar/Sidebar';
 import Footer from '../components/Footer/Footer';
 import LayoutsContext from './LayoutsContext';
 
-const StyledSiteDimensionsWrapper = styled.div`
-  max-width: 100%;
-`;
-
 const StyledMainContentContainer = styled.div`
+  display: flex;
+  justify-content: center;
   margin-top: ${props =>
     props.isMobile ? '14vh' : props.isTablet ? '12vh' : '10vh'};
   max-width: 100%;
+  min-height: ${props =>
+    props.isMobile ? '86vh' : props.isTablet ? '88vh' : '90vh'};
   background-color: #eee;
 `;
 
@@ -21,7 +21,7 @@ export default function Layout({ children }) {
   const [showSideDraw, setShowSideDraw] = useState(false);
   const yScrollBarWidth = window.innerWidth - document.body.clientWidth;
 
-  //Stange bug detecting scrollbar on inital load when trying to refactor this code
+  //Strange bug detecting scrollbar on inital load when trying to refactor this code
 
   const [layoutModeProps, setLayoutModeProps] = useState(
     window.innerWidth > 1024
@@ -86,16 +86,14 @@ export default function Layout({ children }) {
   };
 
   return (
-    <StyledSiteDimensionsWrapper>
-      <LayoutsContext.Provider value={layoutModeProps}>
-        <ScrollToTop />
-        <Toolbar toggleSideDrawFn={sideDrawToggleHandler} />
-        <SideDraw isOpen={showSideDraw} closeFn={sideDrawerClosedHandler} />
-        <StyledMainContentContainer {...layoutModeProps}>
-          {children}
-        </StyledMainContentContainer>
-        <Footer />
-      </LayoutsContext.Provider>
-    </StyledSiteDimensionsWrapper>
+    <LayoutsContext.Provider value={layoutModeProps}>
+      <ScrollToTop />
+      <Toolbar toggleSideDrawFn={sideDrawToggleHandler} />
+      <SideDraw isOpen={showSideDraw} closeFn={sideDrawerClosedHandler} />
+      <StyledMainContentContainer {...layoutModeProps}>
+        {children}
+      </StyledMainContentContainer>
+      <Footer />
+    </LayoutsContext.Provider>
   );
 }
