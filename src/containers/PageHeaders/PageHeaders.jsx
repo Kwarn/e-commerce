@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PageHeader from './PageHeader/PageHeader';
-import productsImage from '../../assets/products.jpg';
+import productsImage from '../../assets/slideImage3.jpg';
 import tongueAndGrooveImage from '../../assets/tongueAndGroove.jpg';
 import clickFlooringImage from '../../assets/clickFlooring.jpeg';
 import underlayImage from '../../assets/underlay.jpeg';
