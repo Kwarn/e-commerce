@@ -8,22 +8,23 @@ const StyledSectionsContainer = styled.div`
   color: #b8b8b8;
   min-width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-direction: ${props => (props.isMobile ? 'column' : 'row')};
 `;
 
 const StyledSection = styled.div`
-  margin: auto 10px auto 10px;
+  margin: 10px;
 `;
 const StyledSectionTitle = styled.h1`
   font-size: 1.2em;
+  margin: 10px;
 `;
 const StyledLink = styled.p`
   &:hover {
     color: white;
   }
   cursor: pointer;
-  margin: 8px auto 8px auto;
+  margin: 10px;
 `;
 
 const StyledCopyRight = styled.div`
@@ -66,8 +67,16 @@ const Footer = ({ history }) => {
         <StyledSection>
           <StyledSectionTitle>Information</StyledSectionTitle>
           <StyledLink onClick={() => history.push('/about')}>About</StyledLink>
+          <StyledLink onClick={() => history.push('/help')}>Support</StyledLink>
+          <StyledLink onClick={() => history.push('/faq')}>FAQs</StyledLink>
+        </StyledSection>
+        <StyledSection>
+          <StyledSectionTitle>Customer Service</StyledSectionTitle>
+          <StyledLink onClick={() => history.push('/contact')}>
+            Contact us
+          </StyledLink>
           <StyledLink onClick={() => history.push('/support')}>
-            Support
+            Book online consultation
           </StyledLink>
           <StyledLink onClick={() => history.push('/faq')}>FAQs</StyledLink>
         </StyledSection>
