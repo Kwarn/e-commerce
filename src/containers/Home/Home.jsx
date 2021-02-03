@@ -13,7 +13,7 @@ const StyledHomeWrapper = styled.div`
 `;
 
 const StyledMenuCards = styled.div`
-  margin: auto;
+  margin: auto auto 40px auto;
   width: 80%;
   display: flex;
   flex-direction: row;
