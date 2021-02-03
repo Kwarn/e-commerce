@@ -31,7 +31,7 @@ const Underlay = React.lazy(() =>
   import('./containers/Products/Underlay/Underlay')
 );
 
-const Help = React.lazy(() => import('./containers/Help/Help'));
+const Support = React.lazy(() => import('./containers/Support/Support'));
 
 const StyledSpinnerWrapper = styled.div`
   display: flex;
@@ -54,7 +54,7 @@ const App = () => {
       }
     >
       <Switch>
-        <Route path="/help" component={Help} />
+        <Route path="/support" component={Support} />
         <Route path="/underlay" component={Underlay} />
         <Route path="/adhesives" component={Adhesives} />
         <Route path="/tng" component={TongueAndGroove} />
