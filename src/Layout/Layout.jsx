@@ -10,10 +10,10 @@ const StyledMainContentContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: ${props =>
-    props.isMobile ? '14vh' : props.isTablet ? '12vh' : '20vh'};
+    props.isMobile ? '14vh' : props.isTablet ? '12vh' : '10vh'};
   max-width: 100%;
   min-height: ${props =>
-    props.isMobile ? '86vh' : props.isTablet ? '88vh' : '80vh'};
+    props.isMobile ? '86vh' : props.isTablet ? '88vh' : '90vh'};
   background-color: #ccc;
 `;
 
@@ -21,7 +21,9 @@ export default function Layout({ children }) {
   const [showSideDraw, setShowSideDraw] = useState(false);
   const yScrollBarWidth = window.innerWidth - document.body.clientWidth;
 
-  //Strange bug detecting scrollbar on inital load when trying to refactor this code
+  //Strange bug: Scrollbar width not detected on init when trying to refactor onResize() into useEffect
+  //Suspect something to do with document.body not being available (?)
+  //Low priority
 
   const [layoutModeProps, setLayoutModeProps] = useState(
     window.innerWidth > 1024
