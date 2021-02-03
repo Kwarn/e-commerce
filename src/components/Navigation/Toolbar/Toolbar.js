@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import LayoutsContext from '../../../Layout/LayoutsContext';
 
 const StyledMainContentNavbar = styled.header`
+  z-index: 100;
   display: flex;
   justify-content: center;
   width: ${props => (props.isDesktop ? '80%' : '100%')};
@@ -13,7 +14,6 @@ const StyledMainContentNavbar = styled.header`
   right: 0;
   top: ${props => (props.isDesktop ? (props.isMainNavBar ? '10vh' : 0) : 0)};
   background-color: white;
-  z-index: 100;
   transition: top 0.6s;
   height: ${props =>
     props.isMobile ? '14vh' : props.isTablet ? '12vh' : '10vh'};
@@ -27,7 +27,13 @@ const StyledMainContentNavbar = styled.header`
         : !props.hide
         ? 0
         : '-10vh'
-      : 0};
+      : props.isTablet
+      ? !props.hide
+        ? 0
+        : '-12vh'
+      : !props.hide
+      ? 0
+      : '-14vh'};
 `;
 
 const StyledLogoNavBar = styled.div`
