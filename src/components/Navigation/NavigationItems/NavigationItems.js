@@ -7,12 +7,13 @@ import contactIcon from '../../../assets/contactIcon.png';
 import LayoutsContext from '../../../Layout/LayoutsContext';
 
 const StyledNavItems = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
   position: relative;
   padding: 0;
-  width: ${props => (props.isDesktop ? '100%' : 'auto')};
+  width: 100%;
   max-width: 100%;
-  display: ${props => (props.isDesktop ? 'inline-flex' : 'flex')};
-  justify-content: space-between;
   height: ${props =>
     props.isMobile
       ? '14vh'
@@ -22,6 +23,7 @@ const StyledNavItems = styled.div`
       ? '10vh'
       : null};
 `;
+
 const StyledLogo = styled.img`
   cursor: pointer;
   margin: auto;
@@ -48,10 +50,8 @@ const StyledContactIcon = styled.img`
 
 const StyledDesktopNavItemsContainer = styled.div`
   background-color: 'green';
-  position: absolute;
-  left: 200px;
   height: 100%;
-  width: 400px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `;
@@ -88,8 +88,10 @@ const NavigationItems = ({ sideDrawToggleFn, history }) => {
   );
 
   const desktopNavItemsContent = [
-    { title: 'PRODUCTS', link: '/products' },
+    { title: 'OUR PRODUCTS', link: '/products' },
+    { title: 'COLLECTIONS', link: '/collections' },
     { title: 'SUPPORT', link: '/support' },
+    { title: 'ABOUT US', link: '/about' },
     { title: 'CONTACT', link: '/contact' },
   ];
 
@@ -104,7 +106,7 @@ const NavigationItems = ({ sideDrawToggleFn, history }) => {
 
   return (
     <StyledNavItems {...layouts} className={isDesktop ? 'isDesktop' : ''}>
-      {isDesktop ? logoComponent : drawToggleComponent}
+      {isDesktop ? null : drawToggleComponent}
       {isDesktop ? (
         <StyledDesktopNavItemsContainer>
           {DesktopNavItems}
