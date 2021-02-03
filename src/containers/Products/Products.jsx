@@ -6,8 +6,13 @@ import styled from 'styled-components';
 const StyledProductsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 100%;
+  width: 100%;
   align-items: center;
+`;
+
+const StyledMenuCardsContainer = styled.div`
+  margin: auto;
+  width: 80%;
 `;
 
 const StyledMenuCards = styled.div`
@@ -28,12 +33,16 @@ export default function Products() {
   return (
     <StyledProductsWrapper>
       {productsHeader}
-      <StyledMenuCards>
-        {tongueAndGroove}
-        {clickFlooring}
-        {underlay}
-        {adhesives}
-      </StyledMenuCards>
+      <StyledMenuCardsContainer>
+        <StyledMenuCards>
+          {tongueAndGroove}
+          {clickFlooring}
+        </StyledMenuCards>
+        <StyledMenuCards>
+          {underlay}
+          {adhesives}
+        </StyledMenuCards>
+      </StyledMenuCardsContainer>
     </StyledProductsWrapper>
   );
 }
