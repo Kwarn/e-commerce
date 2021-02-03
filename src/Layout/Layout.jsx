@@ -10,11 +10,11 @@ const StyledMainContentContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: ${props =>
-    props.isMobile ? '14vh' : props.isTablet ? '12vh' : '10vh'};
+    props.isMobile ? '14vh' : props.isTablet ? '12vh' : '20vh'};
   max-width: 100%;
   min-height: ${props =>
-    props.isMobile ? '86vh' : props.isTablet ? '88vh' : '90vh'};
-  background-color: #eee;
+    props.isMobile ? '86vh' : props.isTablet ? '88vh' : '80vh'};
+  background-color: #ccc;
 `;
 
 export default function Layout({ children }) {
