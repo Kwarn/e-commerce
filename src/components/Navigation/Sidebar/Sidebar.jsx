@@ -98,10 +98,10 @@ const SideDraw = ({ isOpen, closeFn, history }) => {
             <h1>ABOUT</h1>
           </StyledMenuItem>
           <StyledMenuItem
-            onClick={() => changeRouteHandler('help')}
-            isCurrentPage={userPageLocation.pathname === '/help'}
+            onClick={() => changeRouteHandler('support')}
+            isCurrentPage={userPageLocation.pathname === '/support'}
           >
-            <h1>HELP</h1>
+            <h1>SUPPORT</h1>
           </StyledMenuItem>
           <StyledMenuItem
             onClick={() => changeRouteHandler('contact')}

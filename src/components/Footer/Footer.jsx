@@ -67,7 +67,9 @@ const Footer = ({ history }) => {
         <StyledSection>
           <StyledSectionTitle>Information</StyledSectionTitle>
           <StyledLink onClick={() => history.push('/about')}>About</StyledLink>
-          <StyledLink onClick={() => history.push('/help')}>Support</StyledLink>
+          <StyledLink onClick={() => history.push('/support')}>
+            Support
+          </StyledLink>
           <StyledLink onClick={() => history.push('/faq')}>FAQs</StyledLink>
         </StyledSection>
         <StyledSection>

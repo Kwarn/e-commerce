@@ -88,15 +88,15 @@ const NavigationItems = ({ sideDrawToggleFn, history }) => {
   );
 
   const desktopNavItemsContent = [
-    { title: 'PRODUCTS', link: 'products' },
-    { title: 'HELP', link: 'help' },
-    { title: 'CONTACT', link: 'contact' },
+    { title: 'PRODUCTS', link: '/products' },
+    { title: 'SUPPORT', link: '/support' },
+    { title: 'CONTACT', link: '/contact' },
   ];
 
   const DesktopNavItems = desktopNavItemsContent.map(content => (
     <StyledDesktopNavItem
       key={content.title}
-      onClick={() => history.push(`/${content.link}`)}
+      onClick={() => history.push(`${content.link}`)}
     >
       {content.title}
     </StyledDesktopNavItem>
