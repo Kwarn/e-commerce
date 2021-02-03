@@ -18,6 +18,7 @@ const StyledMobileTextArea = styled.div`
 `;
 
 const StyledDesktopAndTabletHeader = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   background-repeat: no-repeat;
@@ -26,7 +27,7 @@ const StyledDesktopAndTabletHeader = styled.div`
   background-position: top;
   background-image: url(${({ background }) => background});
   width: 100%;
-  min-height: 44vh;
+  min-height: 60vh;
   font-family: Arial, Helvetica;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -40,7 +41,7 @@ const StyledFrostedGlass = styled.div`
   width: ${props =>
     props.isDesktop ? '600px' : props.isTablet ? '400px' : '300px'};
   height: 200px;
-  top: calc(50% - 100px);
+  top: ${props => (props.isTablet ? 'calc(50% - 100px)' : 'calc(50% - 50px)')};
   background: inherit;
   overflow: hidden;
 
