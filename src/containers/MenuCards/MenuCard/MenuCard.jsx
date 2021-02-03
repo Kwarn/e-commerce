@@ -4,6 +4,7 @@ import Button from '../../../components/Button/Button';
 import LayoutsContext from '../../../Layout/LayoutsContext';
 
 const StyledImageContainer = styled.div`
+  padding: 10px;
   margin: 5px;
   position: relative;
   display: flex;
