@@ -11,7 +11,7 @@ const StyledProductsWrapper = styled.div`
 `;
 
 const StyledMenuCardsContainer = styled.div`
-  margin: auto;
+  margin: 40px auto 40px auto;
   width: 80%;
 `;
 
