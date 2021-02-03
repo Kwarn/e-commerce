@@ -12,9 +12,16 @@ import leftChev from '../../assets/leftChev.png';
 import styled from 'styled-components';
 
 const StyledCarouselContainer = styled.div`
-  height: ${props =>
-    props.isMobile ? '86vh' : props.isTablet ? '88vh' : '90vh'};
   width: 100%;
+`;
+
+const StyledSlideDot = styled.button`
+  z-index: 10;
+  position: absolute;
+  top: -10vh;
+  width: 25px;
+  background-color: black;
+  height: 25px;
 `;
 
 export default function Carousel() {
@@ -75,9 +82,19 @@ export default function Carousel() {
     />
   );
 
+  let dots = [];
+  for (let i = 0; i < slidesContentArray.length; i++) {
+    dots.push(
+      <li>
+        <StyledSlideDot />
+      </li>
+    );
+  }
+
   return (
     <StyledCarouselContainer {...layouts}>
       <Slider
+        customPaging={i => <StyledSlideDot>{i + 1}</StyledSlideDot>}
         prevArrow={leftChevImg}
         nextArrow={rightChevImg}
         autoplay={true}

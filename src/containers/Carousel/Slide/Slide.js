@@ -4,7 +4,7 @@ import LayoutsContext from '../../../Layout/LayoutsContext';
 
 const StyledSlide = styled.li`
   height: ${props =>
-    props.isMobile ? '78vh' : props.isTablet ? '80vh' : '84vh'};
+    props.isMobile ? '86vh' : props.isTablet ? '88vh' : '90vh'};
   position: relative;
   display: flex;
   background-image: url(${({ background }) => background});
