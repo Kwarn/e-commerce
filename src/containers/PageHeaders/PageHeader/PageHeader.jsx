@@ -4,15 +4,17 @@ import LayoutsContext from '../../../Layout/LayoutsContext';
 
 const StyledMobileHeader = styled.div`
   width: 100%;
-  height: 22vh;
+  height: 40vh;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url(${({ background }) => background});
 `;
 
 const StyledMobileTextArea = styled.div`
+  display: flex;
+  justify-content: center;
   width: 100%;
-  height: 28vh;
+  height: 46vh;
 `;
 
 const StyledDesktopAndTabletHeader = styled.div`
