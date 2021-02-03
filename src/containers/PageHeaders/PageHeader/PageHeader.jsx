@@ -2,19 +2,6 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import LayoutsContext from '../../../Layout/LayoutsContext';
 
-const StyledDesktopAndTabletHeader = styled.div`
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: top;
-  background-image: url(${({ background }) => background});
-  width: 100%;
-  min-height: 44vh;
-  font-family: Arial, Helvetica;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-`;
-
 const StyledMobileHeader = styled.div`
   width: 100%;
   height: 22vh;
@@ -28,6 +15,21 @@ const StyledMobileTextArea = styled.div`
   height: 28vh;
 `;
 
+const StyledDesktopAndTabletHeader = styled.div`
+  display: flex;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: top;
+  background-image: url(${({ background }) => background});
+  width: 100%;
+  min-height: 44vh;
+  font-family: Arial, Helvetica;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+`;
+
 const StyledFrostedGlass = styled.div`
   padding: 0 10px 0 10px;
   display: flex;
@@ -37,14 +39,6 @@ const StyledFrostedGlass = styled.div`
     props.isDesktop ? '600px' : props.isTablet ? '400px' : '300px'};
   height: 200px;
   top: calc(50% - 100px);
-
-  left: ${props =>
-    props.isDesktop
-      ? 'calc(50% - 300px)'
-      : props.isTablet
-      ? 'calc(50% - 200px)'
-      : 'calc(50% - 150px)'};
-
   background: inherit;
   overflow: hidden;
 
@@ -52,11 +46,8 @@ const StyledFrostedGlass = styled.div`
     content: '';
     width: ${props =>
       props.isDesktop ? '650px' : props.isTablet ? '550px' : '250px'};
-    /* width: 650px; */
     height: ${props =>
       props.isDesktop ? '300px' : props.isTablet ? '260px' : '220px'};
-
-    /* height: 300px; */
     background: inherit;
     position: absolute;
     left: -25px;
