@@ -15,7 +15,7 @@ const StyledImageContainer = styled.div`
   }
   width: 95%;
   height: 100%;
-  max-width: 350px;
+  max-width: 100%;
   max-height: 350px;
   color: ${props => (props.textColor === 'black' ? 'black' : 'white')};
 `;
