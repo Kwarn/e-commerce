@@ -9,6 +9,14 @@ import Spinner from './components/UI/spinner/Spinner';
 import styled from 'styled-components';
 import LayoutsContext from './Layout/LayoutsContext';
 
+//todo:
+// Navbar needs spicing add quick Call to actions: Free samples - Book consultation - Phone us
+// Search functionality for products
+// new splash page based on matts simple design, page then displays normally after scroll?
+// FAQ section needs adding and layout fixes for SUPPORT
+// make contact and calculator form pretty
+// add About & Testimonials content
+
 const Home = React.lazy(() => import('./containers/Home/Home'));
 const Contact = React.lazy(() => import('./containers/Contact/Contact'));
 const Products = React.lazy(() => import('./containers/Products/Products'));
