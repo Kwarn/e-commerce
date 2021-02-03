@@ -13,6 +13,8 @@ const StyledHomeWrapper = styled.div`
 `;
 
 const StyledMenuCards = styled.div`
+  margin: auto;
+  width: 80%;
   display: flex;
   flex-direction: row;
   @media (max-width: 768px) {
@@ -23,7 +25,7 @@ const StyledMenuCards = styled.div`
 `;
 
 function Home() {
-  const { welcomeElement, testimonials, aboutUs } = MenuCards();
+  const { testimonials, aboutUs } = MenuCards();
   const { welcomeText } = TextSections();
   return (
     <>
