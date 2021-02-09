@@ -1,16 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import logo from '../../../assets/logo.png';
 import DrawToggle from '../Sidebar/DrawToggle/DrawToggle';
 import { withRouter } from 'react-router-dom';
 import contactIcon from '../../../assets/contactIcon.png';
 import LayoutsContext from '../../../Layout/LayoutsContext';
+import LoginNavItem from '../NavigationItems/LoginNavItem';
 
 const StyledNavItems = styled.div`
   display: flex;
   justify-content: space-between;
   margin: auto;
-  position: relative;
+  z-index: 10;
   padding: 0;
   width: 100%;
   max-width: 100%;
@@ -65,7 +66,18 @@ const StyledDesktopNavItem = styled.h3`
   }
 `;
 
-const NavigationItems = ({ sideDrawToggleFn, history }) => {
+const StyledLoginNavItemContainer = styled.div`
+  display: flex;
+  width: 10vw;
+  position: relative;
+  z-index: 1;
+`;
+
+const NavigationItems = ({
+  sideDrawToggleFn,
+  history,
+  toggleLoginCallback,
+}) => {
   const layouts = useContext(LayoutsContext);
   const { isDesktop } = layouts;
 
@@ -78,6 +90,7 @@ const NavigationItems = ({ sideDrawToggleFn, history }) => {
       onClick={() => history.push('/home')}
     />
   );
+
   const contactIconComponent = (
     <StyledContactIcon
       {...layouts}
@@ -98,11 +111,27 @@ const NavigationItems = ({ sideDrawToggleFn, history }) => {
   const DesktopNavItems = desktopNavItemsContent.map(content => (
     <StyledDesktopNavItem
       key={content.title}
-      onClick={() => history.push(`${content.link}`)}
+      onClick={
+        content.link
+          ? () => history.push(`${content.link}`)
+          : () => content.cb()
+      }
     >
       {content.title}
+      {content.component ? content.component : null}
     </StyledDesktopNavItem>
   ));
+
+  // LoginNavItem is included seperately from DesktopNavItems
+  // this is to allow correct absolute positioning of the login drop down draw
+  // relative to this element and not the whole DesktopNavItems element.
+  const Login = (
+    <StyledLoginNavItemContainer>
+      <StyledDesktopNavItem onClick={() => toggleLoginCallback()}>
+        LOGIN
+      </StyledDesktopNavItem>
+    </StyledLoginNavItemContainer>
+  );
 
   return (
     <StyledNavItems {...layouts} className={isDesktop ? 'isDesktop' : ''}>
@@ -114,6 +143,7 @@ const NavigationItems = ({ sideDrawToggleFn, history }) => {
       ) : null}
       {isDesktop ? null : logoComponent}
       {isDesktop ? null : contactIconComponent}
+      {isDesktop ? Login : null}
     </StyledNavItems>
   );
 };

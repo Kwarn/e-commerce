@@ -5,8 +5,8 @@ import LogoNavItem from '../NavigationItems/LogoNavItem';
 import styled from 'styled-components';
 import LayoutsContext from '../../../Layout/LayoutsContext';
 
-const StyledMainContentNavbar = styled.header`
-  z-index: 100;
+const StyledNavBar = styled.header`
+  z-index: 10;
   display: flex;
   justify-content: center;
   width: ${props => (props.isDesktop ? '80%' : '100%')};
@@ -52,54 +52,31 @@ const StyledLogoNavBar = styled.div`
   height: ${props => (!props.hide ? '20vh' : '10vh')};
 `;
 
-const Toolbar = ({ toggleSideDrawFn }) => {
+const Toolbar = ({ toggleSideDrawFn, toggleLoginCallback, scrollPos }) => {
   const layouts = useContext(LayoutsContext);
   const { isDesktop } = layouts;
-  console.log(layouts.isDesktop);
-  const [scrollPos, setScrollPos] = useState({
-    posY: window.pageYOffset,
-    visible: true,
-  });
-
-  useEffect(() => {
-    window.addEventListener('scroll', scrollHandler);
-    return () => window.removeEventListener('scroll', scrollHandler);
-  });
-
-  const scrollHandler = () => {
-    const newScrollPos = window.pageYOffset;
-    const visible = scrollPos.posY > newScrollPos;
-    setScrollPos({ posY: newScrollPos, visible: visible });
-  };
 
   const navbar = layouts.isDesktop ? (
     <>
       <StyledLogoNavBar hide={!scrollPos.visible}>
         <LogoNavItem />
       </StyledLogoNavBar>
-      <StyledMainContentNavbar
-        isMainNavBar={true}
-        {...layouts}
-        hide={!scrollPos.visible}
-      >
+      <StyledNavBar isMainNavBar={true} {...layouts} hide={!scrollPos.visible}>
         <NavigationItems
+          toggleLoginCallback={toggleLoginCallback}
           sideDrawToggleFn={!isDesktop ? toggleSideDrawFn : null}
         />
-      </StyledMainContentNavbar>
-      <StyledMainContentNavbar {...layouts} hide={!scrollPos.visible}>
+      </StyledNavBar>
+      <StyledNavBar {...layouts} hide={!scrollPos.visible}>
         <ExtraNavItems />
-      </StyledMainContentNavbar>
+      </StyledNavBar>
     </>
   ) : (
-    <StyledMainContentNavbar
-      isMainNavBar={true}
-      {...layouts}
-      hide={!scrollPos.visible}
-    >
+    <StyledNavBar isMainNavBar={true} {...layouts} hide={!scrollPos.visible}>
       <NavigationItems
         sideDrawToggleFn={!isDesktop ? toggleSideDrawFn : null}
       />
-    </StyledMainContentNavbar>
+    </StyledNavBar>
   );
 
   return navbar;
