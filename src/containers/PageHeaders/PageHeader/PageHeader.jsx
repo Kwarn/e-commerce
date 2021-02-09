@@ -65,7 +65,7 @@ const Text = styled.div`
   font-size: ${props =>
     props.isDesktop ? '1em' : props.isTablet ? '0.9em' : '1em'};
   text-align: center;
-  z-index: 10;
+  z-index: 1;
   margin: auto;
   .h2 {
     font-weight: 900;
