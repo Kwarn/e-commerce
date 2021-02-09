@@ -16,7 +16,7 @@ const StyledCarouselContainer = styled.div`
 `;
 
 const StyledSlideDot = styled.button`
-  z-index: 10;
+  z-index: 5;
   position: absolute;
   top: -10vh;
   width: 25px;
