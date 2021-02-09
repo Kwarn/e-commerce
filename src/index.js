@@ -5,9 +5,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import productsReducer from './store/ducks/products';
+import authReducer from './store/ducks/auth';
 import App from './App';
 
 const rootReducer = combineReducers({
+  // auth: authReducer,
   products: productsReducer,
 });
 
