@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import SideDraw from '../components/Navigation/Sidebar/Sidebar';
 import Footer from '../components/Footer/Footer';
 import LayoutsContext from './LayoutsContext';
+import LoginNavItem from '../components/Navigation/NavigationItems/LoginNavItem';
 
 const StyledMainContentContainer = styled.div`
   display: flex;
@@ -14,12 +15,31 @@ const StyledMainContentContainer = styled.div`
   max-width: 100%;
   min-height: ${props =>
     props.isMobile ? '86vh' : props.isTablet ? '88vh' : '90vh'};
-  background-color: #ccc;
+  background-color: #eee;
 `;
 
 export default function Layout({ children }) {
   const [showSideDraw, setShowSideDraw] = useState(false);
   const yScrollBarWidth = window.innerWidth - document.body.clientWidth;
+  const [showLogin, setShowLogin] = useState(false);
+  const toggleLogin = () => setShowLogin(!showLogin);
+
+  // Controls Navbar animations
+  const [scrollPos, setScrollPos] = useState({
+    posY: window.pageYOffset,
+    visible: true,
+  });
+
+  useEffect(() => {
+    window.addEventListener('scroll', scrollHandler);
+    return () => window.removeEventListener('scroll', scrollHandler);
+  });
+
+  const scrollHandler = () => {
+    const newScrollPos = window.pageYOffset;
+    const visible = scrollPos.posY > newScrollPos;
+    setScrollPos({ posY: newScrollPos, visible: visible });
+  };
 
   //Strange bug: Scrollbar width not detected on init when trying to refactor onResize() into useEffect
   //Suspect something to do with document.body not being available (?)
@@ -90,7 +110,18 @@ export default function Layout({ children }) {
   return (
     <LayoutsContext.Provider value={layoutModeProps}>
       <ScrollToTop />
-      <Toolbar toggleSideDrawFn={sideDrawToggleHandler} />
+      <Toolbar
+        scrollPos={scrollPos}
+        toggleLoginCallback={toggleLogin}
+        toggleSideDrawFn={sideDrawToggleHandler}
+      />
+      {layoutModeProps.isDesktop ? (
+        <LoginNavItem
+          scrollPos={scrollPos}
+          isHidden={!showLogin}
+          toggleCallback={() => toggleLogin()}
+        />
+      ) : null}
       <SideDraw isOpen={showSideDraw} closeFn={sideDrawerClosedHandler} />
       <StyledMainContentContainer {...layoutModeProps}>
         {children}
