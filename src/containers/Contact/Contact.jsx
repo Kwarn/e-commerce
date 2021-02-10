@@ -5,6 +5,7 @@ import background from '../../assets/sidebarBackground.jpg';
 import LayoutContext from '../../Layout/LayoutsContext';
 
 const StyledContactWrapper = styled.div`
+  padding-top: ${props => (props.isDesktop ? '5vh' : 0)};
   display: flex;
   justify-content: center;
   flex-direction: column;
