@@ -24,13 +24,11 @@ const StyledSlideDot = styled.button`
 export default function ProductSlider({ productTitle, images }) {
   const layouts = useContext(LayoutContext);
   const history = useHistory();
-  const imgs = [...images];
   let slidesContent = [];
   images.forEach(img =>
     slidesContent.push({ title: productTitle, image: img })
   );
 
-  console.log('slidesContent :>> ', slidesContent);
   const slides = slidesContent.map(slide => (
     <ProductSlide key={slide.title} slide={slide} />
   ));
@@ -77,9 +75,6 @@ export default function ProductSlider({ productTitle, images }) {
         customPaging={i => <StyledSlideDot>{i + 1}</StyledSlideDot>}
         prevArrow={leftChevImg}
         nextArrow={rightChevImg}
-        autoplay={false}
-        autoplaySpeed={5000}
-        duration={500}
         dots
       >
         {slides}
