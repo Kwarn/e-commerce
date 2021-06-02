@@ -22,6 +22,8 @@ const StyledSlideDot = styled.button`
 `;
 
 export default function ProductSlider({ productTitle, images }) {
+  // TO DO: Issue mixing VW & % for CSS
+  // Causes product sliders to bug out of container
   const layouts = useContext(LayoutsContext);
   let slideImages = [];
   const slides = images.map((image, idx) => (
@@ -32,8 +34,8 @@ export default function ProductSlider({ productTitle, images }) {
     <img
       style={{
         position: 'absolute',
-        height: '30px',
-        width: '15px',
+        height: '35px',
+        width: '20px',
         top: 'calc(50% - 15px)',
         right: '10px',
       }}
@@ -45,8 +47,8 @@ export default function ProductSlider({ productTitle, images }) {
     <img
       style={{
         position: 'absolute',
-        height: '30px',
-        width: '15px',
+        height: '35px',
+        width: '20px',
         top: 'calc(50% - 15px)',
         left: '10px',
       }}

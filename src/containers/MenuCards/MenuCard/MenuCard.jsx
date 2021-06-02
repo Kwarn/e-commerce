@@ -4,8 +4,7 @@ import Button from '../../../components/Button/Button';
 import LayoutsContext from '../../../Layout/LayoutsContext';
 
 const StyledImageContainer = styled.div`
-  padding: 10px;
-  margin: 5px;
+  margin: 10px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -14,7 +13,7 @@ const StyledImageContainer = styled.div`
     width: 100%;
     object-fit: cover;
   }
-  width: 95%;
+  width: 100%;
   height: 100%;
   max-width: 100%;
   max-height: 350px;

@@ -32,8 +32,8 @@ const MenuCards = () => {
       buttonCallback: () => history.push('/tng'),
       image: tongueAndGrooveImage,
     },
-    clickFlooring: {
-      title: 'CLICK FLOORING',
+    woodFlooring: {
+      title: 'WOOD FLOORING',
       buttonText: 'BROWSE',
       buttonCallback: () => history.push('/clickflooring'),
       image: clickFlooringImage,

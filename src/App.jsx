@@ -24,11 +24,9 @@ const Testimonials = React.lazy(() =>
   import('./components/Testimonials/Testimonials')
 );
 const About = React.lazy(() => import('./containers/About/About'));
-const TongueAndGroove = React.lazy(() =>
-  import('./containers/Products/TongueAndGroove/TongueAndGroove')
-);
-const ClickFlooring = React.lazy(() =>
-  import('./containers/Products/ClickFlooring/ClickFlooring')
+
+const WoodFlooring = React.lazy(() =>
+  import('./containers/Products/WoodFlooring/WoodFlooring')
 );
 
 const Adhesives = React.lazy(() =>
@@ -65,8 +63,7 @@ const App = () => {
         <Route path="/support" component={Support} />
         <Route path="/underlay" component={Underlay} />
         <Route path="/adhesives" component={Adhesives} />
-        <Route path="/tng" component={TongueAndGroove} />
-        <Route path="/clickflooring" component={ClickFlooring} />
+        <Route path="/woodflooring" component={WoodFlooring} />
         <Route path="/testimonials" component={Testimonials} />
         <Route path="/products" component={Products} />
         <Route path="/about" component={About} />

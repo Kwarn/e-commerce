@@ -10,12 +10,11 @@ const Wrapper = styled.div`
   background-image: url(${background});
   background-size: cover;
   width: 100%;
-  min-height: 100%;
 `;
 
 const StyledSupportSectionsWrapper = styled.div`
-  background-color: rgba(255, 255, 255, 0.9);
-  margin: 20vh auto 30vh auto;
+  background-color: rgba(255, 255, 255, 0.95);
+  margin: 20vh auto 20vh auto;
   max-width: 1024px;
   display: flex;
   flex-direction: column;
@@ -33,11 +32,13 @@ const StyledCalculatorSection = styled.div`
     text-align: center;
   }
   h3 {
+    font-size: larger;
     margin: auto;
     font-weight: 600;
     text-align: center;
   }
   p {
+    font-size: larger;
     margin: auto;
     padding: 10px;
     text-align: center;
@@ -68,6 +69,7 @@ const StyledFAQSection = styled.div`
     text-align: center;
   }
   p {
+    font-size: larger;
     margin: 5px auto 10px auto;
     text-align: center;
     max-width: 400px;
@@ -82,7 +84,8 @@ export default function Help() {
           <h2>FAQ</h2>
           <h3>How do I buy?</h3>
           <p>
-            Call or email us! Contact information can be found
+            Call or email for our most up-to-date competitive prices and
+            quotations.
           </p>
           <h3>Do you deliver?</h3>
           <p>Yes! We offer next day delivery!</p>
