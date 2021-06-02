@@ -29,14 +29,14 @@ export default function Carousel() {
   const history = useHistory();
   const slidesContentArray = [
     {
-      title: 'VIEW OUR BEAUTIFUL COLLECTION OF WOOD FLOORING',
-      image: slideImage1,
-      isImageDark: false,
+      title: 'NEED FLOORING ADVICE? BOOK A CONSULTATION',
+      image: slideImage4,
       callbackFn: () => history.push('/products'),
     },
     {
-      title: 'NEED FLOORING ADVICE? BOOK A CONSULTATION',
-      image: slideImage4,
+      title: 'VIEW OUR BEAUTIFUL COLLECTION OF WOOD FLOORING',
+      image: slideImage1,
+      isImageDark: false,
       callbackFn: () => history.push('/products'),
     },
     {

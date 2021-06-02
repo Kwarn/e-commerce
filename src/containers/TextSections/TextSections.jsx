@@ -20,7 +20,7 @@ export default function TextSections() {
   const textSectionContent = {
     welcomeText: {
       title:
-        'We Make Beautiful Real Wood Flooring From Responsibly Sourced Timber',
+        'Twelve Oak Are Proud To Supply Real Wood Flooring From Responsibly Sourced Timber',
       secondTitle: 'Find Your Perfect Wood Floor',
     },
     // customers: [
