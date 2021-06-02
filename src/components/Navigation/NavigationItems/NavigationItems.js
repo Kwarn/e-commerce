@@ -1,11 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import logo from '../../../assets/logo.png';
 import DrawToggle from '../Sidebar/DrawToggle/DrawToggle';
 import { withRouter } from 'react-router-dom';
 import contactIcon from '../../../assets/contactIcon.png';
 import LayoutsContext from '../../../Layout/LayoutsContext';
-import LoginNavItem from '../NavigationItems/LoginNavItem';
 
 const StyledNavItems = styled.div`
   display: flex;
@@ -66,13 +65,6 @@ const StyledDesktopNavItem = styled.h3`
   }
 `;
 
-const StyledLoginNavItemContainer = styled.div`
-  display: flex;
-  width: 10vw;
-  position: relative;
-  z-index: 1;
-`;
-
 const NavigationItems = ({
   sideDrawToggleFn,
   history,
@@ -102,7 +94,6 @@ const NavigationItems = ({
 
   const desktopNavItemsContent = [
     { title: 'OUR PRODUCTS', link: '/products' },
-    { title: 'COLLECTIONS', link: '/collections' },
     { title: 'SUPPORT', link: '/support' },
     { title: 'ABOUT US', link: '/about' },
     { title: 'CONTACT', link: '/contact' },
@@ -122,17 +113,6 @@ const NavigationItems = ({
     </StyledDesktopNavItem>
   ));
 
-  // LoginNavItem is included seperately from DesktopNavItems
-  // this is to allow correct absolute positioning of the login drop down draw
-  // relative to this element and not the whole DesktopNavItems element.
-  const Login = (
-    <StyledLoginNavItemContainer>
-      <StyledDesktopNavItem onClick={() => toggleLoginCallback()}>
-        LOGIN
-      </StyledDesktopNavItem>
-    </StyledLoginNavItemContainer>
-  );
-
   return (
     <StyledNavItems {...layouts} className={isDesktop ? 'isDesktop' : ''}>
       {isDesktop ? null : drawToggleComponent}
@@ -143,7 +123,6 @@ const NavigationItems = ({
       ) : null}
       {isDesktop ? null : logoComponent}
       {isDesktop ? null : contactIconComponent}
-      {isDesktop ? Login : null}
     </StyledNavItems>
   );
 };
