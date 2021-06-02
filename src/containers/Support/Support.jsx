@@ -82,8 +82,7 @@ export default function Help() {
           <h2>FAQ</h2>
           <h3>How do I buy?</h3>
           <p>
-            Call or email us, contact information can be found on our Contact
-            page
+            Call or email us! Contact information can be found
           </p>
           <h3>Do you deliver?</h3>
           <p>Yes! We offer next day delivery!</p>

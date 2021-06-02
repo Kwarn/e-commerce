@@ -4,7 +4,7 @@ import MenuCard from './MenuCard/MenuCard';
 import happyCustomer from '../../assets/happyCustomer.jpg';
 import welcomeImage from '../../assets/slideImage1.jpg';
 import tongueAndGrooveImage from '../../assets/tongueAndGroove.jpg';
-import clickFlooringImage from '../../assets/clickFlooring.jpeg';
+import clickFlooringImage from '../../assets/clickflooring.JPG';
 import underlayImage from '../../assets/underlay.jpeg';
 import adhesivesImage from '../../assets/adhesives.jpeg';
 import { useHistory } from 'react-router-dom';

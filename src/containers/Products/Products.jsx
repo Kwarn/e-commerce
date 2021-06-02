@@ -2,6 +2,8 @@ import React from 'react';
 import PageHeaders from '../PageHeaders/PageHeaders';
 import MenuCards from '../MenuCards/MenuCards';
 import styled from 'styled-components';
+import ProductsObject from './ProductsRawData';
+import ProductSlider from './ProductSliders/ProductSlider';
 
 const StyledProductsWrapper = styled.div`
   display: flex;
@@ -27,9 +29,18 @@ const StyledMenuCards = styled.div`
 
 export default function Products() {
   const { productsHeader } = PageHeaders();
-
   const { tongueAndGroove, clickFlooring, underlay, adhesives } = MenuCards();
-
+  const productSliders = [];
+  for (let product in ProductsObject) {
+    productSliders.push(
+      <ProductSlider
+        key={product}
+        productTitle={product}
+        images={ProductsObject[product].images}
+      />
+    );
+  }
+  console.log('ProductsObject :>> ', ProductsObject);
   return (
     <StyledProductsWrapper>
       {productsHeader}
@@ -42,6 +53,7 @@ export default function Products() {
           {underlay}
           {adhesives}
         </StyledMenuCards>
+        <StyledMenuCards>{productSliders}</StyledMenuCards>
       </StyledMenuCardsContainer>
     </StyledProductsWrapper>
   );
