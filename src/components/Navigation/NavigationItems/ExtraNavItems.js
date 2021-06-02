@@ -7,8 +7,9 @@ const StyledContainer = styled.div`
   display: flex;
 `;
 
-const StyledLink = styled.p`
+const StyledLink = styled.a`
   margin: auto;
+  color: inherit;
 `;
 const StyledDivider = styled.h3`
   margin: auto 10px auto 10px;
@@ -17,9 +18,11 @@ const StyledDivider = styled.h3`
 export default function ExtraNavItems() {
   return (
     <StyledContainer>
-      <StyledLink>Where to find us</StyledLink>
+      <StyledLink href="https://goo.gl/maps/9n7kboFp7JqX23WB8" target="_blank">
+        Where to find us
+      </StyledLink>
       <StyledDivider>|</StyledDivider>
-      <StyledLink>Speak with us: 09090897878</StyledLink>
+      <StyledLink>Speak with us: 03333 110 888</StyledLink>
     </StyledContainer>
   );
 }

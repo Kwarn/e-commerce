@@ -21,7 +21,7 @@ const StyledForm = styled.form`
   }
   button {
     font-size: larger;
-    margin-top: 5px;
+    margin: 0 0 10px 0;
     padding: 5px 0px 5px 0px;
   }
 `;
@@ -64,7 +64,6 @@ const StyledWarningMessage = styled.p`
   text-align: center;
   color: red;
   padding: 0;
-  margin: 0;
 `;
 
 export default function Calculator() {

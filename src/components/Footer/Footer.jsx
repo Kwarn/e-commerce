@@ -58,10 +58,7 @@ const Footer = ({ history }) => {
             Products
           </StyledLink>
           <StyledLink onClick={() => history.push('/contact')}>
-            Order Your Free Twelve Oak Flooring Samples
-          </StyledLink>
-          <StyledLink onClick={() => history.push('/faq')}>
-            How To Buy Your Twelve Oak Flooring
+            Get a quote
           </StyledLink>
         </StyledSection>
         <StyledSection>
@@ -70,17 +67,15 @@ const Footer = ({ history }) => {
           <StyledLink onClick={() => history.push('/support')}>
             Support
           </StyledLink>
-          <StyledLink onClick={() => history.push('/faq')}>FAQs</StyledLink>
         </StyledSection>
         <StyledSection>
           <StyledSectionTitle>Customer Service</StyledSectionTitle>
           <StyledLink onClick={() => history.push('/contact')}>
             Contact us
           </StyledLink>
-          <StyledLink onClick={() => history.push('/support')}>
+          <StyledLink onClick={() => history.push('/contact')}>
             Book online consultation
           </StyledLink>
-          <StyledLink onClick={() => history.push('/faq')}>FAQs</StyledLink>
         </StyledSection>
       </StyledSectionsContainer>
       <StyledCopyRight>
