@@ -9,7 +9,7 @@ import styled from 'styled-components';
 
 const StyledCarouselContainer = styled.div`
   width: 100%;
-  margin: 5px;
+  /* margin: 5px; */
 `;
 
 const StyledSlideDot = styled.button`

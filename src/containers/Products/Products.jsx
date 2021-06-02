@@ -53,7 +53,7 @@ export default function Products() {
           {underlay}
           {adhesives}
         </StyledMenuCards>
-        <StyledMenuCards>{productSliders}</StyledMenuCards>
+        {productSliders}
       </StyledMenuCardsContainer>
     </StyledProductsWrapper>
   );
