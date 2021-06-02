@@ -1,60 +1,78 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PageHeaders from '../PageHeaders/PageHeaders';
 import MenuCards from '../MenuCards/MenuCards';
 import styled from 'styled-components';
-import ProductsObject from './ProductsRawData';
+import ProductDataArray from './ProductsRawData';
 import ProductSlider from './ProductSliders/ProductSlider';
+import LayoutsContext from '../../Layout/LayoutsContext';
 
-const StyledProductsWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   align-items: center;
 `;
 
+const StyledProductSliderWrapper = styled.div`
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
 const StyledMenuCardsContainer = styled.div`
   margin: 40px auto 40px auto;
-  width: 80%;
+  width: ${props => (props.isDesktop ? '80%' : '100%')};
 `;
 
 const StyledMenuCards = styled.div`
   display: flex;
-  flex-direction: row;
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-  max-width: 100%;
+  flex-direction: ${props => (!props.isDesktop ? 'column' : 'row')};
   align-items: center;
 `;
 
+const StyledProductSliderGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+`;
+
 export default function Products() {
+  const layouts = useContext(LayoutsContext);
   const { productsHeader } = PageHeaders();
   const { tongueAndGroove, clickFlooring, underlay, adhesives } = MenuCards();
-  const productSliders = [];
-  for (let product in ProductsObject) {
-    productSliders.push(
-      <ProductSlider
-        key={product}
-        productTitle={product}
-        images={ProductsObject[product].images}
-      />
+  const productSliders = {};
+  for (let product of ProductDataArray) {
+    const title = product.title;
+    productSliders[product.title] = (
+      <StyledProductSliderWrapper {...layouts}>
+        <h1>{product.title}</h1>
+        <ProductSlider
+          key={product.images[0]}
+          productTitle={product.title}
+          images={product.images}
+        />
+      </StyledProductSliderWrapper>
     );
   }
-  console.log('ProductsObject :>> ', ProductsObject);
   return (
-    <StyledProductsWrapper>
+    <Wrapper>
       {productsHeader}
-      <StyledMenuCardsContainer>
-        <StyledMenuCards>
+      <StyledMenuCardsContainer {...layouts}>
+        <StyledMenuCards {...layouts}>
           {tongueAndGroove}
           {clickFlooring}
         </StyledMenuCards>
-        <StyledMenuCards>
+        <StyledMenuCards {...layouts}>
           {underlay}
           {adhesives}
         </StyledMenuCards>
-        {productSliders}
       </StyledMenuCardsContainer>
-    </StyledProductsWrapper>
+      {productSliders['Walnut']}
+      <StyledProductSliderGroup>
+        {productSliders['Grey Bark']}
+        {productSliders['Warwick Castle']}
+      </StyledProductSliderGroup>
+    </Wrapper>
   );
 }

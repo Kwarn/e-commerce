@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Slider from 'infinite-react-carousel';
-import LayoutContext from '../../../Layout/LayoutsContext';
 import ProductSlide from './ProductSlide';
 import rightChev from '../../../assets/rightChev.png';
 import leftChev from '../../../assets/leftChev.png';
 import styled from 'styled-components';
+import LayoutsContext from '../../../Layout/LayoutsContext';
 
 const StyledCarouselContainer = styled.div`
-  width: 100%;
-  /* margin: 5px; */
+  width: ${props => (props.isDesktop ? '60%' : '100%')};
+  margin: auto;
 `;
 
 const StyledSlideDot = styled.button`
@@ -22,15 +22,10 @@ const StyledSlideDot = styled.button`
 `;
 
 export default function ProductSlider({ productTitle, images }) {
-  const layouts = useContext(LayoutContext);
-  const history = useHistory();
-  let slidesContent = [];
-  images.forEach(img =>
-    slidesContent.push({ title: productTitle, image: img })
-  );
-
-  const slides = slidesContent.map(slide => (
-    <ProductSlide key={slide.title} slide={slide} />
+  const layouts = useContext(LayoutsContext);
+  let slideImages = [];
+  const slides = images.map((image, idx) => (
+    <ProductSlide key={idx} image={image} title={productTitle} />
   ));
 
   const rightChevImg = (
@@ -59,15 +54,6 @@ export default function ProductSlider({ productTitle, images }) {
       alt="left"
     />
   );
-
-  let dots = [];
-  for (let i = 0; i < slidesContent.length; i++) {
-    dots.push(
-      <li>
-        <StyledSlideDot />
-      </li>
-    );
-  }
 
   return (
     <StyledCarouselContainer {...layouts}>

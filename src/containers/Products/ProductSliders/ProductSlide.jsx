@@ -18,9 +18,8 @@ const StyledText = styled.div`
   text-align: center;
 `;
 
-const ProductSlide = ({ slide }) => {
-  const layouts = useContext(LayoutsContext);
-  return <StyledSlide {...layouts} background={slide.image}></StyledSlide>;
+const ProductSlide = ({ image }) => {
+  return <StyledSlide background={image} />;
 };
 
 export default ProductSlide;

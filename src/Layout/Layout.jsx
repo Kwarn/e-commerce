@@ -15,7 +15,7 @@ const StyledMainContentContainer = styled.div`
   max-width: 100%;
   min-height: ${props =>
     props.isMobile ? '86vh' : props.isTablet ? '88vh' : '90vh'};
-  background-color: #eee;
+  background-color: #fff;
 `;
 
 export default function Layout({ children }) {
