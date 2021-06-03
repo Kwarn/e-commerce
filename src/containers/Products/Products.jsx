@@ -25,10 +25,8 @@ const StyledMenuCards = styled.div`
   display: flex;
   flex-direction: ${props => (props.isDesktop ? 'row' : 'column')};
   align-items: center;
-  width: 100vw;
+  width: 100%;
 `;
-
-
 
 export default function Products() {
   const layouts = useContext(LayoutsContext);

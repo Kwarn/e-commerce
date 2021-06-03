@@ -11,11 +11,17 @@ const woodFlooringData = [
   {
     title: 'Walnut',
     images: [walnut, walnutTopdown, walnutActual],
+    desc: 'Traditionally proportioned random length planks are milled from mixed grade Black American Walnut. The surface is smooth sanded and sealed with matt aluminium oxide lacquer to accentuate the wonderfully varied grain and rich earthy walnut tones which over time mellow to suit the character of any interior space. This luxurious plank adds a deep warmth to a room whilst being versatile to install and easy to maintain.',
   },
-  { title: 'Grey Bark', images: [greybark, greybarkTopdown, greybarkActual] },
+  {
+    title: 'Grey Bark',
+    images: [greybark, greybarkTopdown, greybarkActual],
+    desc: 'Beautifully crafted coloured floors created from an oak top layer which is lightly brushed to release the natural grain. Wood lye is then applied to bleach and colour the floors to create the deep lustred and distinctive oak tones and grain variations found in the collection.',
+  },
   {
     title: 'Warwick Castle',
     images: [warwickcastle, warwickcastleTopdown, warwickcastleActual],
+    desc: 'This is an untreated smooth sanded oak plank. The first striking difference between this board and the other oak we sell is the pale colouration, the raw colour of seasoned oak. This creates a canvas full of rustic character to which any surface application can be added once installed on your floor.',
   },
 ];
 

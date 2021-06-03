@@ -12,19 +12,8 @@ const StyledCarouselContainer = styled.div`
   margin: auto;
 `;
 
-const StyledSlideDot = styled.button`
-  z-index: 5;
-  position: absolute;
-  top: -10vh;
-  width: 25px;
-  background-color: white;
-  color: white;
-  height: 25px;
-`;
 
 export default function ProductSlider({ productTitle, images }) {
-  // TO DO: Issue mixing VW & % for CSS
-  // Causes product sliders to bug out of container
   const layouts = useContext(LayoutsContext);
   let slideImages = [];
   const slides = images.map((image, idx) => (
@@ -61,7 +50,7 @@ export default function ProductSlider({ productTitle, images }) {
   return (
     <StyledCarouselContainer {...layouts}>
       <Slider
-        customPaging={i => <StyledSlideDot>{i + 1}</StyledSlideDot>}
+        // customPaging={i => <StyledSlideDot>{i + 1}</StyledSlideDot>}
         prevArrow={leftChevImg}
         nextArrow={rightChevImg}
         dots

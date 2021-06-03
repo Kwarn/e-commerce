@@ -19,7 +19,7 @@ export default function ExtraNavItems() {
   return (
     <StyledContainer>
       <StyledLink href="https://goo.gl/maps/9n7kboFp7JqX23WB8" target="_blank">
-        Where to find us
+        How to find us
       </StyledLink>
       <StyledDivider>|</StyledDivider>
       <StyledLink>Speak with us: 03333 110 888</StyledLink>

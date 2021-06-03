@@ -32,7 +32,7 @@ const StyledCopyRight = styled.div`
   color: #b8b8b8;
   text-align: center;
   width: auto;
-  padding: 25px;
+  padding: 10px;
   p {
     margin: 0;
     padding: 0;
