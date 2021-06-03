@@ -6,6 +6,8 @@ import woodFlooringData from '../woodFlooringData';
 import ProductSlider from '../ProductSliders/ProductSlider';
 import lightbulb from '../../../assets/lightbulb.png';
 import Button from '../../../components/Button/Button';
+import Modal from '../../../components/UI/Modal/Modal';
+import maximizeIcon from '../../../assets/maximizeIcon.png';
 
 const Wrapper = styled.div`
   display: flex;
@@ -83,6 +85,13 @@ const StyledButtonWrapper = styled.div`
   justify-content: center;
 `;
 
+const StyledMaximiseButton = styled.img`
+  border: 3px solid red;
+  z-index: 2;
+  display: absolute;
+  width: 40px;
+  height: 40px;
+`;
 export default function WoodFlooring({ productCardElements }) {
   const layouts = useContext(LayoutsContext);
   const { woodFlooringHeader } = PageHeaders();
@@ -115,6 +124,7 @@ export default function WoodFlooring({ productCardElements }) {
               setToolTipStatus({ ...tooltipStatus, [idx]: !tooltipStatus[idx] })
             }
           >
+            <StyledMaximiseButton src={maximizeIcon} alt="Maximize" />
             <Button
               emFontSize="0.8"
               text={`${
