@@ -35,7 +35,7 @@ const MenuCards = () => {
     woodFlooring: {
       title: 'WOOD FLOORING',
       buttonText: 'BROWSE',
-      buttonCallback: () => history.push('/clickflooring'),
+      buttonCallback: () => history.push('/woodflooring'),
       image: clickFlooringImage,
     },
     underlay: {

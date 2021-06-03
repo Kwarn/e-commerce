@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PageHeader from './PageHeader/PageHeader';
 import productsImage from '../../assets/slideImage3.jpg';
 import tongueAndGrooveImage from '../../assets/tongueAndGroove.jpg';
-import clickFlooringImage from '../../assets/clickflooring.JPG';
+import woodFlooringImage from '../../assets/clickflooring.JPG';
 import underlayImage from '../../assets/underlay.jpeg';
 import adhesivesImage from '../../assets/adhesives.jpeg';
 
@@ -19,10 +19,10 @@ export default function PageHeaders() {
       description: 'Tongue And Groove flooring requires adhesive!',
       image: tongueAndGrooveImage,
     },
-    clickFlooringHeader: {
-      title: 'Click Flooring',
+    woodFlooringHeader: {
+      title: 'woodFlooring',
       description: 'Hassle and mess free installation',
-      image: clickFlooringImage,
+      image: woodFlooringImage,
     },
     underlayHeader: {
       title: 'Underlay',

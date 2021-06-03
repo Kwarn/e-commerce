@@ -7,7 +7,7 @@ import greybarkActual from '../../assets/Grey_Bark/Grey_Bark_actual-min.jpg';
 import warwickcastle from '../../assets/Warwick_Castle/WarwickCastle_Beauty-min.jpg';
 import warwickcastleTopdown from '../../assets/Warwick_Castle/WarwickCastle_TopDown-min.jpg';
 import warwickcastleActual from '../../assets/Warwick_Castle/WarwickCastle_actual-min.jpg';
-const productDataArray = [
+const woodFlooringData = [
   {
     title: 'Walnut',
     images: [walnut, walnutTopdown, walnutActual],
@@ -19,4 +19,4 @@ const productDataArray = [
   },
 ];
 
-export default productDataArray;
+export default woodFlooringData;
