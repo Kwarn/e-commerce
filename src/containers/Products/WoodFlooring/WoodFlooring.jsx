@@ -5,6 +5,7 @@ import LayoutsContext from '../../../Layout/LayoutsContext';
 import woodFlooringData from '../woodFlooringData';
 import ProductSlider from '../ProductSliders/ProductSlider';
 import lightbulb from '../../../assets/lightbulb.png';
+import Button from '../../../components/Button/Button';
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,25 +25,6 @@ const StyledProductSliderWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   min-height: 40vh;
-  .lightbulb {
-    transition: 0.3s;
-    z-index: 2;
-    position: absolute;
-    color: #474747;
-    right: calc(50% - 30px);
-    bottom: calc(50% - 20px);
-    width: 60px;
-    height: 60px;
-    &:hover:hover {
-      opacity: 0;
-    }
-  }
-  .show {
-    opacity: 1;
-  }
-  .hide {
-    opacity: 0;
-  }
 
   h1 {
     color: #fff;
@@ -52,9 +34,10 @@ const StyledProductSliderWrapper = styled.div`
     padding: 0;
   }
   section {
+    opacity: ${props => (props.tooltipStatus ? '1' : '0')};
+    pointer-events: ${props => (props.isMobile ? 'none' : 'all')};
     display: flex;
     justify-content: center;
-    opacity: 0;
     transition: 0.8s;
     z-index: 2;
     font-weight: 500;
@@ -64,11 +47,11 @@ const StyledProductSliderWrapper = styled.div`
     text-align: center;
     position: absolute;
     top: ${props =>
-      props.isDesktop ? 'calc(50% - (50% / 2))' : 'calc(50% - (70% / 2))'};
+      props.isDesktop ? 'calc(50% - (50% / 2))' : 'calc(50% - (50% / 2))'};
     left: ${props =>
       props.isDesktop ? 'calc(50% - (50% / 2))' : 'calc(50% - (70% / 2))'};
     width: ${props => (props.isDesktop ? '50%' : '70%')};
-    height: ${props => (props.isDesktop ? '50%' : '70%')};
+    height: ${props => (props.isDesktop ? '50%' : '50%')};
     &:hover:hover {
       opacity: 1;
     }
@@ -79,6 +62,14 @@ const StyledProductSliderWrapper = styled.div`
       margin: auto;
     }
   }
+  .infoBtn {
+    position: absolute;
+    z-index: 2;
+    height: 40px;
+    width: 100px;
+    bottom: 70px;
+    left: calc(50% - 50px);
+  }
 `;
 
 const StyledProductSliderGroup = styled.div`
@@ -87,36 +78,51 @@ const StyledProductSliderGroup = styled.div`
   width: 100%;
 `;
 
+const StyledButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export default function WoodFlooring({ productCardElements }) {
-  const [isToolTipShown, setIsToolTipShown] = useState(false);
-  const [isLightbulbShown, setIsLightbulbShown] = useState(true);
   const layouts = useContext(LayoutsContext);
   const { woodFlooringHeader } = PageHeaders();
+  const [tooltipStatus, setToolTipStatus] = useState({});
+
   const ProductCardElements = {};
-  for (let product of woodFlooringData) {
+  for (const [idx, product] of woodFlooringData.entries()) {
     ProductCardElements[product.title] = (
-      <StyledProductSliderWrapper {...layouts}>
+      <StyledProductSliderWrapper
+        index={idx}
+        tooltipStatus={tooltipStatus[idx]}
+        {...layouts}
+      >
         <h1>{product.title.toUpperCase()}</h1>
         <ProductSlider
+          onClick={() =>
+            setToolTipStatus({ ...tooltipStatus, [idx]: !tooltipStatus[idx] })
+          }
           key={product.images[0]}
           productTitle={product.title}
           images={product.images}
         />
-        <img
-          onClick={() => setIsToolTipShown(true)}
-          onMouseEnter={() => setIsToolTipShown(true)}
-          onMouseLeave={() => setIsToolTipShown(false)}
-          className={`lightbulb ${isLightbulbShown ? '' : 'hide'}`}
-          src={lightbulb}
-          alt="lightbulb"
-        />
-        <section
-          onMouseLeave={() => setIsLightbulbShown(false)}
-          className={isToolTipShown ? 'show' : 'hide'}
-          {...layouts}
-        >
+        <section>
           <p>{product.desc ? product.desc : null}</p>
         </section>
+        {layouts.isMobile || layouts.isTablet ? (
+          <StyledButtonWrapper
+            className="infoBtn"
+            onClick={() =>
+              setToolTipStatus({ ...tooltipStatus, [idx]: !tooltipStatus[idx] })
+            }
+          >
+            <Button
+              emFontSize="0.8"
+              text={`${
+                !tooltipStatus[idx] ? 'Show Description' : 'Hide Decriptions'
+              }`}
+            />
+          </StyledButtonWrapper>
+        ) : null}
       </StyledProductSliderWrapper>
     );
   }

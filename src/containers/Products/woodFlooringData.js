@@ -11,7 +11,7 @@ const woodFlooringData = [
   {
     title: 'Walnut',
     images: [walnut, walnutTopdown, walnutActual],
-    desc: 'Traditionally proportioned random length planks are milled from mixed grade Black American Walnut. The surface is smooth sanded and sealed with matt aluminium oxide lacquer to accentuate the wonderfully varied grain and rich earthy walnut tones which over time mellow to suit the character of any interior space. This luxurious plank adds a deep warmth to a room whilst being versatile to install and easy to maintain.',
+    desc: 'Traditionally proportioned random length planks are milled from mixed grade Black American Walnut. The surface is smooth sanded and sealed with matt aluminium oxide lacquer to accentuate the wonderfully varied grain and rich earthy walnut tones which over time mellow to suit the character of any interior space.',
   },
   {
     title: 'Grey Bark',

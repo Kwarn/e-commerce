@@ -53,7 +53,7 @@ export default function Layout({ children }) {
           isDesktop: true,
           yScrollBarWidth,
         }
-      : window.innerWidth > 450 && window.innerWidth < 1025
+      : window.innerWidth > 500 && window.innerWidth < 1025
       ? {
           isMobile: false,
           isTablet: true,
@@ -83,7 +83,7 @@ export default function Layout({ children }) {
             isDesktop: true,
             yScrollBarWidth,
           }
-        : window.innerWidth > 450 && window.innerWidth < 1025
+        : window.innerWidth > 500 && window.innerWidth < 1025
         ? {
             isMobile: false,
             isTablet: true,
