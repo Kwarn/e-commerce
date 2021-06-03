@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import LayoutsContext from '../../../Layout/LayoutsContext';
 
 const StyledCarouselContainer = styled.div`
-  width: ${props => (props.isDesktop ? '60%' : '100%')};
+  width: ${props => (props.isDesktop ? '80%' : '100%')};
   margin: auto;
 `;
 
@@ -17,7 +17,8 @@ const StyledSlideDot = styled.button`
   position: absolute;
   top: -10vh;
   width: 25px;
-  background-color: black;
+  background-color: white;
+  color: white;
   height: 25px;
 `;
 

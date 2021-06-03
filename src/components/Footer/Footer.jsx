@@ -85,7 +85,7 @@ const Footer = ({ history }) => {
             Karl Warner
           </StyledExternalLink>
         </p>
-        <p>Copyright 2021© Twelve Oak®. All rights reserved.</p>
+        <p>Copyright 2021© Q&Y®. All rights reserved.</p>
       </StyledCopyRight>
     </>
   );

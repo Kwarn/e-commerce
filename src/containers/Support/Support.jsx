@@ -103,8 +103,7 @@ export default function Help() {
             <h3>How much will it cost?</h3>
             <p>
               Simply use the Sq Ft/m Calculator or enter the total area and the
-              price per Sq ft/m into the calculator. The price per sq foot/meter
-              can be found on all of our products.
+              price per Sq Ft/m into the calculator.
             </p>
           </div>
           <StyledCalculatorWrapper>

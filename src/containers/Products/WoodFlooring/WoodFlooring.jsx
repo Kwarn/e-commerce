@@ -12,11 +12,15 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
+const StyledTopMarginSpacer = styled.div`
+  margin-top: 10vh;
+`;
+
 const StyledProductSliderWrapper = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
   h1 {
     color: #fff;
     width: ${props => (props.isDesktop ? '60%' : '100%')};
@@ -29,7 +33,7 @@ const StyledProductSliderWrapper = styled.div`
 const StyledProductSliderGroup = styled.div`
   display: flex;
   flex-direction: ${props => (props.isDesktop ? 'row' : 'column')};
-  width: 100vw;
+  width: 100%;
   margin: 0;
   padding: 0;
 `;
@@ -55,6 +59,7 @@ export default function WoodFlooring({ productCardElements }) {
     <>
       <Wrapper {...layouts}>
         {woodFlooringHeader}
+        <StyledTopMarginSpacer />
         {ProductCardElements['Walnut']}
         <StyledProductSliderGroup {...layouts}>
           {ProductCardElements['Grey Bark']}

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import PageHeader from './PageHeader/PageHeader';
 import productsImage from '../../assets/slideImage3.jpg';
-import tongueAndGrooveImage from '../../assets/tongueAndGroove.jpg';
 import woodFlooringImage from '../../assets/clickflooring.JPG';
 import underlayImage from '../../assets/underlay.jpeg';
 import adhesivesImage from '../../assets/adhesives.jpeg';
@@ -14,14 +13,10 @@ export default function PageHeaders() {
         'Twelve Oak is proud to be FSC® and PEFC® certified. All Twelve Oak Wood Flooring products are produced in FSC® certified factories and comply fully with the European Timber Regulations. Look out for the logos on certified products.',
       image: productsImage,
     },
-    tongueAndGrooveHeader: {
-      title: 'Tongue And Groove',
-      description: 'Tongue And Groove flooring requires adhesive!',
-      image: tongueAndGrooveImage,
-    },
     woodFlooringHeader: {
-      title: 'woodFlooring',
-      description: 'Hassle and mess free installation',
+      title: 'THE Q&Y SOLID WOOD COLLECTION',
+      description:
+        'Our collection of solid wood engineered floors include; herringbone, plank, chevron, reclaimed timber floors as well as high quality laminate floors. All are stocked in the UK and ready for delivery.',
       image: woodFlooringImage,
     },
     underlayHeader: {
