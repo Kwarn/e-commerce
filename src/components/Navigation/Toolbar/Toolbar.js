@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import ExtraNavItems from '../NavigationItems/ExtraNavItems';
 import LogoNavItem from '../NavigationItems/LogoNavItem';

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import LayoutsContext from '../../../Layout/LayoutsContext';
 import woodFlooringData from '../woodFlooringData';
 import ProductSlider from '../ProductSliders/ProductSlider';
-import lightbulb from '../../../assets/lightbulb.png';
 import Button from '../../../components/Button/Button';
 import Modal from '../../../components/UI/Modal/Modal';
 import maximizeIcon from '../../../assets/maximizeIcon.png';

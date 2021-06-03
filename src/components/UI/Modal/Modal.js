@@ -42,10 +42,10 @@ const Modal = ({ show, hide, children }) => {
   return (
     <>
       <Backdrop show={show} hide={hide} />
-      <Modal show={show} hide={hide}>
+      <StyledModal show={show} hide={hide}>
         <StyledCloseIcon onClick={hide} src={closeIcon} alt="close modal" />
-        <div className={classes.Content}>{children}</div>
-      </Modal>
+        <StyledContent className={classes.Content}>{children}</StyledContent>
+      </StyledModal>
     </>
   );
 };

@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { updateObject } from '../../../utility/utility';
 import { validateInput } from '../../../utility/utility';
-import Spinner from '../../UI/spinner/Spinner';
 import styled from 'styled-components';
 import LayoutsContext from '../../../Layout/LayoutsContext';
-import background from '../../../assets/sidebarBackground.jpg';
 import Button from '../../Button/Button';
 
 const StyledDrawContainer = styled.div`

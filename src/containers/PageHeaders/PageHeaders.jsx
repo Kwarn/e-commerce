@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PageHeader from './PageHeader/PageHeader';
 import productsImage from '../../assets/slideImage3.jpg';
 import woodFlooringImage from '../../assets/clickflooring.JPG';

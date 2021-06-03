@@ -3,5 +3,5 @@ import PageHeaders from '../../PageHeaders/PageHeaders';
 
 export default function Adhesives() {
   const { adhesivesHeader } = PageHeaders();
-  return adhesivesHeader;
+  return <>{adhesivesHeader}</>;
 }

@@ -3,5 +3,5 @@ import PageHeaders from '../../PageHeaders/PageHeaders';
 
 export default function Underlay() {
   const { underlayHeader } = PageHeaders();
-  return underlayHeader;
+  return <>{underlayHeader}</>;
 }

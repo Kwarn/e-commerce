@@ -2,7 +2,6 @@ import React from 'react';
 import goldFloor from '../../assets/goldFloor.jpeg';
 import MenuCard from './MenuCard/MenuCard';
 import happyCustomer from '../../assets/happyCustomer.jpg';
-import welcomeImage from '../../assets/slideImage1.jpg';
 import tongueAndGrooveImage from '../../assets/tongueAndGroove.jpg';
 import clickFlooringImage from '../../assets/clickflooring.JPG';
 import underlayImage from '../../assets/underlay.jpeg';

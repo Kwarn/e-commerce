@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import Slider from 'infinite-react-carousel';
 import ProductSlide from './ProductSlide';
 import rightChev from '../../../assets/rightChev.png';
@@ -15,7 +14,6 @@ const StyledCarouselContainer = styled.div`
 
 export default function ProductSlider({ productTitle, images }) {
   const layouts = useContext(LayoutsContext);
-  let slideImages = [];
   const slides = images.map((image, idx) => (
     <ProductSlide key={idx} image={image} title={productTitle} />
   ));
@@ -50,7 +48,6 @@ export default function ProductSlider({ productTitle, images }) {
   return (
     <StyledCarouselContainer {...layouts}>
       <Slider
-        // customPaging={i => <StyledSlideDot>{i + 1}</StyledSlideDot>}
         prevArrow={leftChevImg}
         nextArrow={rightChevImg}
         dots

@@ -2,8 +2,6 @@ import React, { useContext } from 'react';
 import PageHeaders from '../PageHeaders/PageHeaders';
 import MenuCards from '../MenuCards/MenuCards';
 import styled from 'styled-components';
-import woodFlooringData from './woodFlooringData';
-import ProductSlider from './ProductSliders/ProductSlider';
 import LayoutsContext from '../../Layout/LayoutsContext';
 
 const Wrapper = styled.div`
@@ -31,7 +29,7 @@ const StyledMenuCards = styled.div`
 export default function Products() {
   const layouts = useContext(LayoutsContext);
   const { productsHeader } = PageHeaders();
-  const { tongueAndGroove, woodFlooring, underlay, adhesives } = MenuCards();
+  const { woodFlooring, underlay, adhesives } = MenuCards();
 
   return (
     <Wrapper>
