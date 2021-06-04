@@ -61,32 +61,51 @@ const StyledThumbnail = styled.img`
   margin: auto;
 `;
 
-const Modal = ({ isVisible, closeFn, children }) => {
+const Modal = ({ isVisible, closeFn, defaultImage, children }) => {
   const layouts = useContext(LayoutsContext);
-  const [mainImage, setMainImage] = useState(0);
+  const [mainImageIndex, setMainImageIndex] = useState(defaultImage || 0);
   let images = [];
   let thumbnails = [];
   if (children) {
     images = Array.from(children);
     thumbnails = images.map((image, idx) => (
       <StyledThumbnail
-        onClick={() => setMainImage(idx)}
+        onClick={() => setMainImageIndex(idx)}
         key={`modal-image-${idx}`}
         src={image}
         alt={`modal-${idx}`}
-        isFocus={mainImage === idx}
+        isFocus={mainImageIndex === idx}
       />
     ));
   }
   console.log('thumbs', thumbnails);
   console.log(images);
+
+  const imageResetHelperFn = () => {
+    setMainImageIndex(0);
+  };
+
   return (
     <>
-      <Backdrop isShown={isVisible} closeFn={closeFn} />
+      <Backdrop
+        isShown={isVisible}
+        closeFn={closeFn}
+        imageResetFn={imageResetHelperFn}
+      />
       <StyledModal isShown={isVisible} closeFn={closeFn}>
-        <StyledCloseIcon onClick={closeFn} src={closeIcon} alt="close modal" />
+        <StyledCloseIcon
+          onClick={() => {
+            imageResetHelperFn();
+            closeFn();
+          }}
+          src={closeIcon}
+          alt="close modal"
+        />
         <StyledContent>
-          <StyledMainImageWrapper {...layouts} background={images[mainImage]} />
+          <StyledMainImageWrapper
+            {...layouts}
+            background={images[mainImageIndex]}
+          />
           {thumbnails ? (
             <StyledThumbnailWrapper>{thumbnails}</StyledThumbnailWrapper>
           ) : null}
@@ -96,4 +115,4 @@ const Modal = ({ isVisible, closeFn, children }) => {
   );
 };
 
-export default Modal;
+export default React.memo(Modal);

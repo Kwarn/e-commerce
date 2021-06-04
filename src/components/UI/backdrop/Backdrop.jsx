@@ -12,7 +12,14 @@ const StyledBackdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const Backdrop = ({ isShown, closeFn }) =>
-  isShown ? <StyledBackdrop onClick={closeFn} /> : null;
+const Backdrop = ({ isShown, closeFn, imageResetFn }) =>
+  isShown ? (
+    <StyledBackdrop
+      onClick={() => {
+        imageResetFn();
+        closeFn();
+      }}
+    />
+  ) : null;
 
 export default Backdrop;
