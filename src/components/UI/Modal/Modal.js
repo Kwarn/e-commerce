@@ -2,7 +2,9 @@ import React, { useState, useContext } from 'react';
 import Backdrop from '../backdrop/Backdrop';
 import styled from 'styled-components';
 import closeIcon from '../../../assets/closeIcon.png';
+import swipeIcon from '../../../assets/swipeIcon.png';
 import LayoutsContext from '../../../Layout/LayoutsContext';
+import { useSwipeable } from 'react-swipeable';
 
 const StyledModal = styled.div`
   transform: ${props =>
@@ -40,6 +42,7 @@ const StyledContent = styled.div`
 `;
 
 const StyledMainImageWrapper = styled.div`
+  position: relative;
   margin: auto;
   width: 100%;
   max-width: ${props => (props.isDesktop ? '70%' : '100%;')};
@@ -58,12 +61,26 @@ const StyledThumbnail = styled.img`
   border: ${props => (props.isFocus ? '2px solid green' : 'none')};
   width: 60px;
   height: 60px;
-  margin: auto;
+  margin: 5px;
+  cursor: pointer;
 `;
 
-const Modal = ({ isVisible, closeFn, defaultImage, children }) => {
+const StyledSwipeIcon = styled.img`
+  position: absolute;
+  bottom: -60px;
+  left: calc(50% - 35px);
+  width: 70px;
+  height: 70px;
+`;
+
+const Modal = ({ isVisible, closeFn, children }) => {
+  if (isVisible) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'unset';
+  }
   const layouts = useContext(LayoutsContext);
-  const [mainImageIndex, setMainImageIndex] = useState(defaultImage || 0);
+  const [mainImageIndex, setMainImageIndex] = useState(0);
   let images = [];
   let thumbnails = [];
   if (children) {
@@ -78,8 +95,29 @@ const Modal = ({ isVisible, closeFn, defaultImage, children }) => {
       />
     ));
   }
-  console.log('thumbs', thumbnails);
-  console.log(images);
+
+  const goRight = () => {
+    if (mainImageIndex === images.length - 1) {
+      setMainImageIndex(0);
+    } else {
+      setMainImageIndex(mainImageIndex + 1);
+    }
+  };
+
+  const goLeft = () => {
+    if (mainImageIndex === 0) {
+      setMainImageIndex(images.length - 1);
+    } else {
+      setMainImageIndex(mainImageIndex - 1);
+    }
+  };
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => goRight(),
+    onSwipedRight: () => goLeft(),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
 
   const imageResetHelperFn = () => {
     setMainImageIndex(0);
@@ -92,7 +130,7 @@ const Modal = ({ isVisible, closeFn, defaultImage, children }) => {
         closeFn={closeFn}
         imageResetFn={imageResetHelperFn}
       />
-      <StyledModal isShown={isVisible} closeFn={closeFn}>
+      <StyledModal {...handlers} isShown={isVisible} closeFn={closeFn}>
         <StyledCloseIcon
           onClick={() => {
             imageResetHelperFn();
@@ -105,7 +143,9 @@ const Modal = ({ isVisible, closeFn, defaultImage, children }) => {
           <StyledMainImageWrapper
             {...layouts}
             background={images[mainImageIndex]}
-          />
+          >
+            <StyledSwipeIcon src={swipeIcon} alt="Swipe" />
+          </StyledMainImageWrapper>
           {thumbnails ? (
             <StyledThumbnailWrapper>{thumbnails}</StyledThumbnailWrapper>
           ) : null}

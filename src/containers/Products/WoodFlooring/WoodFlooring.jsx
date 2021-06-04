@@ -157,7 +157,6 @@ export default function WoodFlooring() {
     <>
       <Wrapper {...layouts}>
         <Modal
-          defaultImage={!modalStatus.isShown ? 1 : 0}
           isVisible={modalStatus.isShown && modalStatus.content}
           closeFn={() => closeModalHandler()}
         >
