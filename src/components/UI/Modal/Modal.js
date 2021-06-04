@@ -12,7 +12,7 @@ const StyledModal = styled.div`
   opacity: ${props => (props.isShown ? '1' : '0')};
   z-index: 500;
   position: fixed;
-  background-color: white;
+  background-color: #fff;
   width: 90%;
   height: 100%;
   max-height: 90%;
@@ -67,7 +67,7 @@ const StyledThumbnail = styled.img`
 
 const StyledSwipeIcon = styled.img`
   position: absolute;
-  bottom: -60px;
+  bottom: 0px;
   left: calc(50% - 35px);
   width: 70px;
   height: 70px;

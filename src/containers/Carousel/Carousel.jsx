@@ -31,7 +31,7 @@ export default function Carousel() {
     {
       title: 'NEED FLOORING ADVICE? BOOK A CONSULTATION',
       image: slideImage4,
-      callbackFn: () => history.push('/products'),
+      callbackFn: () => history.push('/contact'),
     },
     {
       title: 'VIEW OUR BEAUTIFUL COLLECTION OF WOOD FLOORING',
