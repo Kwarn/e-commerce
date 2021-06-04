@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledBackdrop = styled.div`
+  /* pointer-events: none; */
   width: 100%;
   height: 100%;
   position: fixed;
@@ -11,7 +12,7 @@ const StyledBackdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const Backdrop = ({ show, closeFn }) =>
-  show ? <StyledBackdrop onClick={closeFn} /> : null;
+const Backdrop = ({ isShown, closeFn }) =>
+  isShown ? <StyledBackdrop onClick={closeFn} /> : null;
 
 export default Backdrop;

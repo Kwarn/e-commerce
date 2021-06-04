@@ -26,13 +26,21 @@ const StyledProductSliderWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   min-height: 40vh;
-
   h1 {
     color: #fff;
     width: ${props => (props.isDesktop ? '80%' : '100%')};
     margin: auto;
     background-color: #474747;
     padding: 0;
+    img {
+      cursor: pointer;
+      position: absolute;
+      z-index: 2;
+      width: 45px;
+      top: 45px;
+      height: 45px;
+      right: ${props => (props.isDesktop ? '11%' : '2%')};
+    }
   }
   section {
     opacity: ${props => (props.tooltipStatus ? '1' : '0')};
@@ -84,17 +92,18 @@ const StyledButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-const StyledMaximiseButton = styled.img`
-  border: 3px solid red;
-  z-index: 2;
-  display: absolute;
-  width: 40px;
-  height: 40px;
-`;
-export default function WoodFlooring({ productCardElements }) {
+export default function WoodFlooring() {
   const layouts = useContext(LayoutsContext);
   const { woodFlooringHeader } = PageHeaders();
   const [tooltipStatus, setToolTipStatus] = useState({});
+  const [modalStatus, setModalStatus] = useState({
+    isShown: false,
+    content: null,
+  });
+
+  const closeModalHandler = () => {
+    setModalStatus({ isShown: false, content: { ...modalStatus.content } });
+  };
 
   const ProductCardElements = {};
   for (const [idx, product] of woodFlooringData.entries()) {
@@ -104,7 +113,16 @@ export default function WoodFlooring({ productCardElements }) {
         tooltipStatus={tooltipStatus[idx]}
         {...layouts}
       >
-        <h1>{product.title.toUpperCase()}</h1>
+        <h1>
+          {product.title.toUpperCase()}
+          <img
+            onClick={() =>
+              setModalStatus({ isShown: true, content: product.images })
+            }
+            src={maximizeIcon}
+            alt="Maximize"
+          />
+        </h1>
         <ProductSlider
           onClick={() =>
             setToolTipStatus({ ...tooltipStatus, [idx]: !tooltipStatus[idx] })
@@ -123,7 +141,6 @@ export default function WoodFlooring({ productCardElements }) {
               setToolTipStatus({ ...tooltipStatus, [idx]: !tooltipStatus[idx] })
             }
           >
-            <StyledMaximiseButton src={maximizeIcon} alt="Maximize" />
             <Button
               emFontSize="0.8"
               text={`${
@@ -139,6 +156,12 @@ export default function WoodFlooring({ productCardElements }) {
   return (
     <>
       <Wrapper {...layouts}>
+        <Modal
+          isVisible={modalStatus.isShown && modalStatus.content}
+          closeFn={() => closeModalHandler()}
+        >
+          {modalStatus.content}
+        </Modal>
         {woodFlooringHeader}
         <StyledTopMarginSpacer />
         {ProductCardElements['Grey Bark']}
