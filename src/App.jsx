@@ -21,7 +21,7 @@ const Home = React.lazy(() => import('./containers/Home/Home'));
 const Contact = React.lazy(() => import('./containers/Contact/Contact'));
 const Products = React.lazy(() => import('./containers/Products/Products'));
 const Testimonials = React.lazy(() =>
-  import('./components/Testimonials/Testimonials')
+  import('./containers/Testimonials/Testimonials')
 );
 const About = React.lazy(() => import('./containers/About/About'));
 
