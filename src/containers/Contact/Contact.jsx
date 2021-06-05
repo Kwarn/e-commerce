@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import ContactForm from './ContactForm/ContactForm';
 import background from '../../assets/sidebarBackground.jpg';
+import GoogleMaps from '../../components/GoogleMaps/GoogleMaps';
 import LayoutContext from '../../Layout/LayoutsContext';
 
 const StyledContactWrapper = styled.div`
@@ -53,6 +54,11 @@ const StyledTextSection = styled.div`
   }
 `;
 
+const StyledMapContainer = styled.div`
+  max-width: 800px;
+  height: 600px;
+`;
+
 const Contact = () => {
   const layouts = useContext(LayoutContext);
   const addressLines = [
@@ -68,34 +74,37 @@ const Contact = () => {
   ));
 
   return (
-    <StyledContactWrapper {...layouts}>
-      <StyledDivider {...layouts} />
-      <StyledGroup>
-        <StyledTextSection>
-          <h3>Customer Service Open Hours</h3>
-          <ul>
-            <li>
-              Monday - Thursday: <b>9:00 - 17:30</b>
-            </li>
-            <li>
-              Friday: <b>9:00 - 17:00</b>
-            </li>
-            <li>
-              Weekends: <b> 12:00 - 14:00</b>
-            </li>
-          </ul>
-          <StyledDivider {...layouts} />
-          <h3>Speak with the team</h3>
-          <p>Phone: 03333 110 888</p>
-          <p>Email: Qandyinternational@gmail.com</p>
-          <StyledDivider {...layouts} />
-          <h3>Our Address</h3>
-          {addressElements}
-        </StyledTextSection>
-        <ContactForm />
-      </StyledGroup>
-      <StyledDivider {...layouts} />
-    </StyledContactWrapper>
+    <>
+      <StyledContactWrapper {...layouts}>
+        <StyledDivider {...layouts} />
+        <StyledGroup>
+          <StyledTextSection>
+            <h3>Customer Service Open Hours</h3>
+            <ul>
+              <li>
+                Monday - Thursday: <b>9:00 - 17:30</b>
+              </li>
+              <li>
+                Friday: <b>9:00 - 17:00</b>
+              </li>
+              <li>
+                Weekends: <b> 12:00 - 14:00</b>
+              </li>
+            </ul>
+            <StyledDivider {...layouts} />
+            <h3>Speak with the team</h3>
+            <p>Phone: 03333 110 888</p>
+            <p>Email: Qandyinternational@gmail.com</p>
+            <StyledDivider {...layouts} />
+            <h3>Our Address</h3>
+            {addressElements}
+          </StyledTextSection>
+          <ContactForm />
+        </StyledGroup>
+        <StyledDivider {...layouts} />
+      </StyledContactWrapper>
+      {/* <GoogleMaps /> */}
+    </>
   );
 };
 
