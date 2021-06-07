@@ -28,7 +28,6 @@ const StyledLink = styled.p`
 `;
 
 const StyledCopyRight = styled.div`
-  margin-top: 15px;
   font-size: 0.7em;
   background-color: #eee;
   color: #474747;
