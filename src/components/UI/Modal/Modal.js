@@ -13,7 +13,7 @@ const StyledModal = styled.div`
   z-index: 500;
   position: fixed;
   background-color: #fff;
-  width: 90%;
+  width: 80%;
   height: 100%;
   max-height: 90%;
   top: 5vh;

@@ -26,6 +26,15 @@ const StyledMenuCards = styled.div`
   width: 100%;
 `;
 
+const StyledInfoCard = styled.div`
+  padding: 35px;
+  max-width: 350px;
+  max-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
 export default function Products() {
   const layouts = useContext(LayoutsContext);
   const { productsHeader } = PageHeaders();
@@ -36,9 +45,42 @@ export default function Products() {
       {productsHeader}
       <StyledMenuCardsContainer {...layouts}>
         <StyledMenuCards {...layouts}>{woodFlooring}</StyledMenuCards>
+        <StyledInfoCard>
+          <h3>ISPUM LOREM 1</h3>
+          <p>
+            ipsum Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Numquam, tempora a nisi labore deleniti voluptatem dolorum sapiente
+            tenetur at consequuntur placeat quibusdam vel, quas quaerat quos
+            accusamus voluptate recusandae natus?
+          </p>
+        </StyledInfoCard>
+      </StyledMenuCardsContainer>
+      <StyledMenuCardsContainer {...layouts}>
         <StyledMenuCards {...layouts}>
+          <StyledInfoCard>
+            <h3 style={{ textAlign: 'right' }}>ISPUM LOREM 2</h3>
+            <p>
+              ipsum Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Numquam, tempora a nisi labore deleniti voluptatem dolorum
+              sapiente tenetur at consequuntur placeat quibusdam vel, quas
+              quaerat quos accusamus voluptate recusandae natus?
+            </p>
+          </StyledInfoCard>
           {underlay}
+        </StyledMenuCards>
+      </StyledMenuCardsContainer>
+      <StyledMenuCardsContainer {...layouts}>
+        <StyledMenuCards>
           {adhesives}
+          <StyledInfoCard>
+            <h3 style={{ textAlign: 'center' }}>ISPUM LOREM 3</h3>
+            <p>
+              ipsum Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Numquam, tempora a nisi labore deleniti voluptatem dolorum
+              sapiente tenetur at consequuntur placeat quibusdam vel, quas
+              quaerat quos accusamus voluptate recusandae natus?
+            </p>
+          </StyledInfoCard>
         </StyledMenuCards>
       </StyledMenuCardsContainer>
     </Wrapper>

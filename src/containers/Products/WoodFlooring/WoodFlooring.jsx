@@ -21,31 +21,26 @@ const StyledTopMarginSpacer = styled.div`
 
 const StyledProductSliderWrapper = styled.div`
   position: relative;
-  text-align: center;
   display: flex;
   flex-direction: column;
+  /* text-align: center; */
   width: 100%;
   min-height: 40vh;
-  h1 {
-    color: #fff;
-    width: ${props => (props.isDesktop ? '80%' : '100%')};
-    margin: auto;
-    background-color: #474747;
-    padding: 0;
-    img {
-      cursor: pointer;
-      position: absolute;
-      z-index: 2;
-      width: 45px;
-      top: 45px;
-      height: 45px;
-      right: ${props => (props.isDesktop ? '11%' : '2%')};
-    }
+  img {
+    position: absolute;
+    cursor: pointer;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    top: 5px;
+    right: ${props => (props.isDesktop ? 'calc(10% + 5px)' : '5px')};
   }
+
   section {
-    opacity: ${props => (props.tooltipStatus ? '1' : '0')};
+    opacity: ${props => (props.tooltipStatus ? '0' : '1')};
     pointer-events: ${props => (props.isMobile ? 'none' : 'all')};
     display: flex;
+    flex-direction: column;
     justify-content: center;
     transition: 0.8s;
     z-index: 2;
@@ -55,29 +50,27 @@ const StyledProductSliderWrapper = styled.div`
     color: #fff;
     text-align: center;
     position: absolute;
-    top: ${props =>
-      props.isDesktop ? 'calc(50% - (50% / 2))' : 'calc(50% - (50% / 2))'};
+    bottom: 90px;
     left: ${props =>
-      props.isDesktop ? 'calc(50% - (50% / 2))' : 'calc(50% - (70% / 2))'};
+      props.isDesktop
+        ? 'calc(50% - (50% / 2) - 5px)'
+        : 'calc(50% - (70% / 2))'};
     width: ${props => (props.isDesktop ? '50%' : '70%')};
-    height: ${props => (props.isDesktop ? '50%' : '50%')};
-    &:hover:hover {
-      opacity: 1;
+    height: fit-content;
+    h3 {
+      margin: 10px auto auto auto;
     }
     p {
-      font-size: ${props => (props.isMobile ? 'small' : '0.9em')};
+      padding: 10px;
+      font-size: ${props =>
+        props.isDesktop ? '1em' : props.isTablet ? '0.9em' : '0.8em'};
       width: 80%;
       text-align: left;
       margin: auto;
     }
-  }
-  .infoBtn {
-    position: absolute;
-    z-index: 2;
-    height: 40px;
-    width: 100px;
-    bottom: 70px;
-    left: calc(50% - 50px);
+    &:hover:hover {
+      opacity: 0;
+    }
   }
 `;
 
@@ -113,16 +106,6 @@ export default function WoodFlooring() {
         tooltipStatus={tooltipStatus[idx]}
         {...layouts}
       >
-        <h1>
-          {product.title.toUpperCase()}
-          <img
-            onClick={() =>
-              setModalStatus({ isShown: true, content: product.images })
-            }
-            src={maximizeIcon}
-            alt="Maximize"
-          />
-        </h1>
         <ProductSlider
           onClick={() =>
             setToolTipStatus({ ...tooltipStatus, [idx]: !tooltipStatus[idx] })
@@ -131,24 +114,17 @@ export default function WoodFlooring() {
           productTitle={product.title}
           images={product.images}
         />
+        <img
+          onClick={() =>
+            setModalStatus({ isShown: true, content: product.images })
+          }
+          src={maximizeIcon}
+          alt="Maximize"
+        />
         <section>
+          <h3>{product.title.toUpperCase()}</h3>
           <p>{product.desc ? product.desc : null}</p>
         </section>
-        {layouts.isMobile || layouts.isTablet ? (
-          <StyledButtonWrapper
-            className="infoBtn"
-            onClick={() =>
-              setToolTipStatus({ ...tooltipStatus, [idx]: !tooltipStatus[idx] })
-            }
-          >
-            <Button
-              emFontSize="0.8"
-              text={`${
-                !tooltipStatus[idx] ? 'Show Description' : 'Hide Decriptions'
-              }`}
-            />
-          </StyledButtonWrapper>
-        ) : null}
       </StyledProductSliderWrapper>
     );
   }

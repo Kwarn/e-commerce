@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom';
 import LayoutsContext from '../../Layout/LayoutsContext';
 
 const StyledSectionsContainer = styled.div`
-  background-color: #474747;
-  color: #b8b8b8;
+  background-color: #eee;
+  color: #474747;
   min-width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -28,8 +28,10 @@ const StyledLink = styled.p`
 `;
 
 const StyledCopyRight = styled.div`
-  background-color: #474747;
-  color: #b8b8b8;
+  margin-top: 15px;
+  font-size: 0.7em;
+  background-color: #eee;
+  color: #474747;
   text-align: center;
   width: auto;
   padding: 10px;
@@ -40,10 +42,10 @@ const StyledCopyRight = styled.div`
 `;
 
 const StyledExternalLink = styled.a`
-  text-decoration: none;
-  color: #ccc;
+  text-decoration: underline;
+  color: #474747;
   &:hover {
-    color: white;
+    color: black;
   }
 `;
 

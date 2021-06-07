@@ -32,7 +32,7 @@ const MenuCards = () => {
       image: tongueAndGrooveImage,
     },
     woodFlooring: {
-      title: 'WOOD FLOORING',
+      title: 'SOLID WOOD FLOORING',
       buttonText: 'BROWSE',
       buttonCallback: () => history.push('/woodflooring'),
       image: clickFlooringImage,
