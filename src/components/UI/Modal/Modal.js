@@ -19,7 +19,7 @@ const StyledModal = styled.div`
   top: 5vh;
   padding: 1px;
   box-sizing: border-box;
-  transition: all 0.2s ease-in;
+  transition: all 0.3s ease-in;
 `;
 
 const StyledCloseIcon = styled.img`
@@ -74,15 +74,16 @@ const StyledSwipeIcon = styled.img`
 `;
 
 const Modal = ({ isVisible, closeFn, children }) => {
+  const layouts = useContext(LayoutsContext);
+  const [mainImageIndex, setMainImageIndex] = useState(0);
+  let images = [];
+  let thumbnails = [];
+
   if (isVisible) {
     document.body.style.overflow = 'hidden';
   } else {
     document.body.style.overflow = 'unset';
   }
-  const layouts = useContext(LayoutsContext);
-  const [mainImageIndex, setMainImageIndex] = useState(0);
-  let images = [];
-  let thumbnails = [];
   if (children) {
     images = Array.from(children);
     thumbnails = images.map((image, idx) => (
