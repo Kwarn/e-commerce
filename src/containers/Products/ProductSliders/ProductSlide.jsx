@@ -76,6 +76,7 @@ const StyledMaximizeIcon = styled.img`
 
 const ProductSlide = ({ title, image, description, showModalCb }) => {
   const layouts = useContext(LayoutsContext);
+  
   return (
     <>
       <StyledSlide background={image}>
