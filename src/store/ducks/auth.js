@@ -83,7 +83,7 @@
 //   };
 // };
 
-// // Action Creators //
+// // Reducer Logic //
 
 // export const setRedirectPathOnLogin = (state, action) => {
 //   return updateObject(state, {
@@ -111,7 +111,7 @@
 //   return updateObject(state, { error: action.error, isLoading: false });
 // };
 
-// // A-SYNC Action Creators //
+// // A-SYNC Reducer Logic //
 
 // export function* logoutSaga(action) {
 //   yield call([localStorage, 'removeItem'], 'token');

@@ -105,7 +105,6 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
       touched: false,
     },
   });
-
   const [isSignup, setIsSignup] = useState(false);
 
   const inputChangedHandler = (event, controlName) => {
@@ -127,7 +126,7 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
 
   const submitHandler = event => {
     event.preventDefault();
-    // props.onAuth(controls.email.value, controls.password.value, isSignup);
+    console.log(event);
   };
 
   const switchAuthModeHandler = () => {

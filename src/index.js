@@ -1,32 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-// import productsReducer from './store/ducks/products';
-// import authReducer from './store/ducks/auth';
 import App from './App';
-
-const rootReducer = combineReducers({
-  // auth: authReducer,
-  // products: productsReducer,
-});
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(sagaMiddleware))
-);
-
+import AuthStateProvider from './AuthStateProvider';
+// uri: 'https://localhost:8080/graphql',
 ReactDOM.render(
-  <Provider store={store}>
+  <AuthStateProvider>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </Provider>,
+  </AuthStateProvider>,
   document.getElementById('root')
 );
 
@@ -34,3 +17,25 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 // reportWebVitals()
+
+// const EXCHANGE_RATES = gql`
+//   query GetExchangeRates {
+//     rates(currency: "USD") {
+//       currency
+//       rate
+//     }
+//   }
+// `;
+// function ExchangeRates() {
+//   const { loading, error, data } = useQuery(EXCHANGE_RATES);
+//   if (loading) return <p>Loading...</p>;
+//   if (error) return <p>Error :(</p>;
+
+//   return data.rates.map(({ currency, rate }) => (
+//     <div key={currency}>
+//       <p>
+//         {currency}: {rate}
+//       </p>
+//     </div>
+//   ));
+// }

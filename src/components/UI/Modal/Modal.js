@@ -79,6 +79,7 @@ const Modal = ({ isVisible, closeFn, children }) => {
   let images = [];
   let thumbnails = [];
 
+  // probably shouldn't do this, feels hacky.
   if (isVisible) {
     document.body.style.overflow = 'hidden';
   } else {

@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Suspense, useContext } from 'react';
+import React, { createContext, Suspense, useContext, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './global';
 import { theme } from './theme';
@@ -48,7 +48,6 @@ const StyledSpinnerWrapper = styled.div`
 
 const App = () => {
   const layouts = useContext(LayoutsContext);
-
   let routes = (
     <Suspense
       fallback={
