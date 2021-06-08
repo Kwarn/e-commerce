@@ -68,10 +68,10 @@ const StyledMaximizeIcon = styled.img`
   cursor: pointer;
   z-index: 2;
   position: absolute;
-  top: -100px;
-  left: calc(50% - 25px);
-  width: 50px;
-  height: 50px;
+  top: 5px;
+  right: 5px;
+  width: 25px;
+  height: 25px;
 `;
 
 const ProductSlide = ({ title, image, description, showModalCb }) => {
@@ -81,9 +81,7 @@ const ProductSlide = ({ title, image, description, showModalCb }) => {
       <StyledSlide background={image}>
         <StyledContentWrapper {...layouts} onClick={showModalCb}>
           {layouts.isMobile ? null : (
-            <StyledFullImages {...layouts} onClick={showModalCb}>
-              See Full Images
-            </StyledFullImages>
+            <StyledFullImages {...layouts}>See Full Images</StyledFullImages>
           )}
           {layouts.isMobile ? (
             <StyledMaximizeIcon src={fullScreenIcon} alt="maximize" />
