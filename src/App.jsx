@@ -9,6 +9,7 @@ import Spinner from './components/UI/spinner/Spinner';
 import styled from 'styled-components';
 import LayoutsContext from './Layout/LayoutsContext';
 import { AuthStateContext } from './Auth/AuthStateProvider';
+import Admin from './containers/Admin/Admin';
 
 //todo:
 // Navbar needs spicing add quick Call to actions: Free samples - Book consultation - Phone us
@@ -49,8 +50,6 @@ const StyledSpinnerWrapper = styled.div`
 
 const App = () => {
   const layouts = useContext(LayoutsContext);
-  const { ...all } = useContext(AuthStateContext);
-  console.log(all);
   let routes = (
     <Suspense
       fallback={
@@ -70,6 +69,7 @@ const App = () => {
         <Route path="/products" component={Products} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
+        <Route path="/admin" component={Admin} />
         <Route path="/home" component={Home} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />
       </Switch>

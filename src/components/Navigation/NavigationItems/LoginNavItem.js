@@ -8,6 +8,7 @@ import Button from '../../Button/Button';
 import Spinner from '../../UI/spinner/Spinner';
 import { useLazyQuery, useQuery } from '@apollo/client';
 import { QUERY_LOGIN } from '../../../GraphQl/Queries';
+import { useHistory } from 'react-router';
 // import LoginQuery from '../../../Auth/LoginQuery';
 // import { LoginQuery } from '../../../Auth/useLoginQuery';
 
@@ -80,10 +81,12 @@ const StyledCloseButtonContainer = styled.div`
 `;
 
 const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
+  const history = useHistory();
   const layouts = useContext(LayoutsContext);
   const [showError, setShowError] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
-  const { authState, appSetLogout, appSetLogin } = useContext(AuthStateContext);
+  const { authState, appSetLogout, appSetLogin, gqlError } =
+    useContext(AuthStateContext);
 
   const loginHandler = async event => {
     event.preventDefault();
@@ -92,6 +95,7 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
 
   const logoutHandler = () => {
     appSetLogout();
+    history.push('/home');
   };
 
   const [controls, setControls] = useState({
@@ -153,12 +157,11 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
       const onError = () => {};
       if (onCompleted || onError) {
         if (onCompleted && !loading && !error) {
-          console.log('NOT SKIPPED Data: ', data);
-          console.log('data.login.token', data.login.token);
           appSetLogin({ token: data.login.token, userId: data.login.userId });
           setSkipQuery(true);
         } else if (onError && !loading && error) {
           console.log('useQueryError: ', error);
+          console.log(gqlError);
           setSkipQuery(true);
         }
       }
@@ -214,6 +217,8 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
 
   const form = loading ? (
     <Spinner />
+  ) : authState.userId ? (
+    <div onClick={logoutHandler}>Logout</div>
   ) : (
     <>
       <StyledLoginSwitchMesssage>
@@ -241,7 +246,7 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
       <StyledCloseButtonContainer>
         <Button
           isDarkText={true}
-          callback={() => console.log(`AuthState: ${authState.userId}`)}
+          callback={() => console.dir(`AuthState.userId: ${authState.userId}`)}
           text={'TEST'}
         />
       </StyledCloseButtonContainer>

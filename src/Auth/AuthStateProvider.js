@@ -73,6 +73,7 @@ const AuthStateProvider = ({ children }) => {
           return;
         if (graphQLErrors[0].path[0] === 'refresh') return;
         const err = graphQLErrors[0].message;
+        console.log('gqlError in link: ', graphQLErrors);
         setGqlError({ msg: err });
       }),
       requestLink,
