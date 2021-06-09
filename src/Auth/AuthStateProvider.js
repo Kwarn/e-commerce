@@ -11,27 +11,27 @@ import { onError } from '@apollo/client/link/error';
 
 let authToken = '';
 const initial = {
-  appState: { loggedIn: false },
+  authState: { loggedIn: false },
   gqlError: { msg: '' },
-  appSetLogin: token => {},
+  appSetLogin: () => {},
   appSetLogout: () => {},
   appSetAuthToken: token => {},
   appClearAuthToken: () => {},
 };
 
-const AppStateContext = createContext(initial);
+export const AuthStateContext = createContext(initial);
 const AuthStateProvider = ({ children }) => {
-  const [appState, setAppState] = useState({ loggedIn: false });
+  const [authState, setAuthState] = useState({ loggedIn: false, userId: '' });
   const [gqlError, setGqlError] = useState({ msg: '' });
 
-  const appSetLogin = token => {
+  const appSetLogin = ({ token, userId }) => {
     authToken = token;
-    setAppState({ ...appState, loggedIn: true });
+    setAuthState({ ...authState, loggedIn: true, userId: userId });
   };
 
   const appSetLogout = () => {
     authToken = '';
-    setAppState({ ...appState, loggedIn: false });
+    setAuthState({ ...authState, loggedIn: false, userId: '' });
   };
   const appSetAuthToken = token => {
     authToken = token;
@@ -77,7 +77,7 @@ const AuthStateProvider = ({ children }) => {
       }),
       requestLink,
       new HttpLink({
-        uri: 'http://localhost:4000/graphql',
+        uri: 'http://localhost:8080/graphql',
         credentials: 'include',
       }),
     ]),
@@ -85,9 +85,9 @@ const AuthStateProvider = ({ children }) => {
   });
 
   return (
-    <AppStateContext.Provider
+    <AuthStateContext.Provider
       value={{
-        appState,
+        authState,
         gqlError,
         appSetLogin,
         appSetLogout,
@@ -96,7 +96,7 @@ const AuthStateProvider = ({ children }) => {
       }}
     >
       <ApolloProvider client={client}>{children}</ApolloProvider>
-    </AppStateContext.Provider>
+    </AuthStateContext.Provider>
   );
 };
 

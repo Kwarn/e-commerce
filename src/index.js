@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import AuthStateProvider from './AuthStateProvider';
+import AuthStateProvider from './Auth/AuthStateProvider';
 // uri: 'https://localhost:8080/graphql',
 ReactDOM.render(
   <AuthStateProvider>

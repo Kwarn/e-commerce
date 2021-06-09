@@ -8,6 +8,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Spinner from './components/UI/spinner/Spinner';
 import styled from 'styled-components';
 import LayoutsContext from './Layout/LayoutsContext';
+import { AuthStateContext } from './Auth/AuthStateProvider';
 
 //todo:
 // Navbar needs spicing add quick Call to actions: Free samples - Book consultation - Phone us
@@ -48,6 +49,8 @@ const StyledSpinnerWrapper = styled.div`
 
 const App = () => {
   const layouts = useContext(LayoutsContext);
+  const { ...all } = useContext(AuthStateContext);
+  console.log(all);
   let routes = (
     <Suspense
       fallback={

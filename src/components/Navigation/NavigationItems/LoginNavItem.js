@@ -1,9 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { updateObject } from '../../../utility/utility';
 import { validateInput } from '../../../utility/utility';
 import styled from 'styled-components';
 import LayoutsContext from '../../../Layout/LayoutsContext';
+import { AuthStateContext } from '../../../Auth/AuthStateProvider';
 import Button from '../../Button/Button';
+import Spinner from '../../UI/spinner/Spinner';
+import { useLazyQuery, useQuery } from '@apollo/client';
+import { QUERY_LOGIN } from '../../../GraphQl/Queries';
+// import LoginQuery from '../../../Auth/LoginQuery';
+// import { LoginQuery } from '../../../Auth/useLoginQuery';
 
 const StyledDrawContainer = styled.div`
   color: #474747;
@@ -75,6 +81,19 @@ const StyledCloseButtonContainer = styled.div`
 
 const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
   const layouts = useContext(LayoutsContext);
+  const [showError, setShowError] = useState(false);
+  const [isSignup, setIsSignup] = useState(false);
+  const { authState, appSetLogout, appSetLogin } = useContext(AuthStateContext);
+
+  const loginHandler = async event => {
+    event.preventDefault();
+    setSkipQuery(false);
+  };
+
+  const logoutHandler = () => {
+    appSetLogout();
+  };
+
   const [controls, setControls] = useState({
     email: {
       elementType: 'input',
@@ -86,6 +105,19 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
       validation: {
         required: true,
         isEmail: true,
+      },
+      valid: false,
+      touched: false,
+    },
+    name: {
+      elementType: 'input',
+      elementConfig: {
+        type: 'name',
+        placeholder: 'Name',
+      },
+      value: '',
+      validation: {
+        required: true,
       },
       valid: false,
       touched: false,
@@ -105,9 +137,36 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
       touched: false,
     },
   });
-  const [isSignup, setIsSignup] = useState(false);
+  const [skipQuery, setSkipQuery] = useState(true);
+  const { loading, error, data } = useQuery(QUERY_LOGIN, {
+    variables: {
+      email: controls.email.value,
+      password: controls.password.value,
+    },
+    skip: skipQuery,
+    fetchPolicy: 'cache-and-network',
+  });
+
+  useEffect(() => {
+    if (!skipQuery) {
+      const onCompleted = () => {};
+      const onError = () => {};
+      if (onCompleted || onError) {
+        if (onCompleted && !loading && !error) {
+          console.log('NOT SKIPPED Data: ', data);
+          console.log('data.login.token', data.login.token);
+          appSetLogin({ token: data.login.token, userId: data.login.userId });
+          setSkipQuery(true);
+        } else if (onError && !loading && error) {
+          console.log('useQueryError: ', error);
+          setSkipQuery(true);
+        }
+      }
+    }
+  }, [loading, data, error]);
 
   const inputChangedHandler = (event, controlName) => {
+    setShowError(false);
     const updatedControl = updateObject(controls[controlName], {
       value: event.target.value,
       valid: validateInput(
@@ -124,21 +183,20 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
     setControls(updatedControls);
   };
 
-  const submitHandler = event => {
-    event.preventDefault();
-    console.log(event);
-  };
-
   const switchAuthModeHandler = () => {
     setIsSignup(!isSignup);
   };
 
   const formElementsArray = [];
   for (let key in controls) {
-    formElementsArray.push({
-      id: key,
-      config: controls[key],
-    });
+    if (key === 'name' && !isSignup) {
+      continue;
+    } else {
+      formElementsArray.push({
+        id: key,
+        config: controls[key],
+      });
+    }
   }
 
   let formElements = formElementsArray.map(elem => (
@@ -154,7 +212,41 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
     />
   ));
 
-  // if (isLoading) form = <Spinner />;
+  const form = loading ? (
+    <Spinner />
+  ) : (
+    <>
+      <StyledLoginSwitchMesssage>
+        {isSignup ? 'Already Have an account?' : `Don't have an account yet?`}
+      </StyledLoginSwitchMesssage>
+      <StyledLoginSwitchButton onClick={switchAuthModeHandler} btnType="Danger">
+        {isSignup ? 'Switch To Login' : 'Sign Up!'}
+      </StyledLoginSwitchButton>
+      <StyledForm onSubmit={loginHandler}>
+        {formElements}
+        <StyledSubmitButtonContainer>
+          <Button
+            isDarkText={true}
+            text={isSignup ? 'Continue' : 'Login'}
+          ></Button>
+        </StyledSubmitButtonContainer>
+      </StyledForm>
+      <StyledCloseButtonContainer>
+        <Button
+          isDarkText={true}
+          callback={() => toggleCallback()}
+          text={'X'}
+        />
+      </StyledCloseButtonContainer>
+      <StyledCloseButtonContainer>
+        <Button
+          isDarkText={true}
+          callback={() => console.log(`AuthState: ${authState.userId}`)}
+          text={'TEST'}
+        />
+      </StyledCloseButtonContainer>
+    </>
+  );
 
   return (
     <StyledDrawContainer
@@ -163,31 +255,7 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
       isHidden={isHidden}
     >
       <StyledDrawElementsWrapperForAnimation isHidden={isHidden}>
-        <StyledLoginSwitchMesssage>
-          {isSignup ? 'Already Have an account?' : `Don't have an account yet?`}
-        </StyledLoginSwitchMesssage>
-        <StyledLoginSwitchButton
-          onClick={switchAuthModeHandler}
-          btnType="Danger"
-        >
-          {isSignup ? 'Switch To Login' : 'Sign Up!'}
-        </StyledLoginSwitchButton>
-        <StyledForm onSubmit={submitHandler}>
-          {formElements}
-          <StyledSubmitButtonContainer>
-            <Button
-              isDarkText={true}
-              text={isSignup ? 'Continue' : 'Login'}
-            ></Button>
-          </StyledSubmitButtonContainer>
-        </StyledForm>
-        <StyledCloseButtonContainer>
-          <Button
-            isDarkText={true}
-            callback={() => toggleCallback()}
-            text={'X'}
-          />
-        </StyledCloseButtonContainer>
+        {form}
       </StyledDrawElementsWrapperForAnimation>
     </StyledDrawContainer>
   );
