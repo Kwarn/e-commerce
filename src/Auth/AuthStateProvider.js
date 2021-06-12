@@ -17,6 +17,7 @@ const initial = {
   appSetLogout: () => {},
   appSetAuthToken: token => {},
   appClearAuthToken: () => {},
+  appGetAuthToken: () => authToken,
 };
 
 export const AuthStateContext = createContext(initial);
@@ -94,6 +95,7 @@ const AuthStateProvider = ({ children }) => {
         appSetLogout,
         appSetAuthToken,
         appClearAuthToken,
+        appGetAuthToken,
       }}
     >
       <ApolloProvider client={client}>{children}</ApolloProvider>
