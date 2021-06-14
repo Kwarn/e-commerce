@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, useContext, createContext, useEffect } from 'react';
 import {
   ApolloProvider,
   ApolloClient,
@@ -25,13 +25,26 @@ const AuthStateProvider = ({ children }) => {
   const [authState, setAuthState] = useState({ loggedIn: false, userId: '' });
   const [gqlError, setGqlError] = useState({ msg: '' });
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+
+    if (token && userId) {
+      appSetLogin({ token: token, userId: userId });
+    }
+  }, []);
+
   const appSetLogin = ({ token, userId }) => {
     authToken = token;
+    localStorage.setItem('token', token);
+    localStorage.setItem('userId', userId);
     setAuthState({ ...authState, loggedIn: true, userId: userId });
   };
 
   const appSetLogout = () => {
     authToken = '';
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
     setAuthState({ ...authState, loggedIn: false, userId: '' });
   };
   const appSetAuthToken = token => {
