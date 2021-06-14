@@ -1,8 +1,31 @@
-import React, { useState, useContext, useCallback } from 'react';
+import React, { useState, useContext, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { updateObject, validateInput } from '../../utility/utility';
 import { useDropzone } from 'react-dropzone';
 import { AuthStateContext } from '../../Auth/AuthStateProvider';
+
+const StyledForm = styled.form`
+  max-width: 400px;
+  width: auto;
+  border-radius: 5px;
+  color: #474747;
+  background-color: rgba(255, 255, 255, 0.4);
+  margin: auto 0;
+  padding: 20px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  h2 {
+    font-size: larger;
+  }
+  input {
+    font-size: larger;
+  }
+  button {
+    font-size: larger;
+    margin-top: 5px;
+    padding: 5px 0px 5px 0px;
+  }
+`;
 
 const StyledAdminWrapper = styled.div`
   margin: auto;
@@ -19,32 +42,24 @@ const StyledInput = styled.input`
   background-color: ${props => (props.invalid ? '#ecd7cd' : 'none')};
 `;
 
-export default function Admin() {
+const StyledPreviewImage = styled.img`
+  width: auto;
+  height: 50px;
+`;
+
+const StyledImagePreviewContainer = styled.div`
+  background-color: #a7d3a7;
+`;
+
+export default React.memo(function Admin() {
   const { appGetAuthToken } = useContext(AuthStateContext);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  // const [previewImages, setPreviewImages] = useState([]);
   const token = appGetAuthToken();
   const onDrop = useCallback(acceptedFiles => {
-    const formData = new FormData();
-    for (const file of acceptedFiles) {
-      formData.append('images', file);
-    }
-    fetch('http://localhost:8080/post-images', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: formData,
-    })
-      .then(resData => {
-        return resData.json();
-      })
-      .then(data => {
-        console.log('data :>> ', data);
-      })
-      .catch(error => console.log('Upload Error :>> ', error));
+    setSelectedFiles(acceptedFiles);
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
-
   const [invalidFormErrorMessages, setInvalidFormErrorMessages] = useState([]);
   const [title, setTitle] = useState({
     validation: {
@@ -68,10 +83,40 @@ export default function Admin() {
     value: '',
   });
 
+  useEffect(() => {
+    console.log(selectedFiles);
+  });
+
+  const submitFormHandler = e => {
+    e.preventDefault();
+    const formData = new FormData();
+    for (const file of selectedFiles) {
+      formData.append('images', file);
+    }
+    fetch('http://localhost:8080/post-images', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: formData,
+    })
+      .then(resData => {
+        setSelectedFiles(null);
+        return resData.json();
+      })
+      .then(data => {
+        console.log('data :>> ', data);
+        if (!data.error) {
+          console.log(data);
+        }
+      })
+      .catch(error => console.log('Upload Error :>> ', error));
+  };
+
   const inputChangedHandler = (value, elementIdentifier) => {
     const targetElements = {
       title: [title, setTitle],
-      // imageUrls: [imageUrls, imageUrls],
       description: [description, setDescription],
     };
 
@@ -87,6 +132,10 @@ export default function Admin() {
     );
   };
 
+  const removeFileHandler = filename => {
+    setSelectedFiles(selectedFiles.filter(f => f.name !== filename));
+  };
+
   return (
     <StyledAdminWrapper>
       <h1>Admin</h1>
@@ -98,14 +147,34 @@ export default function Admin() {
           <p>Drag 'n' drop some files here, or click to select files</p>
         )}
       </div>
+      <div>
+        Selected Files:
+        {selectedFiles
+          ? selectedFiles.map(file => (
+              <StyledImagePreviewContainer key={file.name}>
+                <p>{file.name}</p>
+                <button onClick={() => removeFileHandler(file.name)}>
+                  Remove
+                </button>
+                <StyledPreviewImage
+                  src={URL.createObjectURL(file)}
+                  alt={file.name}
+                />
+              </StyledImagePreviewContainer>
+            ))
+          : null}
+      </div>
       {/* <UploadImageToS3WithNativeSdk /> */}
-      <StyledInput
-        placeholder="Title"
-        invalid={!title.isValid && title.wasTouched}
-        name="title"
-        onChange={event => inputChangedHandler(event.target.value, 'title')}
-        value={title.value}
-      />
+      <StyledForm onSubmit={e => submitFormHandler(e)}>
+        <StyledInput
+          placeholder="Title"
+          invalid={!title.isValid && title.wasTouched}
+          name="title"
+          onChange={event => inputChangedHandler(event.target.value, 'title')}
+          value={title.value}
+        />
+        <input type="submit" value="Submit" />
+      </StyledForm>
     </StyledAdminWrapper>
   );
-}
+});
