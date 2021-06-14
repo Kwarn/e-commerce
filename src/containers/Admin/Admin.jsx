@@ -36,7 +36,10 @@ export default function Admin() {
       body: formData,
     })
       .then(resData => {
-        console.log('resData :>> ', resData);
+        return resData.json();
+      })
+      .then(data => {
+        console.log('data :>> ', data);
       })
       .catch(error => console.log('Upload Error :>> ', error));
   }, []);
