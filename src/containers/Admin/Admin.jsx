@@ -54,10 +54,16 @@ const StyledImagePreviewContainer = styled.div`
 export default React.memo(function Admin() {
   const { appGetAuthToken } = useContext(AuthStateContext);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  // const [previewImages, setPreviewImages] = useState([]);
   const token = appGetAuthToken();
   const onDrop = useCallback(acceptedFiles => {
-    setSelectedFiles(acceptedFiles);
+    setSelectedFiles(existingFiles => {
+      const nonDuplicates = [];
+      const existingFileNames = [];
+      for (const file of existingFiles) existingFileNames.push(file.name);
+      for (const file of acceptedFiles)
+        if (!existingFileNames.includes(file.name)) nonDuplicates.push(file);
+      return [...existingFiles, ...nonDuplicates];
+    });
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   const [invalidFormErrorMessages, setInvalidFormErrorMessages] = useState([]);
@@ -83,9 +89,7 @@ export default React.memo(function Admin() {
     value: '',
   });
 
-  useEffect(() => {
-    console.log(selectedFiles);
-  });
+  useEffect(() => {}, []);
 
   const submitFormHandler = e => {
     e.preventDefault();

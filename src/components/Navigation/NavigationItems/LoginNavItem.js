@@ -11,6 +11,7 @@ import { QUERY_LOGIN } from '../../../GraphQl/Queries';
 import { useHistory } from 'react-router';
 // import LoginQuery from '../../../Auth/LoginQuery';
 // import { LoginQuery } from '../../../Auth/useLoginQuery';
+// require('dotenv').config();
 
 const StyledDrawContainer = styled.div`
   color: #474747;
@@ -151,6 +152,42 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
     fetchPolicy: 'cache-and-network',
   });
 
+  const __DEV__autoFillLogin = () => {
+    setControls(prevControls => {
+      return {
+        ...prevControls,
+        email: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'email',
+            placeholder: 'Email',
+          },
+          value: process.env.REACT_APP_AUTO_LOGIN_EMAIL,
+          validation: {
+            required: true,
+            isEmail: true,
+          },
+          valid: false,
+          touched: false,
+        },
+        password: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'password',
+            placeholder: 'Password',
+          },
+          value: process.env.REACT_APP_AUTO_LOGIN_PASSWORD,
+          validation: {
+            required: true,
+            minLength: 6,
+          },
+          valid: false,
+          touched: false,
+        },
+      };
+    });
+  };
+
   useEffect(() => {
     if (!skipQuery) {
       const onCompleted = () => {};
@@ -205,6 +242,7 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
   let formElements = formElementsArray.map(elem => (
     <StyledInput
       key={elem.id}
+      type={elem.id === 'password' ? 'password' : null}
       placeholder={elem.config.elementConfig.placeholder}
       elementType={elem.config.elementType}
       value={elem.config.value}
@@ -230,10 +268,7 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
       <StyledForm onSubmit={loginHandler}>
         {formElements}
         <StyledSubmitButtonContainer>
-          <Button
-            isDarkText={true}
-            text={isSignup ? 'Continue' : 'Login'}
-          ></Button>
+          <Button isDarkText={true} text={isSignup ? 'Continue' : 'Login'} />
         </StyledSubmitButtonContainer>
       </StyledForm>
       <StyledCloseButtonContainer>
@@ -246,8 +281,8 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
       <StyledCloseButtonContainer>
         <Button
           isDarkText={true}
-          callback={() => console.dir(`AuthState.userId: ${authState.userId}`)}
-          text={'TEST'}
+          callback={() => __DEV__autoFillLogin()}
+          text={'AutoFill login'}
         />
       </StyledCloseButtonContainer>
     </>
