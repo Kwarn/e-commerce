@@ -4,13 +4,25 @@ import { updateObject, validateInput } from '../../utility/utility';
 import { useDropzone } from 'react-dropzone';
 import { AuthStateContext } from '../../Auth/AuthStateProvider';
 
+const StyledAdminWrapper = styled.div`
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h1 {
+    color: black;
+  }
+`;
+
 const StyledForm = styled.form`
+  margin: auto;
   max-width: 400px;
   width: auto;
   border-radius: 5px;
   color: #474747;
   background-color: rgba(255, 255, 255, 0.4);
-  margin: auto 0;
   padding: 20px 10px 10px 10px;
   display: flex;
   flex-direction: column;
@@ -27,19 +39,15 @@ const StyledForm = styled.form`
   }
 `;
 
-const StyledAdminWrapper = styled.div`
-  margin: auto;
-  width: 100%;
-  height: 100%;
-  h1 {
-    color: black;
-  }
-`;
-
 const StyledInput = styled.input`
   padding: 5px;
   margin-bottom: 5px;
   background-color: ${props => (props.invalid ? '#ecd7cd' : 'none')};
+`;
+
+const StyledTextarea = styled.textarea`
+  width: 400px;
+  height: 400px;
 `;
 
 const StyledPreviewImage = styled.img`
@@ -47,8 +55,27 @@ const StyledPreviewImage = styled.img`
   height: 50px;
 `;
 
+const StyledPreviewImageWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-space-evenly;
+`;
+
 const StyledImagePreviewContainer = styled.div`
+  margin: 0 10px 0 10px;
   background-color: #a7d3a7;
+`;
+
+const StyledDropZone = styled.div`
+  background-color: #eee9c9;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+`;
+
+const StyledUploadTooltip = styled.p`
+  margin: auto;
+  color: red;
 `;
 
 export default React.memo(function Admin() {
@@ -57,6 +84,7 @@ export default React.memo(function Admin() {
   const token = appGetAuthToken();
   const onDrop = useCallback(acceptedFiles => {
     setSelectedFiles(existingFiles => {
+      if (!existingFiles) return [...acceptedFiles];
       const nonDuplicates = [];
       const existingFileNames = [];
       for (const file of existingFiles) existingFileNames.push(file.name);
@@ -143,23 +171,28 @@ export default React.memo(function Admin() {
   return (
     <StyledAdminWrapper>
       <h1>Admin</h1>
-      <div {...getRootProps()}>
+      <StyledDropZone {...getRootProps()}>
         <input {...getInputProps()} />
+
         {isDragActive ? (
           <p>Drop the files here ...</p>
         ) : (
           <p>Drag 'n' drop some files here, or click to select files</p>
         )}
-      </div>
-      <div>
+      </StyledDropZone>
+      <StyledUploadTooltip>
+        Selected files will display in the order they are selected, upload most
+        important marketing images first.
+      </StyledUploadTooltip>
+      <StyledPreviewImageWrapper>
         Selected Files:
         {selectedFiles
           ? selectedFiles.map(file => (
               <StyledImagePreviewContainer key={file.name}>
-                <p>{file.name}</p>
                 <button onClick={() => removeFileHandler(file.name)}>
                   Remove
                 </button>
+                <p>{file.name}</p>
                 <StyledPreviewImage
                   src={URL.createObjectURL(file)}
                   alt={file.name}
@@ -167,8 +200,7 @@ export default React.memo(function Admin() {
               </StyledImagePreviewContainer>
             ))
           : null}
-      </div>
-      {/* <UploadImageToS3WithNativeSdk /> */}
+      </StyledPreviewImageWrapper>
       <StyledForm onSubmit={e => submitFormHandler(e)}>
         <StyledInput
           placeholder="Title"
@@ -176,6 +208,15 @@ export default React.memo(function Admin() {
           name="title"
           onChange={event => inputChangedHandler(event.target.value, 'title')}
           value={title.value}
+        />
+        <StyledTextarea
+          placeholder="Description"
+          invalid={!description.isValid && description.wasTouched}
+          name="description"
+          onChange={event =>
+            inputChangedHandler(event.target.value, 'description')
+          }
+          value={description.value}
         />
         <input type="submit" value="Submit" />
       </StyledForm>
