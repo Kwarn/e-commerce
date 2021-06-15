@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import Slider from 'infinite-react-carousel';
 import ProductSlide from './ProductSlide';
 import rightChev from '../../../assets/rightChev.png';

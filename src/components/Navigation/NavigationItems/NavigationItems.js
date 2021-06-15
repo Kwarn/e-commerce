@@ -5,7 +5,6 @@ import DrawToggle from '../Sidebar/DrawToggle/DrawToggle';
 import { withRouter } from 'react-router-dom';
 import contactIcon from '../../../assets/contactIcon.png';
 import LayoutsContext from '../../../Layout/LayoutsContext';
-import LoginNavItem from '../NavigationItems/LoginNavItem';
 
 const StyledNavItems = styled.div`
   display: flex;

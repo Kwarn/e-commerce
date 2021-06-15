@@ -6,12 +6,9 @@ import LayoutsContext from '../../../Layout/LayoutsContext';
 import { AuthStateContext } from '../../../Auth/AuthStateProvider';
 import Button from '../../Button/Button';
 import Spinner from '../../UI/spinner/Spinner';
-import { useLazyQuery, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { QUERY_LOGIN } from '../../../GraphQl/Queries';
 import { useHistory } from 'react-router';
-// import LoginQuery from '../../../Auth/LoginQuery';
-// import { LoginQuery } from '../../../Auth/useLoginQuery';
-// require('dotenv').config();
 
 const StyledDrawContainer = styled.div`
   color: #474747;
@@ -295,6 +292,7 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
       isHidden={isHidden}
     >
       <StyledDrawElementsWrapperForAnimation isHidden={isHidden}>
+        {showError ? <div>{showError}</div> : null}
         {form}
       </StyledDrawElementsWrapperForAnimation>
     </StyledDrawContainer>

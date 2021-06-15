@@ -56,6 +56,7 @@ function GoogleMaps() {
 
   const center = { lat: 51.572, lng: -0.707 };
   const [map, setMap] = React.useState(null);
+  console.log('map :>> ', map);
 
   const onLoad = React.useCallback(function callback(map) {
     setMap(map);

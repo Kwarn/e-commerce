@@ -1,5 +1,5 @@
 import './App.css';
-import React, { createContext, Suspense, useContext, useState } from 'react';
+import React, { Suspense, useContext } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './global';
 import { theme } from './theme';
@@ -8,7 +8,6 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import Spinner from './components/UI/spinner/Spinner';
 import styled from 'styled-components';
 import LayoutsContext from './Layout/LayoutsContext';
-import { AuthStateContext } from './Auth/AuthStateProvider';
 import Admin from './containers/Admin/Admin';
 
 //todo:

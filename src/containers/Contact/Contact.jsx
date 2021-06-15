@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import ContactForm from './ContactForm/ContactForm';
 import background from '../../assets/sidebarBackground.jpg';
-import GoogleMaps from '../../components/GoogleMaps/GoogleMaps';
+// import GoogleMaps from '../../components/GoogleMaps/GoogleMaps';
 import LayoutContext from '../../Layout/LayoutsContext';
 
 const StyledContactWrapper = styled.div`
@@ -54,10 +54,10 @@ const StyledTextSection = styled.div`
   }
 `;
 
-const StyledMapContainer = styled.div`
-  max-width: 800px;
-  height: 600px;
-`;
+// const StyledMapContainer = styled.div`
+//   max-width: 800px;
+//   height: 600px;
+// `;
 
 const Contact = () => {
   const layouts = useContext(LayoutContext);

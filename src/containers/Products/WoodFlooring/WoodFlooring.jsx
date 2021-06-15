@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import PageHeaders from '../../PageHeaders/PageHeaders';
 import styled from 'styled-components';
 import LayoutsContext from '../../../Layout/LayoutsContext';
-import woodFlooringData, { lightwoodSliderData } from '../woodFlooringData';
+import { lightwoodSliderData } from '../woodFlooringData';
 import ProductSlider from '../ProductSliders/ProductSlider';
 import Modal from '../../../components/UI/Modal/Modal';
 
@@ -26,7 +26,6 @@ const StyledProductSliderGroup = styled.div`
 export default function WoodFlooring() {
   const layouts = useContext(LayoutsContext);
   const { woodFlooringHeader } = PageHeaders();
-  const [tooltipStatus, setToolTipStatus] = useState({});
   const [modalStatus, setModalStatus] = useState({
     isShown: false,
     content: null,
