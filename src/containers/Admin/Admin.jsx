@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { updateObject, validateInput } from '../../utility/utility';
 import { useDropzone } from 'react-dropzone';
 import { AuthStateContext } from '../../Auth/AuthStateProvider';
+import { useMutation } from '@apollo/client';
+import { MUTATION_CREATE_PRODUCT } from '../../GraphQl/Mutations';
 
 const StyledAdminWrapper = styled.div`
   margin: auto;
@@ -79,7 +81,8 @@ const StyledUploadTooltip = styled.p`
 `;
 
 export default React.memo(function Admin() {
-  const { appGetAuthToken } = useContext(AuthStateContext);
+  const { appGetAuthToken, gqlError } = useContext(AuthStateContext);
+
   const [selectedFiles, setSelectedFiles] = useState([]);
   const token = appGetAuthToken();
   const onDrop = useCallback(acceptedFiles => {
@@ -117,7 +120,7 @@ export default React.memo(function Admin() {
     value: '',
   });
 
-  useEffect(() => {}, []);
+  const [createProduct, { data }] = useMutation(MUTATION_CREATE_PRODUCT);
 
   const submitFormHandler = e => {
     e.preventDefault();
@@ -139,9 +142,18 @@ export default React.memo(function Admin() {
       })
       .then(data => {
         console.log('data :>> ', data);
-        if (!data.error) {
-          console.log(data);
+        if (!data.error && data.imageUrls) {
+          return createProduct({
+            variables: {
+              title: title.value,
+              imageUrls: data.imageUrls,
+              description: description.value,
+            },
+          });
         }
+      })
+      .then(resData => {
+        console.log(resData);
       })
       .catch(error => console.log('Upload Error :>> ', error));
   };
@@ -181,7 +193,7 @@ export default React.memo(function Admin() {
         )}
       </StyledDropZone>
       <StyledUploadTooltip>
-        Selected files will display in the order they are selected, upload most
+        Selected files will later display in the order they are selected, upload most
         important marketing images first.
       </StyledUploadTooltip>
       <StyledPreviewImageWrapper>
