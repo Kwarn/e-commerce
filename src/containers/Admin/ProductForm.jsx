@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import { updateObject, validateInput } from '../../utility/utility';
 import { useDropzone } from 'react-dropzone';
 import { AuthStateContext } from '../../Auth/AuthStateProvider';
-import { useMutation } from '@apollo/client';
-import { MUTATION_CREATE_PRODUCT } from '../../GraphQl/Mutations';
 import Spinner from '../../components/UI/spinner/Spinner';
+import { useCreateProduct } from '../../Hooks/Products/useCreateProduct';
 
 const StyledProductFormWrapper = styled.div`
   margin-top: 10vh;
@@ -95,8 +94,7 @@ export default React.memo(function ProductForm() {
   const token = appGetAuthToken();
 
   // graphQl mutation.
-  const [createProduct] = useMutation(MUTATION_CREATE_PRODUCT);
-
+  const createProduct = useCreateProduct();
   // stores the files returned from react-dropzone file picker.
   const [selectedFiles, setSelectedFiles] = useState([]);
 
@@ -188,16 +186,18 @@ export default React.memo(function ProductForm() {
         return resData.json();
       }) // response contains a String Array of the AWS S3 hosted images URL's.
       .then(data => {
-        if (!data.error && data.imageUrls) {
+        const imageUrls = data.imageUrls;
+        if (!data.error && imageUrls.length > 0) {
           // graphQl query called with response imageUrls and remaining form input data.
           return createProduct({
             variables: {
               title: title.value,
-              imageUrls: data.imageUrls,
+              imageUrls,
               description: description.value,
             },
           });
         }
+        return new Error('Fail uploading images');
       })
       // stops loading Spinner which returns the empty form to view.
       .then(resData => {

@@ -9,6 +9,7 @@ import {
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 
+// Apollo-client setup
 // This is a higher order component which provides the app authentication information context.
 
 let authToken = '';
@@ -59,6 +60,7 @@ const AuthStateProvider = ({ children }) => {
 
   //appolo client
   const cache = new InMemoryCache({});
+  console.log(cache);
   const requestLink = new ApolloLink(
     (operation, forward) =>
       new Observable(observer => {
