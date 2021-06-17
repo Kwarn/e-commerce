@@ -59,7 +59,7 @@ const AuthStateProvider = ({ children }) => {
   const appGetAuthToken = () => authToken;
 
   //appolo client
-  const cache = new InMemoryCache({});
+  const cache = new InMemoryCache();
   console.log(cache);
   const requestLink = new ApolloLink(
     (operation, forward) =>
@@ -85,6 +85,7 @@ const AuthStateProvider = ({ children }) => {
       })
   );
   const client = new ApolloClient({
+    connectToDevTools: true,
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors === undefined || graphQLErrors[0].path === undefined)
