@@ -9,6 +9,8 @@ import {
 } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 
+// This is a higher order component which provides the app authentication information context.
+
 let authToken = '';
 const initial = {
   authState: { loggedIn: false },
