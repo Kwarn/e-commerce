@@ -60,7 +60,7 @@ const AuthStateProvider = ({ children }) => {
 
   //appolo client
   const cache = new InMemoryCache();
-  console.log(cache);
+
   const requestLink = new ApolloLink(
     (operation, forward) =>
       new Observable(observer => {

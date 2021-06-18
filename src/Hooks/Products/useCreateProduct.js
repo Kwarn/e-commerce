@@ -1,22 +1,25 @@
 import { gql, useMutation } from '@apollo/client';
 
 export const MUTATION_CREATE_PRODUCT = gql`
-  mutation CreateProduct(
+  mutation GetProducts(
     $title: String!
     $imageUrls: [String!]!
     $description: String!
+    $productType: String!
   ) {
     createProduct(
       productInput: {
         title: $title
         imageUrls: $imageUrls
         description: $description
+        productType: $productType
       }
     ) {
       _id
       title
       imageUrls
       description
+      productType
       creator {
         name
       }
@@ -25,7 +28,12 @@ export const MUTATION_CREATE_PRODUCT = gql`
   }
 `;
 
-export const useCreateProduct = (title, imageUrls, description) => {
+export const useCreateProduct = (
+  title,
+  imageUrls,
+  description,
+  productType
+) => {
   const [createProduct] = useMutation(MUTATION_CREATE_PRODUCT, {
     update(cache, { data: { createProduct } }) {
       cache.modify({
@@ -39,6 +47,7 @@ export const useCreateProduct = (title, imageUrls, description) => {
                   title
                   imageUrls
                   description
+                  productType
                 }
               `,
             });

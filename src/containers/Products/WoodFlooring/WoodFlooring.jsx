@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PageHeaders from '../../PageHeaders/PageHeaders';
 import styled from 'styled-components';
 import LayoutsContext from '../../../Layout/LayoutsContext';
 import { lightwoodSliderData } from '../woodFlooringData';
 import ProductSlider from '../ProductSliders/ProductSlider';
 import Modal from '../../../components/UI/Modal/Modal';
+import { useGetProducts } from '../../../Hooks/Products/useGetProducts';
 
 const Wrapper = styled.div`
   display: flex;
@@ -30,6 +31,11 @@ export default function WoodFlooring() {
     isShown: false,
     content: null,
   });
+  const products = useGetProducts('woodFlooring');
+
+  useEffect(() => {
+    console.log('products :>> ', products);
+  }, [products]);
 
   const closeModalHandler = () => {
     setModalStatus({ isShown: false, content: { ...modalStatus.content } });

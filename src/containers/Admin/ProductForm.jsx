@@ -62,6 +62,12 @@ const StyledImagePreviewContainer = styled.div`
   }
 `;
 
+const StyledSelect = styled.select`
+  background-color: ${props => (!props.selectedValue ? 'red' : 'none')};
+  height: 5vh;
+  margin: 5px 0 5px 0;
+`;
+
 const StyledDropZone = styled.div`
   cursor: pointer;
   margin: auto auto 40px auto;
@@ -81,7 +87,7 @@ const StyledUploadTooltip = styled.p`
   color: red;
 `;
 
-const StyledInvalidFormErrorMessages = styled.p`
+const StyledInvalidFormErrorMessages = styled.div`
   color: red;
 `;
 
@@ -139,6 +145,13 @@ export default React.memo(function ProductForm() {
   // contains and controls the displaying of invalid form fields error messages.
   const [invalidFormErrorMessages, setInvalidFormErrorMessages] = useState([]);
 
+  const invalidFormErrorMessagesHandler = message => {
+    setInvalidFormErrorMessages(existingMessages => {
+      if (existingMessages.includes(message)) return [...existingMessages];
+      return [...existingMessages, message];
+    });
+  };
+
   // allows easy resetting form elements
   const [title, setTitle] = useState(defaultTitleElement);
   const [description, setDescription] = useState(defaultDescriptionElement);
@@ -146,21 +159,39 @@ export default React.memo(function ProductForm() {
     setTitle(defaultTitleElement);
     setDescription(defaultDescriptionElement);
   };
+  const [productType, setproductType] = useState('');
 
   // response recieves the uploaded images hosted URL's.
   // graphql mutation is passed the host URLs & the remaining input field data.
   // loading stops => response data is logged to console.
 
+  const getInvalidFormErrors = () => {
+    let isError = false;
+    if (!productType) {
+      invalidFormErrorMessagesHandler('No product type selected. ');
+      isError = true;
+    }
+    if (selectedFiles.length < 1) {
+      invalidFormErrorMessagesHandler('You must select at least 1 file. ');
+      isError = true;
+    }
+    if (!title.value) {
+      invalidFormErrorMessagesHandler('Title must be at least 4 characters. ');
+      isError = true;
+    }
+    if (!description.value) {
+      invalidFormErrorMessagesHandler(
+        'Product description must be at least 10 characters. '
+      );
+    }
+    return isError;
+  };
+
   const submitFormHandler = e => {
     e.preventDefault();
 
-    // checks for files => if none => appends error message to error Array.
-    if (selectedFiles.length < 1) {
-      return setInvalidFormErrorMessages(existingMessages => {
-        if (existingMessages.includes('No files selected.'))
-          return [...existingMessages];
-        return [...existingMessages, 'No files selected.'];
-      });
+    if (getInvalidFormErrors()) {
+      return;
     }
 
     // starts loading Spinner.
@@ -194,6 +225,7 @@ export default React.memo(function ProductForm() {
               title: title.value,
               imageUrls,
               description: description.value,
+              productType: productType,
             },
           });
         }
@@ -225,6 +257,10 @@ export default React.memo(function ProductForm() {
         value: value,
       })
     );
+  };
+
+  const selectChangedHandler = e => {
+    setproductType(e.target.value);
   };
 
   const removeFileHandler = filename => {
@@ -266,8 +302,19 @@ export default React.memo(function ProductForm() {
           </StyledPreviewImageWrapper>
           <StyledForm onSubmit={e => submitFormHandler(e)}>
             <StyledInvalidFormErrorMessages>
-              {invalidFormErrorMessages}
+              {invalidFormErrorMessages.map(errorMsg => (
+                <p key={errorMsg}>{errorMsg}</p>
+              ))}
             </StyledInvalidFormErrorMessages>
+            <StyledSelect
+              selectedValue={productType}
+              onChange={selectChangedHandler}
+            >
+              <option value="">Select Product Type</option>
+              <option value="woodFlooring">Wood Flooring</option>
+              <option value="underlay">Underlay</option>
+              <option value="adhesive">Adhesive</option>
+            </StyledSelect>
             <StyledInput
               placeholder="Title"
               invalid={!title.isValid && title.wasTouched}
