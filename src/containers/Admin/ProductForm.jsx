@@ -7,7 +7,7 @@ import Spinner from '../../components/UI/spinner/Spinner';
 import { useCreateProduct } from '../../Hooks/Products/useCreateProduct';
 
 const StyledProductFormWrapper = styled.div`
-  margin-top: 10vh;
+  margin-top: 2vh;
   width: 100%;
   height: 100%;
   display: flex;

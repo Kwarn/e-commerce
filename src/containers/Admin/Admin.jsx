@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import PreviewProducts from './PreviewProducts';
 
 import ProductForm from './ProductForm';
 
 const StyledAdminWrapper = styled.div`
-  margin: auto;
+  /* margin: auto; */
   width: 100%;
   height: 100%;
   display: flex;
@@ -15,10 +16,25 @@ const StyledAdminWrapper = styled.div`
   }
 `;
 
+// TO DO: FIX MARGIN PROBLEMS FROM LAYOUT
+const StyledToggleDisplayElement = styled.button`
+  margin-top: 14vh;
+`;
+
 export default React.memo(function Admin() {
+  const [displayElement, setDisplayElement] = useState('addProduct');
   return (
     <StyledAdminWrapper>
-      <ProductForm />
+      <StyledToggleDisplayElement
+        onClick={() =>
+          setDisplayElement(
+            displayElement === 'addProduct' ? 'previewProducts' : 'addProduct'
+          )
+        }
+      >
+        {displayElement === 'addProduct' ? 'Preview Products' : 'Add Products'}
+      </StyledToggleDisplayElement>
+      {displayElement === 'addProduct' ? <ProductForm /> : <PreviewProducts />}
     </StyledAdminWrapper>
   );
 });
