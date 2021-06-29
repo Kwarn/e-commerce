@@ -91,7 +91,7 @@ const StyledInvalidFormErrorMessages = styled.div`
   color: red;
 `;
 
-export default React.memo(function ProductForm() {
+const ProductForm = () => {
   // controls the displaying of a loading Spinner while waiting for the form submit response.
   const [isLoading, setIsLoading] = useState(false);
 
@@ -339,4 +339,6 @@ export default React.memo(function ProductForm() {
       )}
     </StyledProductFormWrapper>
   );
-});
+};
+
+export default React.memo(ProductForm);

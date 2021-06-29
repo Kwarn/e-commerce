@@ -31,16 +31,37 @@ const AuthStateProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
+    const expiryDate = localStorage.getItem('expiryDate');
 
+    if (!token || !expiryDate) return;
+
+    if (new Date(expiryDate) <= new Date()) {
+      appSetLogout();
+      return;
+    }
     if (token && userId) {
       appSetLogin({ token: token, userId: userId });
     }
+
+    const remainingMilliseconds =
+      new Date(expiryDate).getTime() - new Date().getTime();
+
+    appSetAutoLogout(remainingMilliseconds);
   }, []);
+
+  const appSetAutoLogout = milliseconds => {
+    setTimeout(() => {
+      appSetLogout();
+    }, milliseconds);
+  };
 
   const appSetLogin = ({ token, userId }) => {
     authToken = token;
     localStorage.setItem('token', token);
     localStorage.setItem('userId', userId);
+    const remainingMilliseconds = 60 * 60 * 1000;
+    const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
+    localStorage.setItem('expiryDate', expiryDate.toISOString());
     setAuthState({ ...authState, loggedIn: true, userId: userId });
   };
 
@@ -48,6 +69,7 @@ const AuthStateProvider = ({ children }) => {
     authToken = '';
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    localStorage.removeItem('expiryDate');
     setAuthState({ ...authState, loggedIn: false, userId: '' });
   };
   const appSetAuthToken = token => {

@@ -4,7 +4,7 @@ import Button from '../../../components/Button/Button';
 import LayoutsContext from '../../../Layout/LayoutsContext';
 
 const StyledImageContainer = styled.div`
-  margin: 10px;
+  margin: ${props => (props.isDesktop ? '10px' : '10px 0 10px 0')};
   position: relative;
   display: flex;
   justify-content: center;

@@ -28,14 +28,15 @@ export default function ExtraNavItems() {
       <StyledDivider>|</StyledDivider>
       <StyledLink>Speak with us: 03333 110 888</StyledLink>
       <StyledDivider>|</StyledDivider>
-      <StyledLink
-        onClick={() => {
-          if (authState.userId) history.push('/admin');
-          else console.log('Not logged in');
-        }}
-      >
-        Admin
-      </StyledLink>
+      {authState.loggedIn ? (
+        <StyledLink
+          onClick={() => {
+            history.push('/admin');
+          }}
+        >
+          Admin
+        </StyledLink>
+      ) : null}
     </StyledContainer>
   );
 }
