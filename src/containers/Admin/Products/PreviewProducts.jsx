@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
-import { useDeleteProduct } from '../../Hooks/Products/useDeleteProduct';
-import { useGetProducts } from '../../Hooks/Products/useGetProducts';
-import LayoutsContext from '../../Layout/LayoutsContext';
+import { useDeleteProduct } from '../../../Hooks/Products/useDeleteProduct';
+import { useGetProducts } from '../../../Hooks/Products/useGetProducts';
+import LayoutsContext from '../../../Layout/LayoutsContext';
 import PreviewProductElement from './PreviewProductElement';
 
 const StyledPreviewProductElementsContainer = styled.div`
