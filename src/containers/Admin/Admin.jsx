@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import PreviewProducts from './Products/PreviewProducts';
+import React, { useState } from "react";
+import styled from "styled-components";
+import PreviewProducts from "./Products/PreviewProducts";
 
-import ProductForm from './AddEdit/ProductForm';
+import ProductForm from "./AddEdit/ProductForm";
 
 const StyledAdminWrapper = styled.div`
   /* margin: auto; */
@@ -22,19 +22,19 @@ const StyledToggleDisplayElement = styled.button`
 `;
 
 export default React.memo(function Admin() {
-  const [displayElement, setDisplayElement] = useState('addProduct');
+  const [displayElement, setDisplayElement] = useState("addProduct");
   return (
     <StyledAdminWrapper>
       <StyledToggleDisplayElement
         onClick={() =>
           setDisplayElement(
-            displayElement === 'addProduct' ? 'previewProducts' : 'addProduct'
+            displayElement === "addProduct" ? "previewProducts" : "addProduct"
           )
         }
       >
-        {displayElement === 'addProduct' ? 'Preview Products' : 'Add Products'}
+        {displayElement === "addProduct" ? "Preview Products" : "Add Products"}
       </StyledToggleDisplayElement>
-      {displayElement === 'addProduct' ? <ProductForm /> : <PreviewProducts />}
+      {displayElement === "addProduct" ? <ProductForm /> : <PreviewProducts />}
     </StyledAdminWrapper>
   );
 });

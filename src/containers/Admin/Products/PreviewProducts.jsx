@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
-import styled from 'styled-components';
-import { useDeleteProduct } from '../../../Hooks/Products/useDeleteProduct';
-import { useGetProducts } from '../../../Hooks/Products/useGetProducts';
-import LayoutsContext from '../../../Layout/LayoutsContext';
-import PreviewProductElement from './PreviewProductElement';
+import React, { useEffect, useState, useContext } from "react";
+import styled from "styled-components";
+import { useCleanupHelper } from "../../../Hooks/Helper/useCleanupHelper";
+import { useDeleteProduct } from "../../../Hooks/Products/useDeleteProduct";
+import { useGetProducts } from "../../../Hooks/Products/useGetProducts";
+import LayoutsContext from "../../../Layout/LayoutsContext";
+import PreviewProductElement from "./PreviewProductElement";
 
 const StyledPreviewProductElementsContainer = styled.div`
   margin: auto;
@@ -15,12 +16,13 @@ const StyledPreviewProductElementsContainer = styled.div`
 export default function PreviewProducts() {
   const layouts = useContext(LayoutsContext);
   const deleteProduct = useDeleteProduct();
+  const cleanupHelper = useCleanupHelper();
   const [productElements, setProductElements] = useState([]);
-  const products = useGetProducts('all');
+  const products = useGetProducts("all");
   useEffect(() => {
     if (products) {
-      console.log('products :>> ', products);
-      const _productElements = products.map(product => (
+      console.log("products :>> ", products);
+      const _productElements = products.map((product) => (
         <PreviewProductElement
           key={product.title}
           title={product.title}
@@ -41,20 +43,29 @@ export default function PreviewProducts() {
         `WARNING: Are you sure you want to delete ${title}? Deleting this product is irreversible!`
       )
     ) {
-      console.log('productId :>> ', productId);
+      console.log("productId :>> ", productId);
       deleteProduct({ variables: { productId } });
     } else {
-      console.log('Delete Cancelled :>> ');
+      console.log("Delete Cancelled :>> ");
     }
   };
 
-  const editProductHandler = productId => {
-    console.log('productId :>> ', productId);
+  const editProductHandler = (productId) => {
+    console.log("productId :>> ", productId);
+  };
+
+  const cleanupHelperFn = () => {
+    const productIdArray = products.map((product) => product._id);
+    console.log(`productIdArray`, productIdArray);
+    cleanupHelper({ variables: { productIdArray } });
   };
 
   return (
     <StyledPreviewProductElementsContainer {...layouts}>
       {productElements}
+      <button onClick={cleanupHelperFn}>
+        Clean User Model of non-existing products
+      </button>
     </StyledPreviewProductElementsContainer>
   );
 }

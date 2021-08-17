@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext, useEffect } from "react";
 import {
   ApolloProvider,
   ApolloClient,
@@ -6,32 +6,32 @@ import {
   HttpLink,
   ApolloLink,
   Observable,
-} from '@apollo/client';
-import { onError } from '@apollo/client/link/error';
+} from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 
 // Apollo-client setup
 // This is a higher order component which provides the app authentication information context.
 
-let authToken = '';
+let authToken = "";
 const initial = {
   authState: { loggedIn: false },
-  gqlError: { msg: '' },
+  gqlError: { msg: "" },
   appSetLogin: () => {},
   appSetLogout: () => {},
-  appSetAuthToken: token => {},
+  appSetAuthToken: (token) => {},
   appClearAuthToken: () => {},
   appGetAuthToken: () => authToken,
 };
 
 export const AuthStateContext = createContext(initial);
 const AuthStateProvider = ({ children }) => {
-  const [authState, setAuthState] = useState({ loggedIn: false, userId: '' });
-  const [gqlError, setGqlError] = useState({ msg: '' });
+  const [authState, setAuthState] = useState({ loggedIn: false, userId: "" });
+  const [gqlError, setGqlError] = useState({ msg: "" });
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    const userId = localStorage.getItem('userId');
-    const expiryDate = localStorage.getItem('expiryDate');
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    const expiryDate = localStorage.getItem("expiryDate");
 
     if (!token || !expiryDate) return;
 
@@ -49,7 +49,7 @@ const AuthStateProvider = ({ children }) => {
     appSetAutoLogout(remainingMilliseconds);
   }, []);
 
-  const appSetAutoLogout = milliseconds => {
+  const appSetAutoLogout = (milliseconds) => {
     setTimeout(() => {
       appSetLogout();
     }, milliseconds);
@@ -57,26 +57,26 @@ const AuthStateProvider = ({ children }) => {
 
   const appSetLogin = ({ token, userId }) => {
     authToken = token;
-    localStorage.setItem('token', token);
-    localStorage.setItem('userId', userId);
+    localStorage.setItem("token", token);
+    localStorage.setItem("userId", userId);
     const remainingMilliseconds = 60 * 60 * 1000;
     const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
-    localStorage.setItem('expiryDate', expiryDate.toISOString());
+    localStorage.setItem("expiryDate", expiryDate.toISOString());
     setAuthState({ ...authState, loggedIn: true, userId: userId });
   };
 
   const appSetLogout = () => {
-    authToken = '';
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('expiryDate');
-    setAuthState({ ...authState, loggedIn: false, userId: '' });
+    authToken = "";
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("expiryDate");
+    setAuthState({ ...authState, loggedIn: false, userId: "" });
   };
-  const appSetAuthToken = token => {
+  const appSetAuthToken = (token) => {
     authToken = token;
   };
   const appClearAuthToken = () => {
-    authToken = '';
+    authToken = "";
   };
   const appGetAuthToken = () => authToken;
 
@@ -85,10 +85,10 @@ const AuthStateProvider = ({ children }) => {
 
   const requestLink = new ApolloLink(
     (operation, forward) =>
-      new Observable(observer => {
+      new Observable((observer) => {
         let handle;
         Promise.resolve(operation)
-          .then(operation => {
+          .then((operation) => {
             operation.setContext({
               headers: { authorization: `Bearer ${appGetAuthToken()}` },
             });
@@ -106,21 +106,17 @@ const AuthStateProvider = ({ children }) => {
         };
       })
   );
+  const errorLink = onError((e) => {
+    console.log(e);
+  });
   const client = new ApolloClient({
     connectToDevTools: true,
     link: ApolloLink.from([
-      onError(({ graphQLErrors, networkError }) => {
-        if (graphQLErrors === undefined || graphQLErrors[0].path === undefined)
-          return;
-        if (graphQLErrors[0].path[0] === 'refresh') return;
-        const err = graphQLErrors[0].message;
-        console.log('gqlError in link: ', graphQLErrors);
-        setGqlError({ msg: err });
-      }),
+      errorLink,
       requestLink,
       new HttpLink({
-        uri: 'http://localhost:8080/graphql',
-        credentials: 'include',
+        uri: "http://localhost:8080/graphql",
+        credentials: "include",
       }),
     ]),
     cache,
