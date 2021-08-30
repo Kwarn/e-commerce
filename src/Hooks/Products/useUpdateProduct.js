@@ -1,14 +1,16 @@
 import { gql, useMutation } from "@apollo/client";
 
-export const MUTATION_CREATE_PRODUCT = gql`
-  mutation CreateProduct(
+export const MUTATION_UPDATE_PRODUCT = gql`
+  mutation UpdateProduct(
+    $_id: ID!
     $title: String!
     $imageUrls: [String!]!
     $description: String!
     $productType: String!
   ) {
-    createProduct(
+    updateProduct(
       productInput: {
+        _id: $_id
         title: $title
         imageUrls: $imageUrls
         description: $description
@@ -28,19 +30,20 @@ export const MUTATION_CREATE_PRODUCT = gql`
   }
 `;
 
-export const useCreateProduct = (
+export const useUpdateProduct = (
+  _id,
   title,
   imageUrls,
   description,
   productType
 ) => {
-  const [createProduct] = useMutation(MUTATION_CREATE_PRODUCT, {
-    update(cache, { data: { createProduct } }) {
+  const [updateProduct] = useMutation(MUTATION_UPDATE_PRODUCT, {
+    update(cache, { data: { updateProduct } }) {
       cache.modify({
         fields: {
           products(existingProducts = []) {
             const newProductRef = cache.writeFragment({
-              data: createProduct,
+              data: updateProduct,
               fragment: gql`
                 fragment NewProduct on Product {
                   id
@@ -57,5 +60,5 @@ export const useCreateProduct = (
       });
     },
   });
-  return createProduct;
+  return updateProduct;
 };

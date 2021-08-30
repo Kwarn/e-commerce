@@ -3,8 +3,14 @@ import styled from "styled-components";
 import { useCleanupHelper } from "../../../Hooks/Helper/useCleanupHelper";
 import { useDeleteProduct } from "../../../Hooks/Products/useDeleteProduct";
 import { useGetProducts } from "../../../Hooks/Products/useGetProducts";
+import ProductForm from "../AddEdit/ProductForm";
 import LayoutsContext from "../../../Layout/LayoutsContext";
 import PreviewProductElement from "./PreviewProductElement";
+
+const StyledPreviewProductElementsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const StyledPreviewProductElementsContainer = styled.div`
   margin: auto;
@@ -13,7 +19,11 @@ const StyledPreviewProductElementsContainer = styled.div`
   max-width: 100%;
 `;
 
+const StyledFormContainer = styled.div``;
+
 export default function PreviewProducts() {
+  const [editProduct, setEditProduct] = useState(null);
+
   const layouts = useContext(LayoutsContext);
   const deleteProduct = useDeleteProduct();
   const cleanupHelper = useCleanupHelper();
@@ -30,7 +40,7 @@ export default function PreviewProducts() {
           deleteProductCallback={() =>
             deleteProductHandler(product.title, product._id)
           }
-          editProductCallback={() => editProductHandler(product._id)}
+          editProductCallback={() => editProductHandler(product)}
         />
       ));
       setProductElements(_productElements);
@@ -50,22 +60,31 @@ export default function PreviewProducts() {
     }
   };
 
-  const editProductHandler = (productId) => {
-    console.log("productId :>> ", productId);
+  const editProductHandler = (product) => {
+    setEditProduct(product);
   };
 
   const cleanupHelperFn = () => {
     const productIdArray = products.map((product) => product._id);
-    console.log(`productIdArray`, productIdArray);
     cleanupHelper({ variables: { productIdArray } });
   };
 
   return (
-    <StyledPreviewProductElementsContainer {...layouts}>
-      {productElements}
-      <button onClick={cleanupHelperFn}>
-        Clean User Model of non-existing products
-      </button>
-    </StyledPreviewProductElementsContainer>
+    <StyledPreviewProductElementsWrapper>
+      <StyledPreviewProductElementsContainer {...layouts}>
+        {productElements}
+        <button onClick={cleanupHelperFn}>
+          Clean User Model of non-existing products
+        </button>
+      </StyledPreviewProductElementsContainer>
+      {editProduct ? (
+        <StyledFormContainer>
+          <ProductForm
+            editProductData={editProduct}
+            doneEditingCb={() => editProductHandler(null)}
+          />
+        </StyledFormContainer>
+      ) : null}
+    </StyledPreviewProductElementsWrapper>
   );
 }

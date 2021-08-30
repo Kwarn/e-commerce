@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from 'react';
-import styled from 'styled-components';
-import { useDropzone } from 'react-dropzone';
-import { useEffect } from 'react';
+import React, { useState, useCallback } from "react";
+import styled from "styled-components";
+import { useDropzone } from "react-dropzone";
+import { useEffect } from "react";
 
 const StyledWrapper = styled.div`
   margin: auto;
@@ -23,6 +23,9 @@ const StyledImagePreviewContainer = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url(${({ background }) => background});
+  background-color: ${(props) => (props.isQueuedForDelete ? "red" : "")};
+  border: ${(props) =>
+    props.isQueuedForDelete ? "3px solid red" : "3px solid tranparent"};
   p {
     max-width: 150px;
     overflow: hidden;
@@ -53,15 +56,19 @@ const StyledUploadTooltip = styled.p`
   color: red;
 `;
 
-export default function FilePickerPreviewer({ sendFilesToParentCb }) {
+export default function FilePickerPreviewer({
+  editImageUrls,
+  sendFilesToParentCb,
+  setImageUrlsForDeletionCb,
+}) {
   // stores the files returned from react-dropzone file picker.
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   // Removes duplicate file inputs & updates selectedFiles.
   // as direct comparison of reference types returns false (File Objects)
   // we create an array of the Files name properties for comparison.
-  const onDrop = useCallback(acceptedFiles => {
-    setSelectedFiles(existingFiles => {
+  const onDrop = useCallback((acceptedFiles) => {
+    setSelectedFiles((existingFiles) => {
       if (!existingFiles) return [...acceptedFiles];
       const nonDuplicates = [];
       const existingFileNames = [];
@@ -74,10 +81,26 @@ export default function FilePickerPreviewer({ sendFilesToParentCb }) {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   // removes files from selectedFiles by filtering by filename.
-  const removeFileHandler = filename => {
-    setSelectedFiles(exisitingFiles =>
-      exisitingFiles.filter(f => f.name !== filename)
+  const removeFileHandler = (filename) => {
+    setSelectedFiles((exisitingFiles) =>
+      exisitingFiles.filter((f) => f.name !== filename)
     );
+  };
+
+  const [urlToDelete, setUrlsToDelete] = useState([]);
+
+  const removeImageUrlHandler = (url) => {
+    // we need to check if this is the last URL if so stop user from deleting only image
+    // OR SET A DEFAULT IMAGE
+    setUrlsToDelete((prevUrls) => [...prevUrls, url]);
+    setImageUrlsForDeletionCb(url);
+    console.log(`urlToDelete`, urlToDelete);
+  };
+
+  const restoreImageUrlHandler = (url) => {
+    // we need to check if this is the last URL if so stop user from deleting only image
+    setUrlsToDelete((prev) => prev.filter((u) => u !== url));
+    setImageUrlsForDeletionCb(url);
   };
 
   // passes selected files back to parent component for inclusion in product creation.
@@ -100,8 +123,28 @@ export default function FilePickerPreviewer({ sendFilesToParentCb }) {
         </StyledUploadTooltip>
       </StyledDropZone>
       <StyledPreviewImageWrapper>
+        {editImageUrls
+          ? editImageUrls.map((url) => (
+              <StyledImagePreviewContainer
+                key={url}
+                background={url}
+                isQueuedForDelete={urlToDelete.includes(url)}
+              >
+                <button
+                  onClick={
+                    !urlToDelete.includes(url)
+                      ? () => removeImageUrlHandler(url)
+                      : () => restoreImageUrlHandler(url)
+                  }
+                >
+                  {urlToDelete.includes(url) ? "Restore" : "Remove"}
+                </button>
+                <p>{url}</p>
+              </StyledImagePreviewContainer>
+            ))
+          : null}
         {selectedFiles
-          ? selectedFiles.map(file => (
+          ? selectedFiles.map((file) => (
               <StyledImagePreviewContainer
                 key={file.name}
                 background={URL.createObjectURL(file)}
