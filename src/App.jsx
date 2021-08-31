@@ -10,13 +10,19 @@ import styled from "styled-components";
 import LayoutsContext from "./Layout/LayoutsContext";
 import Admin from "./containers/Admin/Admin";
 
-//todo:
-// Navbar needs spicing add quick Call to actions: Free samples - Book consultation - Phone us
-// Search functionality for products
-// new splash page based on matts simple design, page then displays normally after scroll?
-// FAQ section needs adding and layout fixes for SUPPORT
-// make contact and calculator form pretty
-// add About & Testimonials content
+/* todo:
+    Search functionality for products (by productType?).
+    style overhaul required for admin & support sections.
+    add About & Testimonials content .
+
+  Known issues: 
+
+  ADMIN/AddEditProduct:
+    issue with user being able to remove all images from a product ->
+    this occurs when adding a new image => removing existing images => removing the new image.
+
+
+*/
 
 const StyledSpinnerWrapper = styled.div`
   display: flex;
