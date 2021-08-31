@@ -1,12 +1,12 @@
-import React, { useContext, useState, useEffect } from 'react';
-import PageHeaders from '../../PageHeaders/PageHeaders';
-import styled from 'styled-components';
-import LayoutsContext from '../../../Layout/LayoutsContext';
+import React, { useContext, useState, useEffect } from "react";
+import PageHeaders from "../../PageHeaders/PageHeaders";
+import styled from "styled-components";
+import LayoutsContext from "../../../Layout/LayoutsContext";
 // import { lightwoodSliderData } from '../woodFlooringData';
 // import ProductSlider from '../ProductSliders/ProductSlider';
-import Modal from '../../../components/UI/Modal/Modal';
-import { useGetProducts } from '../../../Hooks/Products/useGetProducts';
-import MenuCard from '../../MenuCards/MenuCard/MenuCard';
+import Modal from "../../../components/UI/Modal/Modal";
+import { useGetProducts } from "../../../Hooks/Products/useGetProducts";
+import MenuCard from "../../MenuCards/MenuCard/MenuCard";
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,8 +21,14 @@ const StyledTopMarginSpacer = styled.div`
 
 const StyledProductElementsContainer = styled.div`
   display: flex;
-  flex-direction: ${props => (props.isDesktop ? 'row' : 'column')};
+  flex-wrap: wrap;
+  flex-direction: ${(props) => (props.isMobile ? "column" : "row")};
   width: 100%;
+`;
+
+const StyledMenuCardWrapper = styled.div`
+  margin: auto;
+  width: 350px;
 `;
 
 export default function WoodFlooring() {
@@ -34,25 +40,27 @@ export default function WoodFlooring() {
     content: null,
   });
 
-  const products = useGetProducts('woodFlooring');
-  console.log('products :>> ', products);
+  const products = useGetProducts("woodFlooring");
+  console.log("products :>> ", products);
   useEffect(() => {
     let _productElements;
     if (products) {
-      _productElements = products.map(product => (
-        <MenuCard
-          key={product._id}
-          title={product.title}
-          description={product.description}
-          image={product.imageUrls[0]}
-          buttonText="See Full Images"
-          buttonCallback={() =>
-            setModalStatus({
-              isShown: true,
-              content: product.imageUrls,
-            })
-          }
-        />
+      _productElements = products.map((product) => (
+        <StyledMenuCardWrapper {...layouts}>
+          <MenuCard
+            key={product._id}
+            title={product.title}
+            description={product.description}
+            image={product.imageUrls[0]}
+            buttonText="See Full Images"
+            buttonCallback={() =>
+              setModalStatus({
+                isShown: true,
+                content: product.imageUrls,
+              })
+            }
+          />
+        </StyledMenuCardWrapper>
       ));
       setProductElements(_productElements);
     }
