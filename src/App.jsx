@@ -18,9 +18,8 @@ import Admin from "./containers/Admin/Admin";
   Known issues: 
 
   ADMIN/AddEditProduct:
-    issue with user being able to remove all images from a product ->
-    this occurs when adding a new image => removing existing images => removing the new image.
-
+    issue with user being able to remove all images from a product while editing.
+    Reproduce => add a new image => remove existing images => remove the new image.
 
 */
 
