@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
-import logo from '../../../assets/Q&YLogo.jpg';
-import DrawToggle from '../Sidebar/DrawToggle/DrawToggle';
-import { withRouter } from 'react-router-dom';
-import contactIcon from '../../../assets/contactIcon.png';
-import LayoutsContext from '../../../Layout/LayoutsContext';
+import React, { useContext } from "react";
+import styled from "styled-components";
+import logo from "../../../assets/Q&YLogo.jpg";
+import DrawToggle from "../Sidebar/DrawToggle/DrawToggle";
+import { withRouter } from "react-router-dom";
+import contactIcon from "../../../assets/contactIcon.png";
+import LayoutsContext from "../../../Layout/LayoutsContext";
+import { AuthStateContext } from "../../../Auth/AuthStateProvider";
 
 const StyledNavItems = styled.div`
   display: flex;
@@ -14,20 +15,20 @@ const StyledNavItems = styled.div`
   padding: 0;
   width: 100%;
   max-width: 100%;
-  height: ${props =>
+  height: ${(props) =>
     props.isMobile
-      ? '14vh'
+      ? "14vh"
       : props.isTablet
-      ? '12vh'
+      ? "12vh"
       : props.isDesktop
-      ? '10vh'
+      ? "10vh"
       : null};
 `;
 
 const StyledLogo = styled.img`
   cursor: pointer;
   margin: auto;
-  max-height: ${props => (props.isDesktop ? '100%' : '80%')};
+  max-height: ${(props) => (props.isDesktop ? "100%" : "80%")};
   ${({ isDesktop }) =>
     isDesktop &&
     `position: absolute;
@@ -37,10 +38,10 @@ const StyledLogo = styled.img`
 
 const StyledContactIcon = styled.img`
   cursor: pointer;
-  margin-top: ${props =>
-    props.isMobile ? '5vh' : props.isTablet ? '4vh' : '2vh'};
-  margin-right: ${props => (props.isDesktop ? 'auto' : '5vw')};
-  height: ${props => (props.isDesktop ? '60%' : '5vh')};
+  margin-top: ${(props) =>
+    props.isMobile ? "5vh" : props.isTablet ? "4vh" : "2vh"};
+  margin-right: ${(props) => (props.isDesktop ? "auto" : "5vw")};
+  height: ${(props) => (props.isDesktop ? "60%" : "5vh")};
   ${({ isDesktop }) =>
     isDesktop &&
     `position: absolute;
@@ -49,7 +50,7 @@ const StyledContactIcon = styled.img`
 `;
 
 const StyledDesktopNavItemsContainer = styled.div`
-  background-color: 'green';
+  background-color: "green";
   height: 100%;
   width: 100%;
   display: flex;
@@ -78,6 +79,8 @@ const NavigationItems = ({
   toggleLoginCallback,
 }) => {
   const layouts = useContext(LayoutsContext);
+  const { authState, appSetLogout, appSetLogin, gqlError } =
+    useContext(AuthStateContext);
   const { isDesktop } = layouts;
 
   const drawToggleComponent = <DrawToggle toggleFn={sideDrawToggleFn} />;
@@ -86,27 +89,27 @@ const NavigationItems = ({
       isDesktop={isDesktop}
       src={logo}
       alt="Twelve Oak"
-      onClick={() => history.push('/home')}
+      onClick={() => history.push("/home")}
     />
   );
 
   const contactIconComponent = (
     <StyledContactIcon
       {...layouts}
-      onClick={() => history.push('/contact')}
+      onClick={() => history.push("/contact")}
       src={contactIcon}
       alt="contact"
     />
   );
 
   const desktopNavItemsContent = [
-    { title: 'OUR PRODUCTS', link: '/products' },
-    { title: 'SUPPORT', link: '/support' },
-    { title: 'ABOUT US', link: '/about' },
-    { title: 'CONTACT', link: '/contact' },
+    { title: "OUR PRODUCTS", link: "/products" },
+    { title: "SUPPORT", link: "/support" },
+    { title: "ABOUT US", link: "/about" },
+    { title: "CONTACT", link: "/contact" },
   ];
 
-  const DesktopNavItems = desktopNavItemsContent.map(content => (
+  const DesktopNavItems = desktopNavItemsContent.map((content) => (
     <StyledDesktopNavItem
       key={content.title}
       onClick={
@@ -131,9 +134,16 @@ const NavigationItems = ({
       </StyledDesktopNavItem>
     </StyledLoginNavItemContainer>
   );
+  const Logout = (
+    <StyledLoginNavItemContainer>
+      <StyledDesktopNavItem onClick={() => appSetLogout()}>
+        LOGOUT
+      </StyledDesktopNavItem>
+    </StyledLoginNavItemContainer>
+  );
 
   return (
-    <StyledNavItems {...layouts} className={isDesktop ? 'isDesktop' : ''}>
+    <StyledNavItems {...layouts} className={isDesktop ? "isDesktop" : ""}>
       {isDesktop ? null : drawToggleComponent}
       {isDesktop ? (
         <StyledDesktopNavItemsContainer>
@@ -142,7 +152,7 @@ const NavigationItems = ({
       ) : null}
       {isDesktop ? null : logoComponent}
       {isDesktop ? null : contactIconComponent}
-      {isDesktop ? Login : null}
+      {authState.userId ? Logout : Login}
     </StyledNavItems>
   );
 };

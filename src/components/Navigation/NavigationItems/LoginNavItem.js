@@ -1,14 +1,14 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { updateObject } from '../../../utility/utility';
-import { validateInput } from '../../../utility/utility';
-import styled from 'styled-components';
-import LayoutsContext from '../../../Layout/LayoutsContext';
-import { AuthStateContext } from '../../../Auth/AuthStateProvider';
-import Button from '../../Button/Button';
-import Spinner from '../../UI/spinner/Spinner';
-import { useQuery } from '@apollo/client';
-import { QUERY_LOGIN } from '../../../GraphQl/Queries';
-import { useHistory } from 'react-router';
+import React, { useState, useContext, useEffect } from "react";
+import { updateObject } from "../../../utility/utility";
+import { validateInput } from "../../../utility/utility";
+import styled from "styled-components";
+import LayoutsContext from "../../../Layout/LayoutsContext";
+import { AuthStateContext } from "../../../Auth/AuthStateProvider";
+import Button from "../../Button/Button";
+import Spinner from "../../UI/spinner/Spinner";
+import { useQuery } from "@apollo/client";
+import { QUERY_LOGIN } from "../../../GraphQl/Queries";
+import { useHistory } from "react-router";
 
 const StyledDrawContainer = styled.div`
   color: #474747;
@@ -26,8 +26,8 @@ const StyledDrawContainer = styled.div`
   width: 20vw;
   right: 0;
   height: 100%;
-  max-height: ${props => (props.isHidden ? '0vh' : '30vh')};
-  top: ${props => (props.isNavBarMinimized ? '10vh' : '20vh')};
+  max-height: ${(props) => (props.isHidden ? "0vh" : "30vh")};
+  top: ${(props) => (props.isNavBarMinimized ? "10vh" : "20vh")};
   transition: top 0.6s, max-height 0.6s ease-in-out;
   overflow: hidden;
 `;
@@ -37,14 +37,14 @@ const StyledDrawElementsWrapperForAnimation = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  opacity: ${props => (props.isHidden ? 0 : 1)};
+  opacity: ${(props) => (props.isHidden ? 0 : 1)};
   transition: opacity 1s ease-in-out;
 `;
 
 const StyledLoginSwitchMesssage = styled.h3`
   height: 20%;
   text-align: center;
-  margin: 5vh auto 0 auto;
+  margin: 3vh auto 0 auto;
 `;
 
 const StyledLoginSwitchButton = styled.div`
@@ -78,6 +78,12 @@ const StyledCloseButtonContainer = styled.div`
   left: 5px;
 `;
 
+const __DEV__StyledAutoFillLogin = styled.div`
+  position: absolute;
+  bottom: 5px;
+  left: 35px;
+`;
+
 const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
   const history = useHistory();
   const layouts = useContext(LayoutsContext);
@@ -86,24 +92,24 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
   const { authState, appSetLogout, appSetLogin, gqlError } =
     useContext(AuthStateContext);
 
-  const loginHandler = async event => {
+  const loginHandler = async (event) => {
     event.preventDefault();
     setSkipQuery(false);
   };
 
   const logoutHandler = () => {
     appSetLogout();
-    history.push('/home');
+    history.push("/home");
   };
 
   const [controls, setControls] = useState({
     email: {
-      elementType: 'input',
+      elementType: "input",
       elementConfig: {
-        type: 'email',
-        placeholder: 'Email',
+        type: "email",
+        placeholder: "Email",
       },
-      value: '',
+      value: "",
       validation: {
         required: true,
         isEmail: true,
@@ -112,12 +118,12 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
       touched: false,
     },
     name: {
-      elementType: 'input',
+      elementType: "input",
       elementConfig: {
-        type: 'name',
-        placeholder: 'Name',
+        type: "name",
+        placeholder: "Name",
       },
-      value: '',
+      value: "",
       validation: {
         required: true,
       },
@@ -125,12 +131,12 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
       touched: false,
     },
     password: {
-      elementType: 'input',
+      elementType: "input",
       elementConfig: {
-        type: 'password',
-        placeholder: 'Password',
+        type: "password",
+        placeholder: "Password",
       },
-      value: '',
+      value: "",
       validation: {
         required: true,
         minLength: 6,
@@ -146,18 +152,18 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
       password: controls.password.value,
     },
     skip: skipQuery,
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy: "cache-and-network",
   });
 
   const __DEV__autoFillLogin = () => {
-    setControls(prevControls => {
+    setControls((prevControls) => {
       return {
         ...prevControls,
         email: {
-          elementType: 'input',
+          elementType: "input",
           elementConfig: {
-            type: 'email',
-            placeholder: 'Email',
+            type: "email",
+            placeholder: "Email",
           },
           value: process.env.REACT_APP_AUTO_LOGIN_EMAIL,
           validation: {
@@ -168,10 +174,10 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
           touched: false,
         },
         password: {
-          elementType: 'input',
+          elementType: "input",
           elementConfig: {
-            type: 'password',
-            placeholder: 'Password',
+            type: "password",
+            placeholder: "Password",
           },
           value: process.env.REACT_APP_AUTO_LOGIN_PASSWORD,
           validation: {
@@ -194,7 +200,7 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
           appSetLogin({ token: data.login.token, userId: data.login.userId });
           setSkipQuery(true);
         } else if (onError && !loading && error) {
-          console.log('useQueryError: ', error);
+          console.log("useQueryError: ", error);
           console.log(gqlError);
           setSkipQuery(true);
         }
@@ -226,7 +232,7 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
 
   const formElementsArray = [];
   for (let key in controls) {
-    if (key === 'name' && !isSignup) {
+    if (key === "name" && !isSignup) {
       continue;
     } else {
       formElementsArray.push({
@@ -236,56 +242,54 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
     }
   }
 
-  let formElements = formElementsArray.map(elem => (
+  let formElements = formElementsArray.map((elem) => (
     <StyledInput
       key={elem.id}
-      type={elem.id === 'password' ? 'password' : null}
+      type={elem.id === "password" ? "password" : null}
       placeholder={elem.config.elementConfig.placeholder}
       elementType={elem.config.elementType}
       value={elem.config.value}
       invalid={elem.config.valid}
       shouldValidate={elem.config.validation}
       touched={elem.config.touched}
-      onChange={event => inputChangedHandler(event, elem.id)}
+      onChange={(event) => inputChangedHandler(event, elem.id)}
     />
   ));
 
   const form = loading ? (
     <Spinner />
-  ) : authState.userId ? (
-    <div onClick={logoutHandler}>Logout</div>
   ) : (
     <>
       <StyledLoginSwitchMesssage>
-        {isSignup ? 'Already Have an account?' : `Don't have an account yet?`}
+        {isSignup ? "Already Have an account?" : `Don't have an account yet?`}
       </StyledLoginSwitchMesssage>
       <StyledLoginSwitchButton onClick={switchAuthModeHandler} btnType="Danger">
-        {isSignup ? 'Switch To Login' : 'Sign Up!'}
+        {isSignup ? "Switch To Login" : "Sign Up!"}
       </StyledLoginSwitchButton>
       <StyledForm onSubmit={loginHandler}>
         {formElements}
         <StyledSubmitButtonContainer>
-          <Button isDarkText={true} text={isSignup ? 'Continue' : 'Login'} />
+          <Button isDarkText={true} text={isSignup ? "Continue" : "Login"} />
         </StyledSubmitButtonContainer>
       </StyledForm>
       <StyledCloseButtonContainer>
         <Button
           isDarkText={true}
           callback={() => toggleCallback()}
-          text={'X'}
+          text={"X"}
         />
       </StyledCloseButtonContainer>
-      <StyledCloseButtonContainer>
+      <__DEV__StyledAutoFillLogin>
         <Button
           isDarkText={true}
           callback={() => __DEV__autoFillLogin()}
-          text={'AutoFill login'}
+          text={"AutoFill login"}
         />
-      </StyledCloseButtonContainer>
+      </__DEV__StyledAutoFillLogin>
     </>
   );
 
-  return (
+  const component = authState.loggedIn ? null : (
     <StyledDrawContainer
       isNavBarMinimized={!scrollPos.visible}
       {...layouts}
@@ -297,6 +301,8 @@ const LoginNavItem = ({ toggleCallback, isHidden, scrollPos }) => {
       </StyledDrawElementsWrapperForAnimation>
     </StyledDrawContainer>
   );
+
+  return component;
 };
 
 export default LoginNavItem;
