@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { updateObject, validateInput } from "../../../utility/utility";
+import { updateObject, validateInput } from "../../../../utility/utility";
 
 const StyledForm = styled.form`
   margin: auto;
@@ -117,7 +117,6 @@ const TextForm = ({ editProductData, submitFormCallBack }) => {
             title: title.value,
             description: description.value,
             productType,
-            imageUrls: editProductData ? editProductData.imageUrls : null,
           },
           isEditMode
         )

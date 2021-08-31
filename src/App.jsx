@@ -1,14 +1,14 @@
-import './App.css';
-import React, { Suspense, useContext } from 'react';
-import { ThemeProvider } from 'styled-components';
-import { GlobalStyles } from './global';
-import { theme } from './theme';
-import Layout from './Layout/Layout';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import Spinner from './components/UI/spinner/Spinner';
-import styled from 'styled-components';
-import LayoutsContext from './Layout/LayoutsContext';
-import Admin from './containers/Admin/Admin';
+import "./App.css";
+import React, { Suspense, useContext } from "react";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "./global";
+import { theme } from "./theme";
+import Layout from "./Layout/Layout";
+import { Redirect, Route, Switch } from "react-router-dom";
+import Spinner from "./components/UI/spinner/Spinner";
+import styled from "styled-components";
+import LayoutsContext from "./Layout/LayoutsContext";
+import Admin from "./containers/Admin/Admin";
 
 //todo:
 // Navbar needs spicing add quick Call to actions: Free samples - Book consultation - Phone us
@@ -18,34 +18,30 @@ import Admin from './containers/Admin/Admin';
 // make contact and calculator form pretty
 // add About & Testimonials content
 
-const Home = React.lazy(() => import('./containers/Home/Home'));
-const Contact = React.lazy(() => import('./containers/Contact/Contact'));
-const Products = React.lazy(() => import('./containers/Products/Products'));
-const Testimonials = React.lazy(() =>
-  import('./containers/Testimonials/Testimonials')
-);
-const About = React.lazy(() => import('./containers/About/About'));
-
-const WoodFlooring = React.lazy(() =>
-  import('./containers/Products/WoodFlooring/WoodFlooring')
-);
-
-const Adhesives = React.lazy(() =>
-  import('./containers/Products/Adhesives/Adhesives')
-);
-
-const Underlay = React.lazy(() =>
-  import('./containers/Products/Underlay/Underlay')
-);
-
-const Support = React.lazy(() => import('./containers/Support/Support'));
-
 const StyledSpinnerWrapper = styled.div`
   display: flex;
   justify-content: center;
-  height: ${props =>
-    props.isMobile ? '86vh' : props.isTablet ? '88vh' : '90vh'};
+  height: ${(props) =>
+    props.isMobile ? "86vh" : props.isTablet ? "88vh" : "90vh"};
 `;
+
+const Home = React.lazy(() => import("./containers/Home/Home"));
+const Contact = React.lazy(() => import("./containers/Contact/Contact"));
+const Products = React.lazy(() => import("./containers/Products/Products"));
+const Testimonials = React.lazy(() =>
+  import("./containers/Testimonials/Testimonials")
+);
+const About = React.lazy(() => import("./containers/About/About"));
+const WoodFlooring = React.lazy(() =>
+  import("./containers/Products/WoodFlooring/WoodFlooring")
+);
+const Adhesives = React.lazy(() =>
+  import("./containers/Products/Adhesives/Adhesives")
+);
+const Underlay = React.lazy(() =>
+  import("./containers/Products/Underlay/Underlay")
+);
+const Support = React.lazy(() => import("./containers/Support/Support"));
 
 const App = () => {
   const layouts = useContext(LayoutsContext);
@@ -53,7 +49,7 @@ const App = () => {
     <Suspense
       fallback={
         <StyledSpinnerWrapper {...layouts}>
-          <div style={{ margin: 'auto' }}>
+          <div style={{ margin: "auto" }}>
             <Spinner isPageLoad={true} />
           </div>
         </StyledSpinnerWrapper>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import PreviewProducts from "./Products/PreviewProducts";
+import PreviewProducts from "./Products/PreviewProducts/PreviewProducts";
 
-import ProductForm from "./AddEdit/ProductForm";
+import ProductForm from "./Products/AddEditProduct/AddEditProduct";
 
 const StyledAdminWrapper = styled.div`
   /* margin: auto; */

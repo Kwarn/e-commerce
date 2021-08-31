@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
-import { useCleanupHelper } from "../../../Hooks/Helper/useCleanupHelper";
-import { useDeleteProduct } from "../../../Hooks/Products/useDeleteProduct";
-import { useGetProducts } from "../../../Hooks/Products/useGetProducts";
-import ProductForm from "../AddEdit/ProductForm";
-import LayoutsContext from "../../../Layout/LayoutsContext";
-import PreviewProductElement from "./PreviewProductElement";
+import { useCleanupHelper } from "../../../../Hooks/Helper/useCleanupHelper";
+import { useDeleteProduct } from "../../../../Hooks/Products/useDeleteProduct";
+import { useGetProducts } from "../../../../Hooks/Products/useGetProducts";
+import ProductForm from "../AddEditProduct/AddEditProduct";
+import LayoutsContext from "../../../../Layout/LayoutsContext";
+import PreviewProductElement from "./PreviewProduct";
 
 const StyledPreviewProductElementsWrapper = styled.div`
   display: flex;
@@ -22,17 +22,16 @@ const StyledPreviewProductElementsContainer = styled.div`
 const StyledFormContainer = styled.div``;
 
 export default function PreviewProducts() {
+  const [previewElements, setPreviewElements] = useState([]);
   const [editProduct, setEditProduct] = useState(null);
 
   const layouts = useContext(LayoutsContext);
   const deleteProduct = useDeleteProduct();
   const cleanupHelper = useCleanupHelper();
-  const [productElements, setProductElements] = useState([]);
   const products = useGetProducts("all");
   useEffect(() => {
     if (products) {
-      console.log("products :>> ", products);
-      const _productElements = products.map((product) => (
+      const _previewElements = products.map((product) => (
         <PreviewProductElement
           key={product.title}
           title={product.title}
@@ -43,21 +42,13 @@ export default function PreviewProducts() {
           editProductCallback={() => editProductHandler(product)}
         />
       ));
-      setProductElements(_productElements);
+      setPreviewElements(_previewElements);
     }
   }, [products]);
 
   const deleteProductHandler = (title, productId) => {
-    if (
-      window.confirm(
-        `WARNING: Are you sure you want to delete ${title}? Deleting this product is irreversible!`
-      )
-    ) {
-      console.log("productId :>> ", productId);
-      deleteProduct({ variables: { productId } });
-    } else {
-      console.log("Delete Cancelled :>> ");
-    }
+    const warningMsg = `WARNING: Are you sure you want to delete ${title}? Deleting this product is irreversible!`;
+    if (window.confirm(warningMsg)) deleteProduct({ variables: { productId } });
   };
 
   const editProductHandler = (product) => {
@@ -72,7 +63,7 @@ export default function PreviewProducts() {
   return (
     <StyledPreviewProductElementsWrapper>
       <StyledPreviewProductElementsContainer {...layouts}>
-        {productElements}
+        {previewElements}
         <button onClick={cleanupHelperFn}>
           Clean User Model of non-existing products
         </button>
