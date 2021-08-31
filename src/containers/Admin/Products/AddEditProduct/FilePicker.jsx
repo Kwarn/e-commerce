@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
-import styled from "styled-components";
 import { useDropzone } from "react-dropzone";
 import { useEffect } from "react";
+import styled from "styled-components";
 
 const StyledWrapper = styled.div`
   margin: auto;
@@ -55,17 +55,20 @@ const StyledUploadTooltip = styled.p`
 
 /* 
 
-  Displays file picker, handles new files being selected,
-  passes files back to parent element for inclusion in product update/creation.
+  Renders:
+   file picker with preview images for selected files (& existing files if provided editImageUrls)
 
-  update/edit mode: if provided editImageUrls.
+  Logic: 
+    handles add/remove of new files, selected files are passed back to parent
+    element for inclusion in product update/creation.
+          
+    When removing an existing images an array of their URLS are passed to parent
+    for removal from product before GraphQL query
 
-  displays preview images, on deleting a URL it passes the URL to parent
-  which is then filtered out of imageUrls before graphQl updating of product.
+  note:
+    server handles file removal from s3 bucket by comparison of updated vs existing Product
   
-  *** server handles file removal from s3 bucket by checking changes ***
-  
-  */
+*/
 
 export default function FilePicker({
   editImageUrls,

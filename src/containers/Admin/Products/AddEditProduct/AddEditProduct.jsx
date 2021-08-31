@@ -22,6 +22,7 @@ const StyledInvalidFormErrorMessages = styled.div`
 
 export default function AddEditProduct({ editProductData, doneEditingCb }) {
   const [invalidFormErrorMessages, setInvalidFormErrorMessages] = useState([]);
+  const [imageUrlsToDelete, setImageUrlsToDelete] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -74,13 +75,11 @@ export default function AddEditProduct({ editProductData, doneEditingCb }) {
    then added to the product.imageUrls to be sent and saved to DB 
   */
 
-  const [imageUrlsToDelete, setImageUrlsToDelete] = useState([]);
-
   const submitFormHandler = async (e, textInputData, isEdit = false) => {
     e.preventDefault();
     setIsLoading(true);
     const validationErrors = getInvalidFormErrors(textInputData);
-    if (validationErrors.length) return setIsLoading(false);
+    if (validationErrors.length > 0) return setIsLoading(false);
 
     try {
       if (isEdit) {
