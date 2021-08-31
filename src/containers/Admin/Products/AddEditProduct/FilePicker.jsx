@@ -3,6 +3,23 @@ import { useDropzone } from "react-dropzone";
 import { useEffect } from "react";
 import styled from "styled-components";
 
+/* 
+
+  Renders:
+   file picker with preview images for selected files (& existing files if provided editImageUrls)
+
+  Logic: 
+    handles add/remove of new files, selected files are passed back to parent
+    element for inclusion in product update/creation.
+          
+    When removing existing images an array of their URLS are passed to parent
+    for removal from product before GraphQL query
+
+  note:
+    server handles file removal from s3 bucket by comparison of updated vs existing Product
+  
+*/
+
 const StyledWrapper = styled.div`
   margin: auto;
 `;
@@ -52,23 +69,6 @@ const StyledUploadTooltip = styled.p`
   margin: auto;
   color: red;
 `;
-
-/* 
-
-  Renders:
-   file picker with preview images for selected files (& existing files if provided editImageUrls)
-
-  Logic: 
-    handles add/remove of new files, selected files are passed back to parent
-    element for inclusion in product update/creation.
-          
-    When removing an existing images an array of their URLS are passed to parent
-    for removal from product before GraphQL query
-
-  note:
-    server handles file removal from s3 bucket by comparison of updated vs existing Product
-  
-*/
 
 export default function FilePicker({
   editImageUrls,
@@ -177,10 +177,12 @@ export default function FilePicker({
       </StyledDropZone>
 
       <StyledPreviewImageWrapper>
-        Existing Images {existingImgs}
+        <h2>Existing Images</h2>
+        {existingImgs}
       </StyledPreviewImageWrapper>
       <StyledPreviewImageWrapper>
-        New Images {selectedImgs}
+        <h2>New Images</h2>
+        {selectedImgs}
       </StyledPreviewImageWrapper>
     </StyledWrapper>
   );
